@@ -9,4 +9,4 @@ function ResultOfPayment() {
   )
 }
 
-export default ResultOfPayment
+export  {ResultOfPayment}

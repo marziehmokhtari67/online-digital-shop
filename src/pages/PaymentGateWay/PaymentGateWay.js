@@ -9,4 +9,4 @@ function PaymentGateWay() {
   )
 }
 
-export default PaymentGateWay
+export  {PaymentGateWay}

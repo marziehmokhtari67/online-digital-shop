@@ -1,16 +1,14 @@
 import React from 'react'
-
 import { Typography } from '@mui/material';
-function Order() {
+function Category() {
   return (
     <div>
-       <Typography variant='h2' align='center'>Orderes </Typography>
-      
+       <Typography variant='h2' align='center'>Category </Typography>
       
     </div>
   )
 }
 
-export default Order
+export {Category}
 
 

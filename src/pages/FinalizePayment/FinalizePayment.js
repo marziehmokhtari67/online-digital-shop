@@ -9,4 +9,4 @@ function FinalizePayment() {
   )
 }
 
-export default FinalizePayment
+export  {FinalizePayment}

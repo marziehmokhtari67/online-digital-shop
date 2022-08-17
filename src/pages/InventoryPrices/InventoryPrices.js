@@ -9,4 +9,4 @@ function InventoryPrices() {
   )
 }
 
-export default InventoryPrices
+export  {InventoryPrices}

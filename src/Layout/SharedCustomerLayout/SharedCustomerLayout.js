@@ -23,4 +23,4 @@ function SharedCustomerLayout() {
   )
 }
 
-export default SharedCustomerLayout
+export  {SharedCustomerLayout}

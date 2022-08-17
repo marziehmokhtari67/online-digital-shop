@@ -9,4 +9,4 @@ function Cancelation() {
   )
 }
 
-export default Cancelation
+export  {Cancelation}

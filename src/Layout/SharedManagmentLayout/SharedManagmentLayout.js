@@ -24,4 +24,4 @@ function SharedManagmentLayout() {
   )
 }
 
-export default SharedManagmentLayout
+export  {SharedManagmentLayout}

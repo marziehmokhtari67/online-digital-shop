@@ -1,20 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SharedCustomerLayout from "./Layout/SharedCustomerLayout";
-import SharedManagmentLayout from "./Layout/SharedManagmentLayout";
-import Home from "./pages/Home";
-import Category from "./pages/Category";
-import Product from "./pages/Product";
-import Cart from "./pages/Cart";
-import FinalizePayment from "./pages/FinalizePayment";
-import PaymentGateWay from "./pages/PaymentGateWay";
-import ResultOfPayment from "./pages/ResultOfPayment";
-import Cancelation from "./pages/Cancelation";
-import Login from "./pages/Login";
-import Order from "./pages/Order";
-import InventoryPrices from "./pages/InventoryPrices";
-import Goods from "./pages/Goods";
-
-
+import {SharedCustomerLayout,Home,Category,Product,FinalizePayment,Cart,ResultOfPayment,Cancelation,PaymentGateWay,Login,
+  SharedManagmentLayout,InventoryPrices,Goods,Order} from './pages/index'
 function App() {
   return (
     <>

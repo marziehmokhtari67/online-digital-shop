@@ -1,12 +1,16 @@
 import React from 'react'
+
 import { Typography } from '@mui/material';
-function Login() {
+function Order() {
   return (
     <div>
-       <Typography variant='h2' align='center'>Login </Typography>
+       <Typography variant='h2' align='center'>Orderes </Typography>
+      
       
     </div>
   )
 }
 
-export default Login
+export  {Order}
+
+
