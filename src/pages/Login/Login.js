@@ -3,7 +3,7 @@ import { Box, Typography, Button, Link, TextField } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import LockIcon from '@mui/icons-material/Lock';
 import { useNavigate } from "react-router-dom";
-import img from "./../assest/img9.jpg";
+import img from "./../../assets/images/img9.jpg";
 
 function Login() {
   const navigate = useNavigate();

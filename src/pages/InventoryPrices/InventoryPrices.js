@@ -75,7 +75,7 @@ function InventoryPrices() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Pagination count={4} onClick={(event)=>setParams(event.target.textContent) } />
+      <Pagination count={7} onClick={(event)=>setParams(event.target.textContent) }color='primary' />
     </>
   );
 }

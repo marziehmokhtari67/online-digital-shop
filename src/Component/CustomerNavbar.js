@@ -3,7 +3,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import { Badge, Tooltip, Box, Toolbar,Typography,IconButton ,Link,AppBar} from "@mui/material";
-import logo from "./../assest/logo1.png";
+import logo from "./../assets/logo/logo1.png";
 
 function CustomerNavbar() {
   return (

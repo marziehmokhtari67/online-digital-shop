@@ -18,7 +18,7 @@ import {
   Pagination,
   
 } from "@mui/material";
-import Row from './../Component/Goods/Row'
+import Row from './../../Component/Goods/Row'
 
 function Goods() {
   const dispatch = useDispatch();

@@ -78,7 +78,7 @@ function ManagmentNavbar() {
               >
                 {pages.map((page,index) => (
                   <MenuItem key={page} onClick={()=>{handleCloseNavMenu();navigate(addres[index])}}>
-                    <Typography textAlign="center">{page}</Typography>
+                    <Typography textAlign="center" sx={{fontFamily:'iran'}}>{page}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -104,9 +104,9 @@ function ManagmentNavbar() {
               onChange={handleChange}
               sx={{display:{xs:'none',md:'flex'},gap:'10px',borderLefttColor:'rgba(0,0,0,0.2)'} }
             >
-              <ToggleButton value="web" sx={{fontFamily:'iran'}} onClick={()=>navigate('goods')} variant='containd'>کالاها</ToggleButton>
-              <ToggleButton value=" android" sx={{fontFamily:'iran',}} onClick={()=>navigate('inventoryPrices')}>موجودی و قیمت ها</ToggleButton>
-              <ToggleButton value="ios" sx={{fontFamily:'iran',}} onClick={()=>navigate('')}>سفارش ها</ToggleButton>
+              <ToggleButton value="web" sx={{fontFamily:'iran',border:'none'}} onClick={()=>navigate('goods')} variant='containd'>کالاها</ToggleButton>
+              <ToggleButton value=" android" sx={{fontFamily:'iran',border:'none'}} onClick={()=>navigate('inventoryPrices')}>موجودی و قیمت ها</ToggleButton>
+              <ToggleButton value="ios" sx={{fontFamily:'iran',border:'none'}} onClick={()=>navigate('')}>سفارش ها</ToggleButton>
             </ToggleButtonGroup>
             <Box sx={{ flexGrow: 0,}}>
               <Link href='/' sx={{ fontFamily: "iran" ,color:'black',cursor:'pointer',textDecoration:'none'}}>بازگشت به سایت</Link>
