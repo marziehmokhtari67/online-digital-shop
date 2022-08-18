@@ -6,8 +6,8 @@ const initialState = {
     error: "",
   };
   
-  export const fetchOrders = createAsyncThunk("orders/fetchOrders", async(delivered) => {
-    return fetch(`${URL}/orders?delivered=${delivered}`)
+  export const fetchOrders = createAsyncThunk("orders/fetchOrders", async(delivered,number=1) => {
+    return fetch(`${URL}/orders?delivered=${delivered}&_page=${number}&_limit=6`)
       .then((res) => res.json()).then((data)=>{return data})
       .catch((error) => error.message);
   });
