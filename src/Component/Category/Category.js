@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Group1() {
+function Group2() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function Group1() {
   )
 }
 
-export default Group1
+export default Group2
