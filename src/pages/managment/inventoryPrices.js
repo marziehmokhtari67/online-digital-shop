@@ -14,38 +14,40 @@ import {
   TableHead,
   TableRow,
   TableCell,
-  Pagination
+  Pagination,Stack
 } from "@mui/material";
-import Row from '../../Component/priceTable/Row'
+import Row from '../../components/priceTable/Row'
+import {useStyles} from './../../styles/table/style' 
+
 function InventoryPrices() {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
-  const [params,setParams]=useState('')
+  const [params,setParams]=useState(1)
+  const classes=useStyles()
+  const handleChange = (event, value) => {
+    setParams(value);
+  };
+
   useEffect(() => {
     dispatch(fetchPosts(params));
   }, [dispatch, params]);
   return (
-    <>
-      <Box sx={{ flexGrow: 1, boxShadow: "none" }}>
+    <Box className={classes.container}>
+      <Box className={classes.header}>
         <AppBar position="static" elevation={0}>
           <Toolbar
-            sx={{
-              backgroundColor: "white",
-              color: "black",
-              justifyContent: "center",
-            }}
+            className={classes.toolBar}
           >
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, fontFamily: "iran" }}
+              sx={{ flexGrow: 1}}
             >
               مدیریت موجودی و قیمت ها
             </Typography>
             <Button
-              variant="contained"
-              color="inherit"
-              sx={{ fontFamily: "iran" }}
+              variant="outlined"
+              color="primary"
             >
               ذخیره
             </Button>
@@ -53,30 +55,35 @@ function InventoryPrices() {
         </AppBar>
       </Box>
 
-      <TableContainer sx={{ padding: "0 30px" }}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer className={classes.tableContainer}>
+        <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="right" sx={{ fontFamily: "iran" }}>
+              <TableCell align="center" >
                 کالا
               </TableCell>
-              <TableCell align="right" sx={{ fontFamily: "iran" }}>
+              <TableCell align="center" >
                 قیمت
               </TableCell>
-              <TableCell align="right" sx={{ fontFamily: "iran" }}>
+              <TableCell align="center" >
                 موجودی
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {posts.map((post) => (
-              <Row post={post} />
+              <Row key={post.id} post={post} />
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <Pagination count={7} onClick={(event)=>setParams(event.target.textContent) }color='primary' />
-    </>
+      <Stack spacing={2}>
+      
+      <Pagination className={classes.pagination} count={7} page={params} onChange={handleChange}  shape="rounded"
+        color='primary' />
+    </Stack>
+      
+    </Box>
   );
 }
 

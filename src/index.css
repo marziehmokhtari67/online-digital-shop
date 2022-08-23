@@ -2,18 +2,22 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  
 }
-body {
- font-family: 'iran';
- 
-}
+
 
 
 @font-face {
   font-family:'iran' ;
-  src: local('iran'), url(./assets/font/iran.ttf) format('truetype');
+  src: local('iran'), url('./assets/font/iran.ttf') format('truetype');
 }
 @font-face {
   font-family:'title' ;
-  src: url(./assets/font/SOGAND.ttf);
+  src: url('./assets/font/SOGAND.ttf');
 }
+@font-face {
+  font-family: "Vazir-Medium";
+  src: local("Vazir-Medium"),
+    url("./assets/font/Vazir-Medium.ttf") format("truetype");
+}
+

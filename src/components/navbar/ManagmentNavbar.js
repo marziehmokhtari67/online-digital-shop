@@ -3,17 +3,15 @@ import { AppBar,Box,Toolbar,Typography,Menu,IconButton,MenuItem } from "@mui/mat
 import MenuIcon from "@mui/icons-material/Menu";
 import { ToggleButton, Link, ToggleButtonGroup, Container} from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
+import {useStyles} from './../../styles/navbar/managmentNavbar/style'
 
 function ManagmentNavbar() {
-
-
   const pages = ["کالاها", "موجودی و قیمت ها", "سفارش ها"];
   const addres=["goods","inventoryPrices",""]
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [alignment, setAlignment] = React.useState("web");
   const navigate=useNavigate()
- 
+ const classes=useStyles()
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
@@ -27,27 +25,19 @@ function ManagmentNavbar() {
 
   return (
     <>
-      <AppBar position="static">
-        <Container maxWidth="xl" sx={{backgroundImage:`linear-gradient(to right, #c6ffdd, #fbd786, #f7797d 120%)`}}>
-          <Toolbar
-            disableGutters
-            sx={{ display: "flex", justifyContent: "space-between", }}
+      <AppBar className={classes.appbar} position='static'>
+        <Container maxWidth="xl">
+          <Toolbar className={classes.toolbar}
+            disableGutters={true}
           >
             <Typography
               variant="h5"
               noWrap
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "title",
-                fontWeight: 500,
-                color: "black",
-                letterSpacing:'0.15rem'
-              }}
+              className={classes.name}
             >
               پنل مدیریت دیجیتال لند
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Box className={classes.menuContainer} >
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -58,7 +48,7 @@ function ManagmentNavbar() {
               >
                 <MenuIcon />
               </IconButton>
-              <Menu
+              <Menu className={classes.menu}
                 id="menu-appbar"
                 anchorEl={anchorElNav}
                 anchorOrigin={{
@@ -72,44 +62,34 @@ function ManagmentNavbar() {
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
               >
                 {pages.map((page,index) => (
                   <MenuItem key={page} onClick={()=>{handleCloseNavMenu();navigate(addres[index])}}>
-                    <Typography textAlign="center" sx={{fontFamily:'iran'}}>{page}</Typography>
+                    <Typography textAlign="center" >{page}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
             </Box>
-            <Typography
-              variant="h5"
+            <Typography className={classes.name1}
+              variant="h6"
               noWrap
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "title",
-                fontWeight: 700,
-                color: "black",
-              }}
+              flexGrow= {1}
             >
               پنل مدیریت دیجیتال لند
             </Typography>
-            <ToggleButtonGroup
-              color="secondary"
+            <ToggleButtonGroup 
+              color="primary"
               value={alignment}
               exclusive
               onChange={handleChange}
-              sx={{display:{xs:'none',md:'flex'},gap:'10px',borderLefttColor:'rgba(0,0,0,0.2)'} }
+              sx={{display:{xs:'none',md:'flex',gap:'10px'}}}
             >
-              <ToggleButton value="web" sx={{fontFamily:'iran',border:'none'}} onClick={()=>navigate('goods')} variant='containd'>کالاها</ToggleButton>
-              <ToggleButton value=" android" sx={{fontFamily:'iran',border:'none'}} onClick={()=>navigate('inventoryPrices')}>موجودی و قیمت ها</ToggleButton>
-              <ToggleButton value="ios" sx={{fontFamily:'iran',border:'none'}} onClick={()=>navigate('')}>سفارش ها</ToggleButton>
+              <ToggleButton value="kala" sx={{border:'none'}} onClick={()=>navigate('goods')}>کالاها</ToggleButton>
+              <ToggleButton value=" gheimatha" sx={{border:'none'}} onClick={()=>navigate('inventoryPrices')}>موجودی و قیمت ها</ToggleButton>
+              <ToggleButton value="sefareshha" sx={{border:'none'}} onClick={()=>navigate('')}>سفارش ها</ToggleButton>
             </ToggleButtonGroup>
             <Box sx={{ flexGrow: 0,}}>
-              <Link href='/' sx={{ fontFamily: "iran" ,color:'black',cursor:'pointer',textDecoration:'none'}}>بازگشت به سایت</Link>
+              <Link sx={{fontFamily:"Vazir-Medium" ,fontSize:'14px'}} href='/' >بازگشت به سایت</Link>
             </Box>
           </Toolbar>
         </Container>

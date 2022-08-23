@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {SharedCustomerLayout,Home,Category,Product,FinalizePayment,Cart,ResultOfPayment,Cancelation,PaymentGateWay,Login,
-SharedManagmentLayout,InventoryPrices,Goods,Order} from './../pages/index'
+SharedManagmentLayout,InventoryPrices,Goods,Order,Error} from './../pages/index'
 function Rout() {
   return (
     

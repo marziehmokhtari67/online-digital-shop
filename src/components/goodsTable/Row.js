@@ -1,18 +1,16 @@
 import React from 'react'
-
+import { useStyles } from '../../styles/table/style'
 import {TableRow,TableCell,Button,Avatar} from '@mui/material'
-
-const URL='http://localhost:3001'
-function Row({post,category}) {
-console.log(category.find(item=>item.id===post.category),category)
+function Row({post,categories}) {
+const classes=useStyles()
   return (
     <>
-    <TableRow>
+    <TableRow >
    
-        <TableCell align='right' sx={{fontFamily:'iran'}}><Avatar alt="image" src={`${URL}/files/${post.thumbnail}`} /></TableCell>
-        <TableCell align='right' sx={{fontFamily:'iran'}}>{post.name}</TableCell>
-        <TableCell align='right' sx={{fontFamily:'iran'}}></TableCell>
-        <TableCell align='right' ><Button variant='outlined' sx={{fontFamily:'iran'}}>ویرایش</Button><Button variant='outlined' sx={{fontFamily:'iran'}}>حذف</Button></TableCell>
+        <TableCell align='center'><Avatar alt="image" src={`${URL}/files/${post.thumbnail}`} /></TableCell>
+        <TableCell align='center' >{post.name}</TableCell>
+        <TableCell align='center' >{categories.find(category=>category.id===post.category).name}</TableCell>
+        <TableCell align='center' className={classes.buttonsContainer}><Button variant='outlined'>ویرایش</Button><Button variant='outlined'sx={{mx:2}} >حذف</Button></TableCell>
       </TableRow>
       
     </>

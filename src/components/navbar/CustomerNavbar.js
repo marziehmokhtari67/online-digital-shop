@@ -3,59 +3,52 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import { Badge, Tooltip, Box, Toolbar,Typography,IconButton ,Link,AppBar} from "@mui/material";
-import logo from "./../assets/logo/logo1.png";
+import logo from "./../../assets/logo/logo1.png";
 
+import {useStyles} from './../../styles/navbar/customerNavbar/style'
 function CustomerNavbar() {
+  const classes = useStyles()
   return (
     <Box>
       <AppBar
-        position="static"
-        sx={{  backgroundImage: `linear-gradient(to right, #c6ffdd, #fbd786, #f7797d 120%)`,
-        backgroundRepeat:'no-repeat',
-        backgroundSize:'cover',padding: "0px 40px" }}
+        position="static" className={classes.appbar} 
       >
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Box sx={{ display: "flex", gap: "20px", alignItems: "center" }}>
-            <Box
+        <Toolbar className={classes.toolbar}>
+          <Box className={classes.rightBox}>
+            <Box className={classes.logoBox}
               component="img"
               src={logo}
               alt="logo"
-              sx={{ width: "25%", borderRadius: "10px" }}
             />
-            <Typography variant="h4" sx={{fontFamily:'title',color:'black'}}>دیجیتال لند</Typography>
+            <Typography variant="h4"className={classes.name}>دیجیتال لند</Typography>
           </Box>
-          <Box sx={{ display: "flex", gap: "20px", alignItems: "center" }}>
+          <Box className={classes.leftBox} >
+           
             <Link
               href="login"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-                textDecoration: "none",
-                color:'#4527a0'
-              }}
+              className={classes.leftBoxLink}
             >
               <PersonOutlineOutlinedIcon/>
-              <Typography sx={{fontFamily:'iran'}}  >مدیریت</Typography>
+              <Typography >مدیریت</Typography>
             </Link>
             <Link href="cart">
               <Badge
                 badgeContent={0}
-                color='primary'
+                color='warning'
                 showZero
                 anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
+                vertical: "top",
+                horizontal: "left",
                   
                 }}
-                sx={{color:'#4527a0'}}
+                
               >
-                <ShoppingCartOutlinedIcon  />
+                <ShoppingCartOutlinedIcon sx={{color:'#4527a0'}} />
               </Badge>
             </Link>
             <Tooltip title="میزان رضایت‌‌ مندی شما" >
               <IconButton >
-              <FavoriteBorderOutlinedIcon color="primary" sx={{color:'#4527a0'}}/>
+              <FavoriteBorderOutlinedIcon />
               </IconButton>
             
               </Tooltip> 

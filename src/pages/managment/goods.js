@@ -1,8 +1,8 @@
 import React from "react";
-import { fetchPosts } from "../../redux/reducer/postSlice"
-import {fetchCategory} from '../../redux/reducer/categorySlice'
+import { fetchPosts } from "../../redux/reducer/postSlice";
+import { fetchCategory } from "../../redux/reducer/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AppBar,
   Box,
@@ -16,78 +16,78 @@ import {
   TableRow,
   TableCell,
   Pagination,
-  
+  Stack,
 } from "@mui/material";
-import Row from '../../Component/goods/Row'
-
+import Row from "../../components/goodsTable/Row";
+import { useStyles } from "../../styles/table/style";
 function Goods() {
   const dispatch = useDispatch();
- const {category}=useSelector((state)=>state.category)
+  const { categories } = useSelector((state) => state.category);
   const { posts } = useSelector((state) => state.posts);
-  const [params,setParams]=useState('')
-
+  const [params, setParams] = useState(1);
+  const classes = useStyles();
   useEffect(() => {
-    dispatch(fetchPosts(params),
-    dispatch(fetchCategory())
-    );
-  }, [params]);
+    dispatch(fetchPosts(params), dispatch(fetchCategory()));
+  }, [dispatch, params]);
+  const handleChange = (event, value) => {
+    setParams(value);
+  };
   return (
-    <>
-      <Box sx={{ flexGrow: 1, boxShadow: "none" }}>
+    <Box className={classes.container}>
+      <Box className={classes.header}>
         <AppBar position="static" elevation={0}>
-          <Toolbar
-            sx={{
-              backgroundColor: "white",
-              color: "black",
-              justifyContent: "center",
-            }}
-          >
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1, fontFamily: "iran" }}
-            >
+          <Toolbar className={classes.toolBar} disableGutters={true}>
+            <Typography variant="h6" component="div">
               مدیریت کالا
             </Typography>
             <Button
-              variant="contained"
-              color="inherit"
-              sx={{ fontFamily: "iran" }}
+              variant="outlined"
+              color='primary'
             >
-              ذخیره
+          اضافه کردن
             </Button>
           </Toolbar>
         </AppBar>
       </Box>
 
-      <TableContainer sx={{ padding: "0 30px" }}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer  className={classes.tableContainer} >
+        <Table className={classes.table} aria-label="simple table" size='small'>
           <TableHead>
             <TableRow>
-              <TableCell align="right" sx={{ fontFamily: "iran" }}>
+              <TableCell align="center">
                 تصویر
               </TableCell>
-              <TableCell align="right" sx={{ fontFamily: "iran" }}>
+              <TableCell align="center">
                 نام کالا
               </TableCell>
-              <TableCell align="right" sx={{ fontFamily: "iran" }}>
+              <TableCell align="center" >
                 دسته بندی
               </TableCell>
-              <TableCell align="right" sx={{ fontFamily: "iran" }}></TableCell>
+              <TableCell align="center"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-             {posts.map((post) => (
-              <Row key={post.id} post={post} category={category.filter((item)=>item.id===post.id)} />
+            {posts.map((post) => (
+              <Row key={post.id} post={post} categories={categories} />
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <Pagination count={7} onClick={(event)=>setParams(event.target.textContent)  } color="primary" shape='rounded'/>
-    </>
+      <Stack spacing={2}>
+      
+      <Pagination className={classes.pagination} count={7} page={params} onChange={handleChange}  shape="rounded"
+        color='primary' />
+    </Stack>
+      {/* <Pagination className={classes.pagination}
+        count={6}
+       
+        onChange={(event) => setParams(event.target.textContent)}
+        shape="rounded"
+        color='primary'
+       
+      /> */}
+    </Box>
   );
 }
 
-export {Goods} ;
-
-
+export { Goods };

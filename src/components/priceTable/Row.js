@@ -5,10 +5,10 @@ function Row({post}) {
   return (
     <>
      <TableRow>
-        {console.log(post)}
-        <TableCell align='right' sx={{fontFamily:'iran'}}>{post.name}</TableCell>
-        <TableCell align='right' sx={{fontFamily:'iran'}}>{post.price}</TableCell>
-        <TableCell align='right' sx={{fontFamily:'iran'}}>{post.quantity}</TableCell>
+       
+        <TableCell align='center' >{post.name}</TableCell>
+        <TableCell align='center' >{post.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
+        <TableCell align='center' >{post.quantity.toString()}</TableCell>
        
       </TableRow>
       </>

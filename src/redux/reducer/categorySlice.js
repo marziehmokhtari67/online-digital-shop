@@ -2,7 +2,7 @@ import { createSlice ,createAsyncThunk} from "@reduxjs/toolkit";
 const URL='http://localhost:3001'
 
 const initialState = {
-    category: [],
+    categories: [],
     loading: false,
     error: "",
   };
@@ -20,10 +20,10 @@ const initialState = {
         return { ...state, loading: true };
       });
       builder.addCase(fetchCategory.fulfilled, (state, action) => {
-        return { ...state, loading: false, category: action.payload };
+        return { ...state, loading: false, categories: action.payload };
       });
       builder.addCase(fetchCategory.rejected, (state, action) => {
-        return { category: [], loading: false, error: action.payload };
+        return { categories: [], loading: false, error: action.payload };
       });
     
      
