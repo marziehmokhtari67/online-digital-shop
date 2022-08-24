@@ -5,11 +5,16 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import {useStyles} from './../../styles/modals/orderModal/style'
 import { changeDelivered } from './../../redux/reducer/orderSlice'
 import {useDispatch} from 'react-redux'
-
+import {useState} from 'react'
 
 function Moodal({handleClose,open,order}) {
   const classes=useStyles()
   const dispatch = useDispatch()
+  const [disable,setDisable]=useState(false)
+  const handleChange=(id)=>{
+    dispatch( changeDelivered(id))
+    setDisable(true)
+  }
   return (  
   <Modal
   open={open}
@@ -50,14 +55,14 @@ function Moodal({handleClose,open,order}) {
       </TableContainer>
       <Box component='div'>
       {order.delivered ? (
-      <Typography sx={{fontSize:'14px'}}>زمان تحویل:{new Date(order.createdAt).toLocaleDateString('fa-IR')}</Typography>
+       <Button onClick={()=>handleChange(order.id)} disabled={disable}>تحویل داده شد</Button>
       ): (
-      <Button onClick={()=>dispatch( changeDelivered(order.id))}>تحویل داده شد</Button>
+        <Typography sx={{fontSize:'14px'}}>زمان تحویل:{new Date(order.createdAt).toLocaleDateString('fa-IR')}</Typography>
+    
       )}
       </Box>
      
-    
-    
+      
       </Box>
       
      
