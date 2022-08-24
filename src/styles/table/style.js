@@ -23,7 +23,7 @@ tableContainer:{
     
 },
 table:{
-    maxWidth:'60%'
+    maxWidth:'80%'
 },
 pagination:{
    marginTop:'40px',

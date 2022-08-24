@@ -1,6 +1,6 @@
 import { createSlice ,createAsyncThunk} from "@reduxjs/toolkit";
-
-const URL='http://localhost:3001'
+import axios from "axios"
+import {URL} from './../../API/constant'
 
 
 const initialState = {
@@ -10,8 +10,8 @@ const initialState = {
   };
   
   export const fetchPosts = createAsyncThunk("posts/fetchPosts", async(number=1) => {
-    return fetch(`${URL}/products?_page=${number}&_limit=5`)
-      .then((res) => res.json()).then((data)=>{return data})
+    return axios.get(`${URL}/products?_page=${number}&_limit=5`)
+      .then((res) => res.data)
       .catch((error) => error.message);
   });
   export const postsSlice = createSlice({

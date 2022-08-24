@@ -61,6 +61,9 @@ function Goods() {
                 نام کالا
               </TableCell>
               <TableCell align="center" >
+                مدل
+              </TableCell>
+              <TableCell align="center" >
                 دسته بندی
               </TableCell>
               <TableCell align="center"></TableCell>

@@ -63,6 +63,9 @@ function InventoryPrices() {
                 کالا
               </TableCell>
               <TableCell align="center" >
+                مدل
+              </TableCell>
+              <TableCell align="center" >
                 قیمت
               </TableCell>
               <TableCell align="center" >
