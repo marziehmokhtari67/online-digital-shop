@@ -21,7 +21,7 @@ import {useStyles} from './../../styles/table/style'
 
 function InventoryPrices() {
   const dispatch = useDispatch();
-  const { posts } = useSelector((state) => state.posts);
+  const { posts,totalCount } = useSelector((state) => state.posts);
   const [params,setParams]=useState(1)
   const classes=useStyles()
   const handleChange = (event, value) => {
@@ -82,7 +82,7 @@ function InventoryPrices() {
       </TableContainer>
       <Stack spacing={2}>
       
-      <Pagination className={classes.pagination} count={7} page={params} onChange={handleChange}  shape="rounded"
+      <Pagination className={classes.pagination} count={Math.ceil(totalCount/5)} page={params} onChange={handleChange}  shape="rounded"
         color='primary' />
     </Stack>
       

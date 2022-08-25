@@ -7,11 +7,12 @@ const initialState = {
     posts: [],
     loading: false,
     error: "",
+    totalCount:0
   };
   
   export const fetchPosts = createAsyncThunk("posts/fetchPosts", async(number=1) => {
     return axios.get(`${URL}/products?_page=${number}&_limit=5`)
-      .then((res) => res.data)
+      .then((res) => {return{data:res.data, headers:res.headers["x-total-count"]}})
       .catch((error) => error.message);
   });
   export const postsSlice = createSlice({
@@ -22,7 +23,7 @@ const initialState = {
         return { ...state, loading: true };
       });
       builder.addCase(fetchPosts.fulfilled, (state, action) => {
-        return { ...state, loading: false, posts: action.payload };
+        return { ...state, loading: false, posts: action.payload.data,totalCount:action.payload.headers };
       });
       builder.addCase(fetchPosts.rejected, (state, action) => {
         return { posts: [], loading: false, error: action.payload };

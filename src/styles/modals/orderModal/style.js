@@ -23,7 +23,9 @@ header:{
     display:'flex',
     justifyContent:'space-between'
 },
-
+table:{
+    border:'2px solid rgb(244 244 244)'
+}
 
 
 }))

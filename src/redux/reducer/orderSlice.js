@@ -5,12 +5,14 @@ const initialState = {
     orders: [],
     loading: false,
     error: "",
+    totalCount:0
   };
   
   export const fetchOrders = createAsyncThunk("orders/fetchOrders", async({delivered,number}) => {
    
-    return axios.get(`${URL}/orders?delivered=${delivered}&_page=${number}&_limit=6`)
-      .then((res) => res.data)
+    return axios.get(`${URL}/orders?delivered=${delivered}&_page=${number}&_limit=5`)
+      .then((res) => {return{data:res.data, headers:res.headers["x-total-count"]}} )
+
       .catch((error) => error.message);
   });
   export const changeDelivered = createAsyncThunk('orders/changeDelivered',async(id)=>{
@@ -25,10 +27,13 @@ const initialState = {
         return { ...state, loading: true };
       });
       builder.addCase(fetchOrders.fulfilled, (state, action) => {
-        return { ...state, loading: false, orders: action.payload };
+      const  {data,headers} = action.payload
+      
+        return { ...state, loading: false, orders:data,totalCount:headers };
       });
       builder.addCase(fetchOrders.rejected, (state, action) => {
         return { orders: [], loading: false, error: action.payload }});
+
         // fetch updata
         builder.addCase( changeDelivered.pending, (state) => {
           return { ...state, loading: true };

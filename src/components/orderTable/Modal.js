@@ -34,10 +34,10 @@ function Moodal({handleClose,open,order}) {
         <Typography sx={{fontSize:'14px'}}>زمان سفارش: {new Date(order.createdAt).toLocaleDateString('fa-IR')}</Typography>
       </Box>
       <TableContainer >
-        <Table>
+        <Table className={classes.table}>
           <TableHead>
-            <TableRow sx={{background:'#eee1f3'}}>
-              <TableCell align='center'>کالا</TableCell>
+            <TableRow  sx={{background:'#eee1f3'}}>
+              <TableCell  align='center'>کالا</TableCell>
               <TableCell align='center'>قیمت</TableCell>
               <TableCell align='center'>تعداد</TableCell>
             </TableRow>
@@ -54,18 +54,11 @@ function Moodal({handleClose,open,order}) {
         </Table>
       </TableContainer>
       <Box component='div'>
-      {order.delivered ? (
-       <Button onClick={()=>handleChange(order.id)} disabled={disable}>تحویل داده شد</Button>
-      ): (
-        <Typography sx={{fontSize:'14px'}}>زمان تحویل:{new Date(order.createdAt).toLocaleDateString('fa-IR')}</Typography>
-    
-      )}
-      </Box>
-     
-      
-      </Box>
-      
-     
+        {console.log(order.delivered)}
+      {order.delivered ? ( <Typography sx={{fontSize:'14px'}}>زمان تحویل:{new Date(order.createdAt).toLocaleDateString('fa-IR')}</Typography> )
+      : ( <Button variant='outlined' onClick={()=>handleChange(order.id)} disabled={disable}>تحویل داده شد</Button> )   }
+    </Box>
+  </Box>
   </Modal>
     
   )

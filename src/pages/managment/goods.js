@@ -23,7 +23,7 @@ import { useStyles } from "../../styles/table/style";
 function Goods() {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
-  const { posts } = useSelector((state) => state.posts);
+  const { posts,totalCount } = useSelector((state) => state.posts);
   const [params, setParams] = useState(1);
   const classes = useStyles();
   useEffect(() => {
@@ -78,17 +78,10 @@ function Goods() {
       </TableContainer>
       <Stack spacing={2}>
       
-      <Pagination className={classes.pagination} count={7} page={params} onChange={handleChange}  shape="rounded"
+      <Pagination className={classes.pagination} count={Math.ceil(totalCount/5)} page={params} onChange={handleChange}  shape="rounded"
         color='primary' />
     </Stack>
-      {/* <Pagination className={classes.pagination}
-        count={6}
-       
-        onChange={(event) => setParams(event.target.textContent)}
-        shape="rounded"
-        color='primary'
-       
-      /> */}
+     
     </Box>
   );
 }

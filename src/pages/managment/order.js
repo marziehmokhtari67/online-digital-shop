@@ -24,7 +24,7 @@ import {
 import {useStyles} from './../../styles/table/style'
 function Order() {
   const dispatch = useDispatch();
-  const { orders } = useSelector((state) => state.orders);
+  const { orders,totalCount } = useSelector((state) => state.orders);
   const [number, setNumber] = useState(1);
   const [delivered, setDelivered] = useState(true);
 
@@ -38,8 +38,9 @@ function Order() {
   useEffect(() => {
     dispatch(fetchOrders({delivered, number}));
   }, [delivered, dispatch, number]);
-
+  
   return (
+    
     <Box className={classes.container}>
       <Box className={classes.header}>
         <AppBar position="static" elevation={0}>
@@ -104,7 +105,7 @@ function Order() {
       </TableContainer>
       <Stack spacing={2} className={classes.pagination}>
       
-      <Pagination  count={2} page={number} onChange={handleChange}  shape="rounded"
+      <Pagination  count={Math.ceil(totalCount/5)} page={number} onChange={handleChange}  shape="rounded"
         color='primary' />
     </Stack>
     </Box>
