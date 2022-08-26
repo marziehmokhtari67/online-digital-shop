@@ -7,7 +7,9 @@ import Moodal from './Modal'
 
 function Row({order}) {
 const [open, setOpen] =React.useState(false)
-const handleOpen = () => setOpen(true);
+const handleOpen = () => {setOpen(true)
+console.log(order.delivered)
+};
 const handleClose = () => setOpen(false);
   return (
     <>

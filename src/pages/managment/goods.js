@@ -78,8 +78,9 @@ function Goods() {
       </TableContainer>
       <Stack spacing={2}>
       
-      <Pagination className={classes.pagination} count={Math.ceil(totalCount/5)} page={params} onChange={handleChange}  shape="rounded"
+      <Pagination className={classes.pagination} count={Number(Math.ceil(totalCount/5))} page={params} onChange={handleChange}  shape="rounded"
         color='primary' />
+        
     </Stack>
      
     </Box>
