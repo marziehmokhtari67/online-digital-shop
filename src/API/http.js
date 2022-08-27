@@ -15,6 +15,7 @@ axios.interceptors.request.use((req)=>{
         const token = localStorage.getItem('ACCESS_TOKEN')
         req.headers.token=token
     }
+    return req;
 })
 axios.interceptors.response.use((response)=>response,
 async(error)=>{
@@ -32,7 +33,7 @@ async(error)=>{
      await store.dispatch(refreshToken()) 
      const res = await axios.request(orginalRequest) 
      return Promise.resolve(res)
-    } catch (error) {
+    } catch (e) {
         
     }
  }  

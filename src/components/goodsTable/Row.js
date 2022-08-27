@@ -1,7 +1,7 @@
 import React from 'react'
 import { useStyles } from '../../styles/table/style'
 import {TableRow,TableCell,Button,Avatar} from '@mui/material'
-import {URL} from './../../API/constant'
+import {URL} from './../../api/constant'
 import DeletModal from './DeletModal'
 import EditModal from './EditModal'
 function Row({post,categories}) {

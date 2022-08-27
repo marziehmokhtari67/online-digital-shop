@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {SharedCustomerLayout,Home,Category,Product,FinalizePayment,Cart,ResultOfPayment,Cancelation,PaymentGateWay,Login,
 SharedManagmentLayout,InventoryPrices,Goods,Order,Error} from './../pages/index'
+import PrivateRoute from './../components/route/PrivateRoute'
 function Rout() {
   return (
     
@@ -24,7 +25,11 @@ function Rout() {
       </Route>
       <Route path="paymentGatetWay" element={<PaymentGateWay />} />
       <Route path="login" element={<Login />} />
-      <Route path="managment" element={<SharedManagmentLayout />}>
+      <Route path="managment" element={
+      
+        <SharedManagmentLayout />
+    
+      }>
         <Route index element={<Order />} />
         <Route path="inventoryPrices" element={<InventoryPrices />} />
         <Route path="goods" element={<Goods />} />

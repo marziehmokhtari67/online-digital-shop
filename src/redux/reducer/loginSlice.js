@@ -1,29 +1,37 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-import axios from "./../../API/http";
+import { loginRequest, refreshTokenRequest } from "./../../api/user"
+import axios from 'axios'
 
 const initialState = {
-  isLogined: false,
+  isLogined: localStorage.getItem('IS_LOGGGED_IN')
+  ? localStorage.getItem('IS_LOGGGED_IN')
+  : false,
   error: "",
 };
-export const fetchLogin = createAsyncThunk("login/fetchLogin", async (user) => {
-  try {
-    return axios.post("/auth/login", user).then((response) => {
-      localStorage.setItem("ACCESS_TOKEN", response.data.accessToken);
-      localStorage.setItem("REFRESH_TOKEN", response.data.refreshToken);
+export const fetchLogin = createAsyncThunk("login/fetchLogin", 
+(user) => {
+  return loginRequest(user)
+    .then((response) => {
+      localStorage.setItem('ACCESS_TOKEN', response.accessToken);
+      localStorage.setItem('REFRESH_TOKEN', response.refreshToken);
+      localStorage.setItem('IS_LOGGGED_IN', true);
+      return response;
+    })
+    .catch((error) => {
+      return Promise.reject(error);
     });
-  } catch (error) {
-    return Promise.reject(error.response.data);
-  }
-});
+  })
 export const refreshToken = createAsyncThunk(
   "login/refreshToken",
-  async (user) => {
-    try {
-      axios.post("/auth/refresh-token", user).then((response) => {
-        localStorage.setItem("ACCESS_TOKEN", response.data.accessToken);
-      });
-    } catch (error){ return Promise.reject(error.response.data)} 
+  async () => {
+    return refreshTokenRequest()
+    .then((response) => {
+      localStorage.setItem('ACCESS_TOKEN', response.accessToken);
+      return response;
+    })
+    .catch((error) => {
+      return Promise.reject(error);
+    }); 
    
   }
 );
