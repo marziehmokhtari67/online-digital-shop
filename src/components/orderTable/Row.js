@@ -19,8 +19,11 @@ const handleClose = () => setOpen(false);
  digitsEnToFa(order.prices.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))}</TableCell>
    <TableCell align='center' >{new Date(order.createdAt).toLocaleDateString('fa-IR')}</TableCell>
    <TableCell align='center' ><Button variant='outlined'onClick={handleOpen} >بررسی سفارش</Button></TableCell>
-   <Moodal handleClose={handleClose} open={open} order={order}/>
-   </TableRow>
+   
+   </TableRow>{
+    open && <Moodal handleClose={handleClose} open={open} order={order}/>
+   }
+   
     </>
   )
 }

@@ -27,7 +27,7 @@ function Goods() {
   const [params, setParams] = useState(1);
   const classes = useStyles();
   useEffect(() => {
-    dispatch(fetchPosts(params), dispatch(fetchCategory()));
+  dispatch(fetchPosts(params), dispatch(fetchCategory()));
   }, [dispatch, params]);
   const handleChange = (event, value) => {
     setParams(value);

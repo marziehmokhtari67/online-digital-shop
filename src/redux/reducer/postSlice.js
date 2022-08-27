@@ -1,6 +1,5 @@
 import { createSlice ,createAsyncThunk} from "@reduxjs/toolkit";
-import axios from "axios"
-import {URL} from './../../API/constant'
+import axios from './../../API/http'
 
 
 const initialState = {
@@ -9,19 +8,14 @@ const initialState = {
     error: "",
     totalCount:0
   };
-  const tocken=  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYlVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoiQWxpcmV6YSBHaGFyZ2hhYmkiLCJpYXQiOjE2NjE0NTYyNTAsImV4cCI6MTY2MTQ1OTg1MH0.rosNqOXzF8nr2pevdZMi-rIEzu98o3gt7YHEJ-WTWJI"
-  
- 
-  
   export const fetchPosts = createAsyncThunk("posts/fetchPosts", async(number=1) => {
-    return axios.get(`${URL}/products?_page=${number}&_limit=5`)
+    return axios.get(`/products?_page=${number}&_limit=5`)
       .then((res) => {return{data:res.data, headers:res.headers["x-total-count"]}})
       .catch((error) => error.message);
   });
   export const fetchDelet = createAsyncThunk('posts/fetchDelet',async(id)=>{
-    return axios.delete(`${URL}/products/${id}`, {headers:{
-      Authorization: 'Bearer ' + tocken
-    }}).then(res=>res.data)
+    return axios.delete(`/products/${id}`
+    ).then(res=>res.data)
   })
   
 
@@ -43,8 +37,6 @@ const initialState = {
       });
       builder.addCase(fetchDelet.fulfilled, (state, action) => {
         return { ...state, loading: false,
-          posts: action.payload.data,
-          totalCount:action.payload.headers
            };
       });
       builder.addCase(fetchDelet.rejected, (action) => {

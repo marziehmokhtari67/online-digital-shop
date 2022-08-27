@@ -2,8 +2,8 @@ import React from 'react'
 import {Modal,Box, IconButton,Typography,TableContainer,TableHead,Table,TableBody,TableRow,TableCell,Link,Button} from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { digitsEnToFa } from "@persian-tools/persian-tools";
-import {useStyles} from './../../styles/modals/orderModal/style'
-import { changeDelivered } from './../../redux/reducer/orderSlice'
+import {useStyles} from './../../styles/modals/style'
+import { changeDelivered, fetchOrders } from './../../redux/reducer/orderSlice'
 import {useDispatch} from 'react-redux'
 import {useState} from 'react'
 
@@ -13,8 +13,10 @@ function Moodal({handleClose,open,order}) {
   const [disable,setDisable]=useState(false)
   const handleChange=(id)=>{
     dispatch( changeDelivered(id))
+    dispatch(fetchOrders())
     setDisable(true)
   }
+  console.log(order.delivered)
   return (  
   <Modal
   open={open}
@@ -54,7 +56,7 @@ function Moodal({handleClose,open,order}) {
         </Table>
       </TableContainer>
       <Box component='div'>
-        {console.log(order.delivered)}
+
       {order.delivered ? ( <Typography sx={{fontSize:'14px'}}>زمان تحویل:{new Date(order.createdAt).toLocaleDateString('fa-IR')}</Typography> )
       : ( <Button variant='outlined' onClick={()=>handleChange(order.id)} disabled={disable}>تحویل داده شد</Button> )   }
     </Box>

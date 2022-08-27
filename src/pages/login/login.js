@@ -4,9 +4,19 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import LockIcon from '@mui/icons-material/Lock';
 import { useNavigate } from "react-router-dom";
 import img from "./../../assets/images/img9.jpg";
-
+import {useState} from "react"
+import {useDispatch} from 'react-redux'
+import {fetchLogin} from './../../redux/reducer/loginSlice'
 function Login() {
   const navigate = useNavigate();
+  const [username,setUsername]=useState('')
+  const [password,setPassword] =useState('')
+  const dispatch=useDispatch()
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    dispatch(fetchLogin({username,password}))
+    navigate("/managment")
+  }
   return (
     <>
       <Box
@@ -46,7 +56,7 @@ function Login() {
             ورود به پنل مدیریت دیجیتال لند
           </Typography>
           <Box
-            component="form"
+            component="form" 
             sx={{ display: "flex", flexDirection: "column", gap: "25px" }}
           >
             <Box
@@ -56,7 +66,7 @@ function Login() {
               }}
             >
               <AccountCircle sx={{ mr: 1,ml:1, my: 0.5 }} />
-              <TextField label="نام کاربری" variant="standard" />
+              <TextField label="نام کاربری" variant="standard" value={username} onChange={(e)=>setUsername(e.target.value)}/>
             </Box>
             <Box
               sx={{
@@ -69,17 +79,20 @@ function Login() {
               type='password'
                 label="رمز عبور"
                 variant="standard"
-                inputProps={{ style: { color: "white" } }}
+                color="secondary"
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
               />
             </Box>
             <Button
               variant="contained"
+              type='submit'
               sx={{
                 fontFamily: "iran",
                 color: "rgba(255,255,255,0.8)",
                 backgroundColor:'#42a5f5',
               }}
-              onClick={() => navigate("/managment")}
+              onClick={(e) =>handleSubmit(e) }
             >
               ورود
             </Button>

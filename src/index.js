@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import store from './redux/store/store'
 import { ThemeProvider } from '@mui/material';
 import {theme} from './styles/config/style'
+import { injectStore } from './API/http';
+injectStore(store)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode >

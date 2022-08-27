@@ -1,6 +1,6 @@
 import { createSlice ,createAsyncThunk} from "@reduxjs/toolkit";
-import {URL} from './../../API/constant'
-import axios from "axios"
+import axios from './../../API/http'
+
 const initialState = {
     categories: [],
     loading: false,
@@ -8,7 +8,7 @@ const initialState = {
   };
   
   export const fetchCategory = createAsyncThunk("category/fetchCategory", async() => {
-    return axios(`${URL}/category`)
+    return axios('/category')
       .then((res) => res.data)
       .catch((error) => error.message);
   });

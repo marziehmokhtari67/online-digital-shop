@@ -1,18 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { URL } from "./../../API/constant";
-import axios from "axios";
+import axios from "./../../API/http";
 const initialState = {
   orders: [],
   loading: false,
   error: "",
   totalCount: 0,
 };
-
+const token=localStorage.getItem("ACCESS_TOKEN")
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
-  async ({ delivered, number }) => {
+  async ({ delivered, number=1 }) => {
     return axios
-      .get(`${URL}/orders?delivered=${delivered}&_page=${number}&_limit=5`)
+      .get(`/orders?delivered=${delivered}&_page=${number}&_limit=5`)
       .then((res) => {
         return { data: res.data, headers: res.headers["x-total-count"] };
       })
@@ -23,7 +22,7 @@ export const changeDelivered = createAsyncThunk(
   "orders/changeDelivered",
   async (id) => {
     return axios
-      .patch(`${URL}/orders/${id}`, { delivered: "true" })
+      .patch(`/orders/${id}`, { delivered: "true" })
       .then((res) => res.data);
   }
  
