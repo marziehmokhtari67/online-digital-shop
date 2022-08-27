@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { loginRequest, refreshTokenRequest } from "./../../api/user"
+import { refreshTokenRequest } from "./../../API/user"
 import axios from 'axios'
+import {URL} from './../../API/constant'
 
 const initialState = {
   isLogined: localStorage.getItem('IS_LOGGGED_IN')
@@ -9,18 +10,18 @@ const initialState = {
   error: "",
 };
 export const fetchLogin = createAsyncThunk("login/fetchLogin", 
-(user) => {
-  return loginRequest(user)
-    .then((response) => {
-      localStorage.setItem('ACCESS_TOKEN', response.accessToken);
-      localStorage.setItem('REFRESH_TOKEN', response.refreshToken);
-      localStorage.setItem('IS_LOGGGED_IN', true);
-      return response;
-    })
-    .catch((error) => {
-      return Promise.reject(error);
-    });
-  })
+async(user) => { try{
+  return axios.post(`${URL}/auth/login`,user)
+  .then((response) => {
+    localStorage.setItem('ACCESS_TOKEN', response.data.accessToken);
+    localStorage.setItem('REFRESH_TOKEN', response.data.refreshToken);
+    localStorage.setItem('IS_LOGGGED_IN', true);
+    return response;
+  })}
+  catch(error) {
+    return Promise.reject(error.response.data)}
+})
+ 
 export const refreshToken = createAsyncThunk(
   "login/refreshToken",
   async () => {

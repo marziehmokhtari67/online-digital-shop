@@ -2,7 +2,7 @@ import React from 'react'
 import {Modal,Box, IconButton,Typography,Button} from '@mui/material'
 import CancelIcon from '@mui/icons-material/Cancel';
 import {useStyles} from './../../styles/modals/style'
-import {fetchDelet,fetchPosts} from './../../redux/reducer/postSlice'
+import {fetchDelet,fetchPosts} from './../../redux/reducer/productSlice'
 import {useDispatch} from 'react-redux'
 
 function EditModal({open,handleClolse}) {

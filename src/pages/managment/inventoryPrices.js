@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchPosts } from "../../redux/reducer/postSlice"
+import { fetchPosts } from "../../redux/reducer/productSlice"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect,useState } from "react";
 import {

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import postsSlice from '../reducer/postSlice'
+import postsSlice from '../reducer/productSlice'
 import categorySlice from '../reducer/categorySlice'
 import ordersSlice from '../reducer/orderSlice'
 import loginSlice from '../reducer/loginSlice'

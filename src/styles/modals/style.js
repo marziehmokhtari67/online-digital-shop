@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme)=>({
     border: '3px solid #eee1f3',
     boxShadow: 24,
     padding:'10px',
-    [theme.breakpoints.down('md')]:{
+    [theme.breakpoints.down('sm')]:{
         width:'100vw',
         height:'100vh',
     }

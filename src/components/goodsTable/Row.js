@@ -1,7 +1,7 @@
 import React from 'react'
 import { useStyles } from '../../styles/table/style'
 import {TableRow,TableCell,Button,Avatar} from '@mui/material'
-import {URL} from './../../api/constant'
+import {URL} from './../../API/constant'
 import DeletModal from './DeletModal'
 import EditModal from './EditModal'
 function Row({post,categories}) {
@@ -33,4 +33,3 @@ const handleClose = () => setOpen(false);
 }
 
 export default Row
-// toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
