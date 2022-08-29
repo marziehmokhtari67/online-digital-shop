@@ -4,7 +4,7 @@ import React, { useCallback } from "react";
 import { Modal, Box, IconButton, Typography, Button } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useStyles } from "./../../styles/modals/style";
-import { fetchDelet, fetchPosts } from "../../redux/reducer/productSlice";
+import { fetchDelete, fetchPosts } from "../../redux/reducer/productSlice";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
@@ -13,7 +13,7 @@ function DeletModal({ open, handleClolse, postId }) {
   const dispatch = useDispatch();
  
   const handleDelete = (id) => {
-    dispatch(fetchDelet(id))
+    dispatch(fetchDelete(id))
       .then(unwrapResult)
       .then(() => {
         toast.success("Success Notification !", {

@@ -20,7 +20,7 @@ export const fetchPosts = createAsyncThunk(
       .catch((error) => error.message);
   }
 );
-export const fetchDelet = createAsyncThunk("posts/fetchDelet", async (id) => {
+export const fetchDelete = createAsyncThunk("posts/fetchDelete", async (id) => {
   return instance.delete(`/products/${id}`).then((res) => res.data);
 });
 
