@@ -9,8 +9,7 @@ const initialState = {
     error: "",
     totalCount:0
   };
-  const tocken=  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYlVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoiQWxpcmV6YSBHaGFyZ2hhYmkiLCJpYXQiOjE2NjE0NTYyNTAsImV4cCI6MTY2MTQ1OTg1MH0.rosNqOXzF8nr2pevdZMi-rIEzu98o3gt7YHEJ-WTWJI"
-  
+ 
  
   
   export const fetchPosts = createAsyncThunk("posts/fetchPosts", async(number=1) => {
@@ -18,10 +17,9 @@ const initialState = {
       .then((res) => {return{data:res.data, headers:res.headers["x-total-count"]}})
       .catch((error) => error.message);
   });
-  export const fetchDelet = createAsyncThunk('posts/fetchDelet',async(id)=>{
-    return axios.delete(`${URL}/products/${id}`, {headers:{
-      Authorization: 'Bearer ' + tocken
-    }}).then(res=>res.data)
+  export const fetchDelete = createAsyncThunk('posts/fetchDelet',async(id)=>{
+    return axios.delete(`${URL}/products/${id}`
+    ).then(res=>res.data)
   })
   
 
@@ -38,16 +36,16 @@ const initialState = {
       builder.addCase(fetchPosts.rejected, (state, action) => {
         return { posts: [], loading: false, error: action.payload };
       });
-      builder.addCase(fetchDelet.pending, (state) => {
+      builder.addCase(fetchDelete.pending, (state) => {
         return { ...state, loading: true };
       });
-      builder.addCase(fetchDelet.fulfilled, (state, action) => {
+      builder.addCase(fetchDelete.fulfilled, (state, action) => {
         return { ...state, loading: false,
-          posts: action.payload.data,
-          totalCount:action.payload.headers
+          
+        
            };
       });
-      builder.addCase(fetchDelet.rejected, (action) => {
+      builder.addCase(fetchDelete.rejected, (action) => {
         return { posts: [], loading: false, error: action.payload };
       });
     

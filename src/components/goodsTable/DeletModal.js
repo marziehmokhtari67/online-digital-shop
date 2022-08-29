@@ -4,12 +4,13 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import {useStyles} from './../../styles/modals/orderModal/style'
 import {fetchDelet,fetchPosts} from './../../redux/reducer/postSlice'
 import {useDispatch} from 'react-redux'
+import {unwrapResult} from 'axios'
 function DeletModal({open,handleClolse,postId}) {
 const classes=useStyles()
 const dispatch = useDispatch()
 const handleDelet= (id) => {
-  dispatch(fetchDelet(id))
-  dispatch(fetchPosts())
+dispatch(fetchDelet(id)).then(unwrapResult).then(()=>{dispatch(fetchPosts())})
+  
 }
   return (
     <Modal
