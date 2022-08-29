@@ -24,7 +24,7 @@ const handleClose = () => setOpen(false);
         <EditModal open={open} handleClose={handleClose}/>
         {/*  */}
         <Button variant='outlined'sx={{mx:2}} onClick={handleOpen}>حذف</Button>
-        <DeletModal open={open} handleClolse={handleClose} postId={post.id}/>
+        <DeletModal open={open} handleClolse={handleClose} postId={post.id} />
         </TableCell>
       </TableRow>
       
