@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme)=>({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 500,
+    width: 700,
     hight:500,
     backgroundColor: 'rgb(255 ,255, 255)',
     border: '3px solid #eee1f3',
@@ -25,6 +25,25 @@ header:{
 },
 table:{
     border:'2px solid rgb(244 244 244)'
+},
+form:{
+    display:'flex',
+    flexDirection:'column',
+    gap:'10px',
+    fontFamily:'Vazir-Medium',
+    textAilgn:'right',
+    fontSize:'12px',
+   
+},
+input:{
+    fontFamily:'Vazir-Medium',
+    padding:'5px'  
+},
+btn:{
+width:'10%'
+},
+ckEditor:{
+    width:'500px'
 }
 
 

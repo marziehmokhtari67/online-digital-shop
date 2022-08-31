@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchPosts } from "../../redux/reducer/productSlice";
+import { fetchProduct } from "../../redux/reducer/productSlice";
 import { fetchCategory } from "../../redux/reducer/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -23,11 +23,11 @@ import { useStyles } from "../../styles/table/style";
 function Goods() {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
-  const { posts,totalCount } = useSelector((state) => state.posts);
+  const { products,totalCount } = useSelector((state) => state.products);
   const [params, setParams] = useState(1);
   const classes = useStyles();
   useEffect(() => {
-  dispatch(fetchPosts(params), dispatch(fetchCategory()));
+  dispatch(fetchProduct(params), dispatch(fetchCategory()));
   }, [dispatch, params]);
   const handleChange = (event, value) => {
     setParams(value);
@@ -70,8 +70,8 @@ function Goods() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts.map((post) => (
-              <Row key={post.id} post={post} categories={categories} />
+            {products.map((product) => (
+              <Row key={product.id} product={product} categories={categories} />
             ))}
           </TableBody>
         </Table>

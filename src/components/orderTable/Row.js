@@ -2,13 +2,12 @@ import * as React from 'react';
 import {TableRow,TableCell,Button} from '@mui/material'
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 
-import Moodal from './Modal'
+import OrderModal from './Modal'
 
 
-function Row({order}) {
+function Row({order,number}) {
 const [open, setOpen] =React.useState(false)
 const handleOpen = () => {setOpen(true)
-console.log(order.delivered)
 };
 const handleClose = () => setOpen(false);
   return (
@@ -18,10 +17,10 @@ const handleClose = () => setOpen(false);
    <TableCell align='center' >{ 
  digitsEnToFa(order.prices.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))}</TableCell>
    <TableCell align='center' >{new Date(order.createdAt).toLocaleDateString('fa-IR')}</TableCell>
-   <TableCell align='center' ><Button variant='outlined'onClick={handleOpen} >بررسی سفارش</Button></TableCell>
+   <TableCell align='center' ><Button variant='outlined'onClick={handleOpen}  >بررسی سفارش</Button></TableCell>
    
    </TableRow>{
-    open && <Moodal handleClose={handleClose} open={open} order={order}/>
+    open && <OrderModal handleClose={handleClose} open={open} order={order}  number={number}/>
    }
    
     </>

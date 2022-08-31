@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { fetchPosts } from "../../redux/reducer/productSlice";
+import { fetchProduct } from "../../redux/reducer/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -35,7 +35,7 @@ function InventoryPrices() {
     console.log('nnikokol')
   }, []);
 
-  const { posts, totalCount } = useSelector((state) => state.posts);
+  const { products, totalCount } = useSelector((state) => state.products);
   const [params, setParams] = useState(1);
   const classes = useStyles();
   const handleChange = (event, value) => {
@@ -43,7 +43,7 @@ function InventoryPrices() {
   };
 
   useEffect(() => {
-    dispatch(fetchPosts(params));
+    dispatch(fetchProduct(params));
   }, [dispatch, params]);
   return (
     <Box className={classes.container}>
@@ -71,8 +71,8 @@ function InventoryPrices() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts.map((post) => (
-              <Row key={post.id} post={post} />
+            {products.map((product) => (
+              <Row key={product.id} product={product} />
             ))}
           </TableBody>
         </Table>
