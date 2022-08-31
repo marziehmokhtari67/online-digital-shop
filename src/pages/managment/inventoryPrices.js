@@ -49,7 +49,7 @@ function InventoryPrices() {
     <Box className={classes.container}>
       <Box className={classes.header}>
         <AppBar position="static" elevation={0}>
-          <Toolbar className={classes.toolBar}>
+          <Toolbar className={classes.toolBar} disableGutters={true}>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               مدیریت موجودی و قیمت ها
             </Typography>

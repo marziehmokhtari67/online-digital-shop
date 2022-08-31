@@ -1,8 +1,8 @@
-import React from "react";
+import React,{ useEffect, useState }  from "react";
 import { fetchProduct } from "../../redux/reducer/productSlice";
 import { fetchCategory } from "../../redux/reducer/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+
 import {
   AppBar,
   Box,
@@ -19,13 +19,20 @@ import {
   Stack,
 } from "@mui/material";
 import Row from "../../components/goodsTable/Row";
+import AddModal from "../../components/goodsTable/AddModal";
 import { useStyles } from "../../styles/table/style";
 function Goods() {
+  // defining constants
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
   const { products,totalCount } = useSelector((state) => state.products);
   const [params, setParams] = useState(1);
   const classes = useStyles();
+  const[open,setOpen]=useState(false)
+
+  // defining functions
+  const handleCloseAdd=()=>setOpen(false)
+  const handleOpenAdd=()=>setOpen(true)
   useEffect(() => {
   dispatch(fetchProduct(params), dispatch(fetchCategory()));
   }, [dispatch, params]);
@@ -43,9 +50,11 @@ function Goods() {
             <Button
               variant="outlined"
               color='primary'
+              onClick={handleOpenAdd}
             >
           اضافه کردن
             </Button>
+            <AddModal open={open} handleCloseAdd={handleCloseAdd}/>
           </Toolbar>
         </AppBar>
       </Box>

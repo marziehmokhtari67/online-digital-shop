@@ -8,7 +8,7 @@ const initialState = {
   error: "",
   totalCount: 0,
 };
-
+//fetchProduct
 export const fetchProduct= createAsyncThunk(
   "product/fetchProduct",
   async (number = 1) => {
@@ -20,17 +20,23 @@ export const fetchProduct= createAsyncThunk(
       .catch((error) => error.message);
   }
 );
+// fetchDelete
 export const fetchDelete = createAsyncThunk("product/fetchDelete", async (id) => {
   return instance.delete(`/products/${id}`).then((res) => res.data);
 });
+// fetchEdit
 export const fetchEdit = createAsyncThunk("posts/fetchEdit", async ({id,formData}) => {
   return instance.put(`/products/${id}`,formData).then((res) => res);
 });
+// fetch add
+export const fetchAdd = createAsyncThunk("posts/fetchAdd", async ({formData}) => {
+  return instance.post('/products',formData).then((res) => res)}) 
 
 export const productsSlice = createSlice({
   name: "products",
   initialState,
   extraReducers: (builder) => {
+     //get product
     builder.addCase(fetchProduct.pending, (state) => {
       return { ...state, loading: true };
     });
@@ -42,9 +48,11 @@ export const productsSlice = createSlice({
         totalCount: action.payload.headers,
       };
     });
+   
     builder.addCase(fetchProduct.rejected, (action) => {
       return { posts: [], loading: false, error: action.payload };
     });
+    // delete product
     builder.addCase(fetchDelete.pending, (state) => {
       return { ...state, loading: true };
     });
@@ -54,7 +62,7 @@ export const productsSlice = createSlice({
     builder.addCase(fetchDelete.rejected, (action) => {
       return { posts: [], loading: false, error: action.payload };
     });
-   
+   //edit product
     builder.addCase(fetchEdit.pending, (state) => {
       return { ...state, loading: true };
     });
@@ -64,6 +72,18 @@ export const productsSlice = createSlice({
     builder.addCase(fetchEdit.rejected, (action) => {
       return { posts: [], loading: false, error: action.payload };
     });
+    //add product
+
+    builder.addCase(fetchAdd.pending, (state) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(fetchAdd.fulfilled, (state, action) => {
+      return { ...state, loading: false };
+    });
+    builder.addCase(fetchAdd.rejected, (action) => {
+      return { posts: [], loading: false, error: action.payload };
+    });
+
   },
   
 });

@@ -13,7 +13,7 @@ export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
   async ({ delivered, number=1 }) => {
     return axios
-      .get(`${URL}/orders?delivered=${delivered}&_page=${number}&_limit=5`,
+      .get(`${URL}/orders?delivered=${delivered}&_page=${number}&_limit=4`,
      )
       .then((res) => {
         return { data: res.data, headers: res.headers["x-total-count"] };

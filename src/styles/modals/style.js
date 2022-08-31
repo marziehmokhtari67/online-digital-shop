@@ -29,7 +29,6 @@ table:{
 form:{
     display:'flex',
     flexDirection:'column',
-    gap:'10px',
     fontFamily:'Vazir-Medium',
     textAilgn:'right',
     fontSize:'12px',
@@ -40,7 +39,8 @@ input:{
     padding:'5px'  
 },
 btn:{
-width:'10%'
+width:'10%',
+
 },
 ckEditor:{
     width:'500px'

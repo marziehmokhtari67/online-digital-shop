@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useCallback} from "react";
 import {
   Modal,
   Box,
@@ -15,23 +15,23 @@ import { fetchCategory } from "./../../redux/reducer/categorySlice";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import instance from "./../../API/http";
-import { fetchEdit, fetchProduct } from "./../../redux/reducer/productSlice";
+import {fetchAdd  ,fetchProduct } from "./../../redux/reducer/productSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-function EditModal({ openedit, handleCloseEdit, product }) {
+function AddModal({open,handleCloseAdd}) {
   // definding variables
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [name, setName] = useState(product.name);
-  const [price, SetPrice] = useState(product.price);
-  const [model, setModel] = useState(product.model);
-  const [quantity, setQuantity] = useState(product.quantity);
-  const [color, setColor] = useState(product.color);
-  const [image,SetImage] =useState(null)
-  const [category, setCategory] = useState(product.category);
-  const [thumbnail, setThumbnail] = useState(product.thumbnail);
-  const [description, setDescription] = useState(product.description);
+  const [name, setName] = useState('');
+  const [price, SetPrice] = useState(0);
+  const [model, setModel] = useState('');
+  const [quantity, setQuantity] = useState(0);
+  const [color, setColor] = useState('');
+  const [image,SetImage] =useState('')
+  const [category, setCategory] = useState(1);
+  const [thumbnail, setThumbnail] = useState('');
+  const [description, setDescription] = useState('');
   const [src, setSrc] = useState([]);
   const { categories } = useSelector((state) => state.category);
 
@@ -43,7 +43,7 @@ function EditModal({ openedit, handleCloseEdit, product }) {
   const handleUpload = async (e) => {
     const selectedFIles = [];
     const targetFiles = e.target.files;
-    console.log(targetFiles);
+    
     const targetFilesObject = [...targetFiles];
     targetFilesObject.map((file) => {
       return selectedFIles.push(URL.createObjectURL(file));
@@ -66,7 +66,7 @@ function EditModal({ openedit, handleCloseEdit, product }) {
   const handleSave= (e,id)=>{
     const formData= {name,model,price,quantity,color,thumbnail,description,category}
     e.preventDefault()
-  dispatch(fetchEdit({id,formData}))
+ dispatch(fetchAdd({formData}))
   .then(unwrapResult)
         .then(() => {
           toast.success("ویرایش کالا با موفقیت انجام شد", {
@@ -76,29 +76,28 @@ function EditModal({ openedit, handleCloseEdit, product }) {
           dispatch(fetchProduct());
         });
       }
-      // SetImage('frfrfrmr')
-      // console.log(image)
+      
       console.log(category)
   return (
     <Modal
-      open={openedit}
+      open={open}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <Box className={classes.container}>
         <Box className={classes.header}>
           <Typography>افزودن/ویرایش</Typography>
-          <IconButton onClick={handleCloseEdit} color={"primary"}>
+          <IconButton onClick={handleCloseAdd} color={"primary"}>
             <CancelIcon />
           </IconButton>
         </Box>
 
-        <form className={classes.form} onSubmit={(e)=>handleSave(e,product.id)}>
+        <form className={classes.form} onSubmit={(e)=>handleSave(e)}>
           <Grid container spacing={2}>
             <Grid item md={12} xs={12}>
               <Typography>تصویر کالا:</Typography>
             </Grid>
-            <Grid item>
+            <Grid item md={6} xs={12}>
               <input
                 type="file"
                 multiple
@@ -126,7 +125,7 @@ function EditModal({ openedit, handleCloseEdit, product }) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
-            </Grid >
+            </Grid>
             <Grid item md={6} xs={12} className={classes.input}>
               <select
                 className={classes.input}
@@ -204,4 +203,4 @@ function EditModal({ openedit, handleCloseEdit, product }) {
   );
 }
 
-export default EditModal;
+export default AddModal;
