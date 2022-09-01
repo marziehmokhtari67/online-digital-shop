@@ -30,12 +30,14 @@ function CustomerNavbar() {
               src={logo}
               alt="logo"
             />
-            <Typography variant="h4" className={classes.name}>
+            <Link href='/' sx={{textDecoration:'none'}}><Typography variant="h4" className={classes.name}>
+            
               دیجیتال لند
             </Typography>
+            </Link>
           </Box>
           <Box className={classes.leftBox}>
-            <Link href="login" className={classes.leftBoxLink}>
+            <Link href="/login" className={classes.leftBoxLink}>
               <PersonOutlineOutlinedIcon />
               <Typography>مدیریت</Typography>
             </Link>

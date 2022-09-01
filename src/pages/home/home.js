@@ -20,16 +20,14 @@ function Home() {
     getData()
     
   }, [dispatch]);
-  console.log(categories);
+  
   return (
-    <Box
+    <Box 
       sx={{
-        display: "flex",
-        flexDirection: "column",
-
-        alignItems:'center',
-        padding:'20px 10px ',
-        gap: "5px",
+      p:4,
+      display:'flex',
+      flexDirection:'column',
+      alignItems:'center',
       }}
     >
       {categories.map((category) =>{return( 

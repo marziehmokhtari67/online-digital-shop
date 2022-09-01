@@ -14,7 +14,8 @@ const useStyles=makeStyles({
   width:'300px',
   height:'300px',
   padding:'10px',
-  transitionDuration:'ease-in-out',
+  borderRadius:'10px',
+  transitionDuration:'ease-in',
   '&:hover':{
     
     
