@@ -57,6 +57,7 @@ function AddModal({open,handleCloseAdd}) {
     });
     const res = await Promise.all(requests);
     setThumbnail(res[0].data.filename)
+    SetImage([res[1].data.filename,res[2].data.filename,res[3].data.filename])
     // const array= [res[1].data.filename,res[2].data.filename,res[3].data.filename]
     
    
@@ -64,7 +65,7 @@ function AddModal({open,handleCloseAdd}) {
   
 
   const handleSave= (e,id)=>{
-    const formData= {name,model,price,quantity,color,thumbnail,description,category}
+    const formData= {name,model,price,quantity,color,thumbnail,description,category,image}
     e.preventDefault()
  dispatch(fetchAdd({formData}))
   .then(unwrapResult)
@@ -75,6 +76,7 @@ function AddModal({open,handleCloseAdd}) {
           });
           dispatch(fetchProduct());
         });
+        handleCloseAdd()
       }
       
       console.log(category)

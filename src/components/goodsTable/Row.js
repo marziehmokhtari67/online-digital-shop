@@ -12,6 +12,7 @@ function Row({ product, categories }) {
   const handleCloseDelete = () => setOpenDelete(false);
   const handleOpenedit = () => setOpenedit(true);
   const handleCloseedit = () => setOpenedit(false);
+  
   return (
     <>
       <TableRow>

@@ -18,6 +18,8 @@ import instance from "./../../API/http";
 import { fetchEdit, fetchProduct } from "./../../redux/reducer/productSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 function EditModal({ openedit, handleCloseEdit, product }) {
   // definding variables
@@ -28,7 +30,7 @@ function EditModal({ openedit, handleCloseEdit, product }) {
   const [model, setModel] = useState(product.model);
   const [quantity, setQuantity] = useState(product.quantity);
   const [color, setColor] = useState(product.color);
-  const [image,SetImage] =useState(null)
+  const [image, SetImage] = useState([product.image[0]]);
   const [category, setCategory] = useState(product.category);
   const [thumbnail, setThumbnail] = useState(product.thumbnail);
   const [description, setDescription] = useState(product.description);
@@ -43,7 +45,7 @@ function EditModal({ openedit, handleCloseEdit, product }) {
   const handleUpload = async (e) => {
     const selectedFIles = [];
     const targetFiles = e.target.files;
-    console.log(targetFiles);
+
     const targetFilesObject = [...targetFiles];
     targetFilesObject.map((file) => {
       return selectedFIles.push(URL.createObjectURL(file));
@@ -56,29 +58,38 @@ function EditModal({ openedit, handleCloseEdit, product }) {
       return instance.post("/upload", form);
     });
     const res = await Promise.all(requests);
-    setThumbnail(res[0].data.filename)
-    // const array= [res[1].data.filename,res[2].data.filename,res[3].data.filename]
-    
-   
+    setThumbnail(res[0].data.filename);
+    SetImage([
+      res[1].data.filename,
+      res[2].data.filename,
+      res[3].data.filename,
+    ]);
   };
-  
 
-  const handleSave= (e,id)=>{
-    const formData= {name,model,price,quantity,color,thumbnail,description,category}
-    e.preventDefault()
-  dispatch(fetchEdit({id,formData}))
-  .then(unwrapResult)
-        .then(() => {
-          toast.success("ویرایش کالا با موفقیت انجام شد", {
-            position: toast.POSITION.BOTTOM_RIGHT,
-
-          });
-          dispatch(fetchProduct());
+  const handleSave = (e, id) => {
+    const formData = {
+      name,
+      model,
+      price,
+      quantity,
+      color,
+      thumbnail,
+      description,
+      category,
+      image,
+    };
+    e.preventDefault();
+    dispatch(fetchEdit({ id, formData }))
+      .then(unwrapResult)
+      .then(() => {
+        toast.success("ویرایش کالا با موفقیت انجام شد", {
+          position: toast.POSITION.BOTTOM_RIGHT,
         });
-      }
-      // SetImage('frfrfrmr')
-      // console.log(image)
-      console.log(category)
+        dispatch(fetchProduct());
+      });
+    handleCloseEdit();
+  };
+ 
   return (
     <Modal
       open={openedit}
@@ -93,7 +104,10 @@ function EditModal({ openedit, handleCloseEdit, product }) {
           </IconButton>
         </Box>
 
-        <form className={classes.form} onSubmit={(e)=>handleSave(e,product.id)}>
+        <form
+          className={classes.form}
+          onSubmit={(e) => handleSave(e, product.id)}
+        >
           <Grid container spacing={2}>
             <Grid item md={12} xs={12}>
               <Typography>تصویر کالا:</Typography>
@@ -126,11 +140,13 @@ function EditModal({ openedit, handleCloseEdit, product }) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
-            </Grid >
+            </Grid>
             <Grid item md={6} xs={12} className={classes.input}>
               <select
                 className={classes.input}
-                onChange={(e) => { setCategory(e.target.value);}}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                }}
               >
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
@@ -191,7 +207,7 @@ function EditModal({ openedit, handleCloseEdit, product }) {
                 data={description}
                 className={classes.ckEditor}
                 editor={ClassicEditor}
-                onChange={(e,editor) => setDescription(editor.getData())}
+                onChange={(e, editor) => setDescription(editor.getData())}
               />
             </Grid>
           </Grid>

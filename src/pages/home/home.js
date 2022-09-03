@@ -32,7 +32,7 @@ function Home() {
     >
       {categories.map((category) =>{return( 
         <div key={category.id}>
-          <Link
+          <img src={`${URL}/files/${category.icon}` } alt='icon'/><Link
             href={`category/${category.id}`}
             sx={{ textDecoration: "none" }}
           >
