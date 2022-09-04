@@ -35,7 +35,7 @@ function Card({product}) {
   const navigate=useNavigate()
   const classes=useStyles()
   return (
-    <Box onClick={()=>navigate(`product/${product.id}`)} className={classes.card}>
+    <Box onClick={()=>navigate(`/product/${product.id}`)} className={classes.card}>
     <img src={`${URL}/files/${product.image[0]}`} alt="productImage" className={classes.img} />
     <Typography align='center'>{product.name} {product.model}</Typography>
     <Typography align='center'>قیمت:{digitsEnToFa(product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))}</Typography>

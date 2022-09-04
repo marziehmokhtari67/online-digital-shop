@@ -29,7 +29,7 @@ export const fetchEdit = createAsyncThunk("posts/fetchEdit", async ({id,formData
   return instance.put(`/products/${id}`,formData).then((res) => res);
 });
 // fetch add
-export const fetchAdd = createAsyncThunk("posts/fetchAdd", async ({formData}) => {
+export const fetchAdd = createAsyncThunk("posts/fetchAdd", async (formData) => {
   return instance.post('/products',formData).then((res) => res)}) 
 
 export const productsSlice = createSlice({

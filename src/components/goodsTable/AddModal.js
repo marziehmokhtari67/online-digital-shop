@@ -1,4 +1,4 @@
-import React, { useEffect, useState ,useCallback} from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Modal,
   Box,
@@ -15,26 +15,73 @@ import { fetchCategory } from "./../../redux/reducer/categorySlice";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import instance from "./../../API/http";
-import {fetchAdd  ,fetchProduct } from "./../../redux/reducer/productSlice";
+import { fetchAdd, fetchProduct } from "./../../redux/reducer/productSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-
-function AddModal({open,handleCloseAdd}) {
+import { useFormik } from "formik";
+import { schema } from "../../yup/schemaModal";
+// ////////////////////////////////////////////////////////////////////////////////////////////////
+function AddModal({ open, handleCloseAdd }) {
   // definding variables
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [price, SetPrice] = useState(0);
-  const [model, setModel] = useState('');
-  const [quantity, setQuantity] = useState(0);
-  const [color, setColor] = useState('');
-  const [image,SetImage] =useState('')
-  const [category, setCategory] = useState(1);
-  const [thumbnail, setThumbnail] = useState('');
-  const [description, setDescription] = useState('');
-  const [src, setSrc] = useState([]);
-  const { categories } = useSelector((state) => state.category);
+  const [image, setImage] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
+  const handleSave = (data) => {
+    
+    setFormData({
+      name: data.name,
+      model: data.model,
+      quantity: data.quantity,
+      color: data.color,
+      category: data.category,
+      description: data.description,
+      price: data.price,
+    });
 
+    formData
+      ? dispatch(fetchAdd(formData))
+          .then(unwrapResult)
+          .then(() => {
+            toast.success("اضافه کردن کالا با موفقیت انجام شد", {
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+            dispatch(fetchProduct());
+          })
+      : alert("دیتای وارد شده صحیح نمیباشد");
+    data.name = "";
+    data.model = "";
+    setImage([]);
+    setThumbnail("");
+    data.price = "";
+    data.color = "";
+    data.quantity = "";
+    data.category = "";
+    data.description = "";
+    setSrc("");
+    handleCloseAdd();
+  };
+  const [src, setSrc] = useState([]);
+  const [formData, setFormData] = useState();
+  const { categories } = useSelector((state) => state.category);
+  const { values, handleChange, errors, handleSubmit, setFieldValue } =
+    useFormik({
+      initialValues: {
+        name: "",
+        model: "",
+        price: "",
+        quantity: 0,
+        color: "",
+        thumbnail: "",
+        description: "",
+        category: 1,
+        image1: "",
+        image2: "",
+        image3: "",
+      },
+      validationSchema: schema,
+     
+    });
   // defindinf functions
   useEffect(() => {
     dispatch(fetchCategory());
@@ -43,7 +90,7 @@ function AddModal({open,handleCloseAdd}) {
   const handleUpload = async (e) => {
     const selectedFIles = [];
     const targetFiles = e.target.files;
-    
+
     const targetFilesObject = [...targetFiles];
     targetFilesObject.map((file) => {
       return selectedFIles.push(URL.createObjectURL(file));
@@ -56,30 +103,14 @@ function AddModal({open,handleCloseAdd}) {
       return instance.post("/upload", form);
     });
     const res = await Promise.all(requests);
-    setThumbnail(res[0].data.filename)
-    SetImage([res[1].data.filename,res[2].data.filename,res[3].data.filename])
-    // const array= [res[1].data.filename,res[2].data.filename,res[3].data.filename]
-    
-   
+    setThumbnail(res[0].data.filename);
+    setImage([
+      res[1].data.filename,
+      res[2].data.filename,
+      res[3].data.filename,
+    ]);
   };
-  
 
-  const handleSave= (e,id)=>{
-    const formData= {name,model,price,quantity,color,thumbnail,description,category,image}
-    e.preventDefault()
- dispatch(fetchAdd({formData}))
-  .then(unwrapResult)
-        .then(() => {
-          toast.success("ویرایش کالا با موفقیت انجام شد", {
-            position: toast.POSITION.BOTTOM_RIGHT,
-
-          });
-          dispatch(fetchProduct());
-        });
-        handleCloseAdd()
-      }
-      
-      console.log(category)
   return (
     <Modal
       open={open}
@@ -94,7 +125,11 @@ function AddModal({open,handleCloseAdd}) {
           </IconButton>
         </Box>
 
-        <form className={classes.form} onSubmit={(e)=>handleSave(e)}>
+        <form
+          className={classes.form}
+          onSubmit={handleSubmit}
+          autoComplete="off"
+        >
           <Grid container spacing={2}>
             <Grid item md={12} xs={12}>
               <Typography>تصویر کالا:</Typography>
@@ -124,14 +159,17 @@ function AddModal({open,handleCloseAdd}) {
               <input
                 type="text"
                 className={classes.input}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              ></input>
+                value={values.name}
+                onChange={handleChange}
+                name="name"
+              />
             </Grid>
             <Grid item md={6} xs={12} className={classes.input}>
               <select
                 className={classes.input}
-                onChange={(e) => { setCategory(e.target.value);}}
+                value={Number(values.category)}
+                name="category"
+                onChange={handleChange}
               >
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
@@ -150,16 +188,18 @@ function AddModal({open,handleCloseAdd}) {
               <input
                 type="text"
                 className={classes.input}
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
+                value={values.model}
+                name="model"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item md={6} xs={12}>
               <input
                 type="text"
+                name="price"
                 className={classes.input}
-                value={price}
-                onChange={(e) => SetPrice(Number(e.target.value))}
+                value={values.price}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -171,17 +211,19 @@ function AddModal({open,handleCloseAdd}) {
             <Grid item md={6} xs={12}>
               <input
                 type="number"
+                name="quantity"
                 className={classes.input}
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
+                value={values.quantity}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item md={6} xs={12}>
               <input
                 type="text"
+                name="color"
                 className={classes.input}
-                value={color}
-                onChange={(e) => setColor(e.target.value)}
+                value={values.color}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item md={12} xs={12}>
@@ -189,16 +231,20 @@ function AddModal({open,handleCloseAdd}) {
             </Grid>
             <Grid item md={12} xs={12}>
               <CKEditor
-                data={description}
+                id="description"
+                data={values.description}
                 className={classes.ckEditor}
                 editor={ClassicEditor}
-                onChange={(e,editor) => setDescription(editor.getData())}
+                onChange={(event, editor) => {
+                  setFieldValue("description", editor.getData());
+                }}
               />
             </Grid>
           </Grid>
           <Button type="submit" className={classes.btn} variant={"outlined"}>
             ذخیره
           </Button>
+          {errors ? <p>mvdondo</p> : <p></p>}
         </form>
       </Box>
     </Modal>

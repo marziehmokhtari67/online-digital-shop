@@ -1,10 +1,35 @@
-import React from 'react'
-
+import React,{useEffect,useState} from 'react'
+import{fetchCategory} from './../../redux/reducer/categorySlice'
+import{useDispatch,useSelector} from 'react-redux'
+import {Link,Box,Typography} from '@mui/material'
+import axios from 'axios'
+import {URL} from './../../API/constant'
 function Sidebar() {
-  return (
-    <div>
+  const dispatch=useDispatch()
+  const {categories}=useSelector(state=>state.category)
+  const [subcategory,setSubcategory]=useState([])
+  function getsubCategory() {
+    axios.get(`${URL}/subcategory`)
+      .then((res) => setSubcategory(res.data))
       
-    </div>
+  }
+  useEffect(()=>{dispatch(fetchCategory())
+  getsubCategory()}
+  ,[dispatch])
+  return (
+    <Box>
+     {categories.map((category)=>{return (<Box key={category.id}>
+    <Link href={`/category/${category.id}`}><Typography>{category.name}</Typography></Link>
+ {subcategory.filter(item=>item.category===category.id).map(element=>
+  {return (
+    <Typography key={element.id}>{element.name}</Typography>
+  )
+
+  }
+  )}
+</Box>
+)})}
+    </Box>
   )
 }
 

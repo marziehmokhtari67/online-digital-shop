@@ -18,9 +18,10 @@ import instance from "./../../API/http";
 import { fetchEdit, fetchProduct } from "./../../redux/reducer/productSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { useFormik } from "formik";
-import * as yup from "yup";
+import { useFormik } from "formik"
+import {schema} from '../../yup/schemaModal'
 
+// //////////////////////////////////////////////////////////////////
 function EditModal({ openedit, handleCloseEdit, product }) {
   // definding variables
   const classes = useStyles();
@@ -36,6 +37,26 @@ function EditModal({ openedit, handleCloseEdit, product }) {
   const [description, setDescription] = useState(product.description);
   const [src, setSrc] = useState([]);
   const { categories } = useSelector((state) => state.category);
+  
+const {values,handleChange,errors} = useFormik({
+  initialValues: {
+    name: product.name,
+    model:product.model,
+    price:product.price,
+    quantity:product.quantity,
+    color:product.color,
+    thumbnail:product.thumbnail,
+    description:product.description,
+    category:product.category,
+    image1:(product.image)[0],
+    image2:(product.image)[1],
+    image:(product.image)[2
+    ],
+  },
+  validationSchema: schema,
+
+  
+});
 
   // defindinf functions
   useEffect(() => {
@@ -121,10 +142,10 @@ function EditModal({ openedit, handleCloseEdit, product }) {
               />
             </Grid>
             <Grid item md={6} xs={12} sx={{ display: "flex", gap: "5px" }}>
-              <Avatar alt="image" src={src[0]} variant="rounded" />
-              <Avatar alt="image" src={src[1]} variant="rounded" />
-              <Avatar alt="image" src={src[2]} variant="rounded" />
-              <Avatar alt="image" src={src[3]} variant="rounded" />
+              <Avatar name='thumbnail' alt="image" src={src[0]} variant="rounded" onChange={handleChange} />
+              <Avatar name='image1' alt="image"  src={src[1]} variant="rounded" onChange={handleChange}/>
+              <Avatar alt="image2" src={src[2]} variant="rounded" onChange={handleChange}/>
+              <Avatar alt="image3" src={src[3]} variant="rounded" onChange={handleChange}/>
             </Grid>
 
             <Grid item md={6} xs={12}>
@@ -135,17 +156,21 @@ function EditModal({ openedit, handleCloseEdit, product }) {
             </Grid>
             <Grid item md={6} xs={12}>
               <input
+              name='name'
                 type="text"
                 className={classes.input}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={values.name}
+                onChange={(e) => {setName(e.target.value)
+                  handleChange()}}
               ></input>
             </Grid>
             <Grid item md={6} xs={12} className={classes.input}>
               <select
                 className={classes.input}
+                value={values.category}
                 onChange={(e) => {
                   setCategory(e.target.value);
+                  
                 }}
               >
                 {categories.map((category) => (
@@ -165,6 +190,7 @@ function EditModal({ openedit, handleCloseEdit, product }) {
               <input
                 type="text"
                 className={classes.input}
+                name='model'
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
               />
@@ -174,6 +200,7 @@ function EditModal({ openedit, handleCloseEdit, product }) {
                 type="text"
                 className={classes.input}
                 value={price}
+                name='price'
                 onChange={(e) => SetPrice(Number(e.target.value))}
               />
             </Grid>
