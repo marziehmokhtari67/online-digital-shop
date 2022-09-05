@@ -17,7 +17,7 @@ function Sidebar() {
   getsubCategory()}
   ,[dispatch])
   return (
-    <Box>
+    <Box sx={{width:'30%',marginTop:'20px'}}>
      {categories.map((category)=>{return (<Box key={category.id}>
     <Link href={`/category/${category.id}`}><Typography>{category.name}</Typography></Link>
  {subcategory.filter(item=>item.category===category.id).map(element=>

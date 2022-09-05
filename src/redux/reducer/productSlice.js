@@ -30,8 +30,13 @@ export const fetchEdit = createAsyncThunk("posts/fetchEdit", async ({id,formData
 });
 // fetch add
 export const fetchAdd = createAsyncThunk("posts/fetchAdd", async (formData) => {
-  return instance.post('/products',formData).then((res) => res)}) 
+  return instance.post('/products',formData).then((res) => res)})
+  //fetch patch 
+  export const fetchPatch = createAsyncThunk("posts/fetchPatch", async ({id,rowData}) => {
+    return instance.patch(`/products/${id}`,rowData).then((res) => res);
+  });
 
+  // ////////
 export const productsSlice = createSlice({
   name: "products",
   initialState,
@@ -81,6 +86,17 @@ export const productsSlice = createSlice({
       return { ...state, loading: false };
     });
     builder.addCase(fetchAdd.rejected, (action) => {
+      return { posts: [], loading: false, error: action.payload };
+    });
+    // ////edit price and quantity of products
+    
+    builder.addCase(fetchPatch.pending, (state) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(fetchPatch.fulfilled, (state, action) => {
+      return { ...state, loading: false };
+    });
+    builder.addCase(fetchPatch.rejected, (action) => {
       return { posts: [], loading: false, error: action.payload };
     });
 

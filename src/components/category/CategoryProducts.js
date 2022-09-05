@@ -3,26 +3,36 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import {URL} from './../../API/constant'
 import Card from './Card'
-import {Grid} from '@mui/material'
+import {Grid,Box} from '@mui/material'
 import{useSearchParams} from 'react-router-dom'
-function CategoryProducts({id,page}) {
-  const[caprdt,setCaprdt]=useState([])
-  const[searchParams,setSearchParams]=useSearchParams()
+import {Pagination} from '@mui/material'
+function CategoryProducts({id}) {
+  const[catprdt,setCatprdt]=useState([])
+  const[search,setSearch]=useSearchParams()
+  const [page,setPage]=useState(1)
+  const handleChange = (event, value) => {
+    setPage(value);
+    setSearch({page:value}) 
+  };
   
-  
-  function getProducts() {
-    axios.get(`${URL}/products?category=${id}&_page=${page}&_limit=4&_page=${page}`)
-      .then((res) => setCaprdt(res.data))  
+  function getProducts(page) {
+    axios.get(`${URL}/products?category=${id}&_page=${page}&_limit=4&`)
+      .then((res) => setCatprdt(res.data))
+       
   }
 
 
-  useEffect(()=>getProducts(),[id,page])
+  useEffect(()=>getProducts(page),[id, page, search])
   return (
+    <Box style={{display:'flex',flexDirection:'column'}}>
     <Grid container>
-      {caprdt.map(element=>{return<Grid item  md={6} xs={12} key={element.id} sx={{display:'flex'}}>
+      {catprdt.map(element=>{return<Grid item  md={6} xs={12} key={element.id} sx={{display:'flex'}}>
         <Card  product={element}/></Grid>})}
       
     </Grid>
+     <Pagination  count={2} page={page} onChange={handleChange}  shape="rounded"
+     color='primary' />
+     </Box>
   )
 }
 
