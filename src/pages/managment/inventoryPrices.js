@@ -25,7 +25,7 @@ function InventoryPrices() {
   const dispatch = useDispatch();
   const [data,setData]=useState([])
   const [params, setParams] = useState(1);
-  const handle = useCallback(async () => {
+  const handleSave = useCallback(async () => {
     const request= data.map(item=>dispatch(fetchPatch({id:item.id,rowData:item})))
  Promise.all(request).then (unwrapResult).then(()=>{
     toast.success("ویرایش با موفقیت ذخیره  شد", {
@@ -61,7 +61,7 @@ function InventoryPrices() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               مدیریت موجودی و قیمت ها
             </Typography>
-            <Button variant="outlined" color="primary" onClick={handle}>
+            <Button variant="outlined" color="primary" onClick={handleSave}>
               ذخیره
             </Button>
           </Toolbar>

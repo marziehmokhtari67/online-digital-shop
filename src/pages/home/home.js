@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from "react";
-import { Link, Box, Typography,Grid } from "@mui/material";
+import { Link, Box, Typography,Grid,Avatar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategory } from "./../../redux/reducer/categorySlice";
 import axios from 'axios'
@@ -31,13 +31,16 @@ function Home() {
       }}
     >
       {categories.map((category) =>{return( 
-        <div key={category.id}>
-          <img src={`${URL}/files/${category.icon}` } alt='icon'/><Link
+        <div key={category.id} >
+          <div style={{display:'flex',gap:'5px',alignItems:'center'}}>
+          <Avatar src={`${URL}/files/${category.icon}` } alt='icon'/><Link
             href={`category/${category.id}`}
             sx={{ textDecoration: "none" }}
           >
             <Typography variant="h5">{category.name}</Typography>
           </Link>
+          </div>
+         
           
            <Grid container>
           {products.filter((product) => product.category === category.id).slice(0,7)

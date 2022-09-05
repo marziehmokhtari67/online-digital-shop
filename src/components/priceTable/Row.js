@@ -22,7 +22,7 @@ function Row({product,data,setData}) {
    else{
     const object={id:id}
     object[e.target.name]=Number(e.target.value)
-    console.log(object)
+    
     setData([...data,object])
    }
    
