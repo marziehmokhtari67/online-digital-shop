@@ -4,7 +4,7 @@ import { TableRow, TableCell, Button, Avatar } from "@mui/material";
 import { URL } from "./../../API/constant";
 import DeletModal from "./DeletModal";
 import EditModal from "./EditModal";
-function Row({ product, categories }) {
+function Row({ product, categories,params }) {
   const classes = useStyles();
   const [openDelete, setOpenDelete] = React.useState(false);
   const [openedit, setOpenedit] = React.useState(false);
@@ -37,7 +37,7 @@ function Row({ product, categories }) {
           >
             ویرایش
           </Button>
-          <EditModal handleCloseEdit={handleCloseedit} openedit={openedit} product={product}/>
+          <EditModal handleCloseEdit={handleCloseedit} openedit={openedit} product={product} params={params}/>
           {/*  */}
           <Button variant="outlined" sx={{ mx: 2 }} onClick={handleOpenDelete}>
             حذف

@@ -19,50 +19,17 @@ import { fetchEdit, fetchProduct } from "./../../redux/reducer/productSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { useFormik } from "formik"
-import {schema} from '../../yup/schemaModal'
 
 // //////////////////////////////////////////////////////////////////
-function EditModal({ openedit, handleCloseEdit, product }) {
+function EditModal({ openedit, handleCloseEdit, product,params }) {
   // definding variables
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [name, setName] = useState(product.name);
-  const [price, SetPrice] = useState(product.price);
-  const [model, setModel] = useState(product.model);
-  const [quantity, setQuantity] = useState(product.quantity);
-  const [color, setColor] = useState(product.color);
   const [image, SetImage] = useState([product.image[0]]);
-  const [category, setCategory] = useState(product.category);
   const [thumbnail, setThumbnail] = useState(product.thumbnail);
-  const [description, setDescription] = useState(product.description);
   const [src, setSrc] = useState([]);
   const { categories } = useSelector((state) => state.category);
-  
-const {values,handleChange,errors} = useFormik({
-  initialValues: {
-    name: product.name,
-    model:product.model,
-    price:product.price,
-    quantity:product.quantity,
-    color:product.color,
-    thumbnail:product.thumbnail,
-    description:product.description,
-    category:product.category,
-    image1:(product.image)[0],
-    image2:(product.image)[1],
-    image:(product.image)[2
-    ],
-  },
-  validationSchema: schema,
-
-  
-});
-
   // defindinf functions
-  useEffect(() => {
-    dispatch(fetchCategory());
-  }, [dispatch]);
-
   const handleUpload = async (e) => {
     const selectedFIles = [];
     const targetFiles = e.target.files;
@@ -86,30 +53,71 @@ const {values,handleChange,errors} = useFormik({
       res[3].data.filename,
     ]);
   };
-
-  const handleSave = (e, id) => {
+  const handleSave = (data) => {
     const formData = {
-      name,
-      model,
-      price,
-      quantity,
-      color,
-      thumbnail,
-      description,
-      category,
-      image,
+     name:data.name,model:data.model,color:data.color,quantity:data.quantity,price:data.price,
+     category:Number(data.category),description:data.description,thumbnail,image
     };
-    e.preventDefault();
-    dispatch(fetchEdit({ id, formData }))
+    // e.preventDefault();
+    dispatch(fetchEdit({ id:product.id, formData }))
       .then(unwrapResult)
       .then(() => {
         toast.success("ویرایش کالا با موفقیت انجام شد", {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
-        dispatch(fetchProduct());
+        dispatch(fetchProduct(params));
       });
     handleCloseEdit();
   };
+  const validate = (values) => {
+    const errors = {};
+    if (
+      !values.name ||
+      !values.model ||
+      !values.price ||
+      !values.color ||
+      !values.category ||
+      !values.quantity ||
+      !values.description
+    ) {
+      errors.massage1 = "پر کردن تمامی فیلدها الزامی است.";
+    }
+    if(!thumbnail){
+      errors.massage2='انتخاب عکس الزامی است'
+    }
+    return errors;
+  };
+
+  //defining formik
+const {values,handleChange,errors,handleSubmit,setFieldValue} = useFormik({
+  initialValues: {
+    name: product.name,
+    model:product.model,
+    price:product.price,
+    quantity:product.quantity,
+    color:product.color,
+    description:product.description,
+    category:product.category,
+  },
+  validate,
+ onSubmit:values => {
+  handleSave(values)
+},
+
+  
+});
+
+
+
+
+
+  useEffect(() => {
+    dispatch(fetchCategory());
+  }, [dispatch]);
+
+  
+
+ 
  
   return (
     <Modal
@@ -127,7 +135,7 @@ const {values,handleChange,errors} = useFormik({
 
         <form
           className={classes.form}
-          onSubmit={(e) => handleSave(e, product.id)}
+          onSubmit={handleSubmit}
         >
           <Grid container spacing={2}>
             <Grid item md={12} xs={12}>
@@ -160,18 +168,15 @@ const {values,handleChange,errors} = useFormik({
                 type="text"
                 className={classes.input}
                 value={values.name}
-                onChange={(e) => {setName(e.target.value)
-                  handleChange()}}
+                onChange={handleChange}
               ></input>
             </Grid>
             <Grid item md={6} xs={12} className={classes.input}>
               <select
                 className={classes.input}
+                name='category'
                 value={values.category}
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                  
-                }}
+                onChange={handleChange}
               >
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
@@ -191,17 +196,17 @@ const {values,handleChange,errors} = useFormik({
                 type="text"
                 className={classes.input}
                 name='model'
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
+                value={values.model}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item md={6} xs={12}>
               <input
-                type="text"
+                type="number"
                 className={classes.input}
-                value={price}
+                value={values.price}
                 name='price'
-                onChange={(e) => SetPrice(Number(e.target.value))}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -213,17 +218,19 @@ const {values,handleChange,errors} = useFormik({
             <Grid item md={6} xs={12}>
               <input
                 type="number"
+                name='quantity'
                 className={classes.input}
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
+                value={values.quantity}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item md={6} xs={12}>
               <input
                 type="text"
+                name='color'
                 className={classes.input}
-                value={color}
-                onChange={(e) => setColor(e.target.value)}
+                value={values.color}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item md={12} xs={12}>
@@ -231,14 +238,19 @@ const {values,handleChange,errors} = useFormik({
             </Grid>
             <Grid item md={12} xs={12}>
               <CKEditor
-                data={description}
+              id="description"
+                data={values.description}
                 className={classes.ckEditor}
                 editor={ClassicEditor}
-                onChange={(e, editor) => setDescription(editor.getData())}
+                onChange={(event, editor) => {
+                  setFieldValue("description", editor.getData());
+                }}
               />
             </Grid>
           </Grid>
-          <Button type="submit" className={classes.btn} variant={"outlined"}>
+          {errors.massage1 &&  <p style={{color:'red'}}>{errors.massage1}</p>}
+            {errors.massage2&&<p style= {{color:'red'}}>{errors.massage2}</p>} 
+          <Button type="submit"  className={classes.btn} variant={"outlined"}>
             ذخیره
           </Button>
         </form>

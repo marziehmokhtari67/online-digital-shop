@@ -256,7 +256,7 @@ export default function AddModal({ open, handleCloseAdd }) {
           {errors.massage1 &&  <p style={{color:'red'}}>{errors.massage1}</p>}
             {errors.massage2&&<p style= {{color:'red'}}>{errors.massage2}</p>} 
           
-          <Button type="submit" className={classes.btn} variant={"outlined"}>
+          <Button type="submit" className={classes.btn}  variant={"outlined"}>
             ذخیره
           </Button>
         </form>

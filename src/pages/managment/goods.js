@@ -80,7 +80,7 @@ function Goods() {
           </TableHead>
           <TableBody>
             {products.map((product) => (
-              <Row key={product.id} product={product} categories={categories} />
+              <Row key={product.id} product={product} categories={categories} params={params}/>
             ))}
           </TableBody>
         </Table>

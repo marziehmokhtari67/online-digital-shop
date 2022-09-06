@@ -41,7 +41,7 @@ const validate = async()=>{
     e.preventDefault();
     await validate()
     dispatch(fetchLogin({ username, password }));
-    isLogined ? navigate("/managment") : navigate("/login");
+    navigate("/managment")
   };
   return (
     <>

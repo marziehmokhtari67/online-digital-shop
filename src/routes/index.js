@@ -26,8 +26,10 @@ function Rout() {
       <Route path="paymentGatetWay" element={<PaymentGateWay />} />
       <Route path="login" element={<Login />} />
       <Route path="managment" element={
-      
+      <PrivateRoute>
         <SharedManagmentLayout />
+      </PrivateRoute>
+        
     
       }>
         <Route index element={<Order />} />
