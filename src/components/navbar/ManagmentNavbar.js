@@ -82,11 +82,12 @@ function ManagmentNavbar() {
               value={alignment}
               exclusive
               onChange={handleChange}
-              sx={{display:{xs:'none',md:'flex',gap:'10px'}}}
+              
+              sx={{display:{xs:'none',md:'flex',direction:'ltr'}}}
             >
-              <ToggleButton value="kala" sx={{border:'none'}} onClick={()=>navigate('goods')}>کالاها</ToggleButton>
-              <ToggleButton value=" gheimatha" sx={{border:'none'}} onClick={()=>navigate('inventoryPrices')}>موجودی و قیمت ها</ToggleButton>
-              <ToggleButton value="sefareshha" sx={{border:'none'}} onClick={()=>navigate('')}>سفارش ها</ToggleButton>
+              <ToggleButton value="kala"  onClick={()=>navigate('goods')}>کالاها</ToggleButton>
+              <ToggleButton value=" gheimatha"  onClick={()=>navigate('inventoryPrices')}>موجودی و قیمت ها</ToggleButton>
+              <ToggleButton value="sefareshha" onClick={()=>navigate('')}>سفارش ها</ToggleButton>
             </ToggleButtonGroup>
             <Box sx={{ flexGrow: 0,}}>
               <Link sx={{fontFamily:"Vazir-Medium" ,fontSize:'14px'}} href='/' >بازگشت به سایت</Link>

@@ -23,13 +23,6 @@ import { fetchAdd, fetchProduct } from "./../../redux/reducer/productSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-
-
-
-
-
-
-
 export default function AddModal({ open, handleCloseAdd }) {
   const handleUpload = async (e) => {
     const selectedFIles = [];

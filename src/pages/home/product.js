@@ -7,13 +7,24 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { useStyles } from "./../../styles/productPage/style";
 import { useFormik } from "formik";
 import * as yup from "yup";
-
+import{useDispatch} from 'react-redux'
+import{addToCart,getTotals} from './../../redux/reducer/cartSlice'
+import { toast } from "react-toastify";
 function Product() {
+  // variables
   const { productId } = useParams();
   const [info, setInfo] = useState([]);
-  const submit = () => {
-    console.log("mmkkkkkkkkmmmmmmmmmmmmmmmmmm");
+  const dispatch=useDispatch()
+  // submit function
+  const submit = (data) => {
+    dispatch(addToCart({name:info.name,id:info.id, price:info.price,cartQuantity:data.count,model:info.model}))
+    dispatch(getTotals())
+      toast.success("کالای مورد نظر به سبد خرید اضافه شد", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+      
   };
+  // schema
   const schema = yup.object().shape({
     count: yup
       .number()
@@ -23,12 +34,15 @@ function Product() {
       .max(info.quantity, "تعداد محصول بیشتر از موجودی است")
       .required("تعداد محصول الزامی است"),
   });
+  // formik
   const formik = useFormik({
     initialValues: {
       count: 0,
     },
     validationSchema: schema,
-    onSubmit: submit,
+    onSubmit: values=>{
+      submit(values)
+    }
   });
   const getData = (id) => {
     axios.get(`${URL}/products/${id}`).then((res) => setInfo(res.data));

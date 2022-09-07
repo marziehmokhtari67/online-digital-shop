@@ -2,6 +2,7 @@ import * as React from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import  FavoriteIcon from "@mui/icons-material/Favorite";
+import{useSelector} from 'react-redux'
 import {
   Badge,
   Tooltip,
@@ -19,6 +20,7 @@ import { useState } from "react";
 function CustomerNavbar() {
   const classes = useStyles();
   const [selected, setSelected] = useState(false);
+  const{cartItems}=useSelector(state=>state.cart)
   return (
     <Box>
       <AppBar position="static" className={classes.appbar}>
@@ -41,9 +43,9 @@ function CustomerNavbar() {
               <PersonOutlineOutlinedIcon />
               <Typography>مدیریت</Typography>
             </Link>
-            <Link href="cart">
+            <Link href="/cart">
               <Badge
-                badgeContent={0}
+                badgeContent={cartItems.length}
                 color="secondary"
                 showZero
                 anchorOrigin={{
