@@ -103,22 +103,12 @@ const {values,handleChange,errors,handleSubmit,setFieldValue} = useFormik({
  onSubmit:values => {
   handleSave(values)
 },
-
-  
+ 
 });
-
-
-
-
 
   useEffect(() => {
     dispatch(fetchCategory());
   }, [dispatch]);
-
-  
-
- 
- 
   return (
     <Modal
       open={openedit}

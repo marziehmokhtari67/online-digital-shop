@@ -15,12 +15,8 @@ function Rout() {
         <Route path="cart" element={<Cart />} />
         <Route path="finalizePayment" element={<FinalizePayment />} />
         <Route
-          path="finalizePayment/result"
+          path="result"
           element={<ResultOfPayment />}
-        />
-        <Route
-          path="finalizePayment/cancelation"
-          element={<Cancelation />}
         />
       </Route>
       <Route path="paymentGatetWay" element={<PaymentGateWay />} />

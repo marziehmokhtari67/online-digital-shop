@@ -6,6 +6,8 @@ const initialState = {
     : [],
   
   cartTotalAmount: 0,
+  success:false,
+  userInfo:{}
 };
 
 const cartSlice = createSlice({
@@ -52,8 +54,11 @@ const cartSlice = createSlice({
         state.cartItems=state.cartItems.filter(cartItem=>cartItem.id!==action.payload)
      const  array=  JSON.parse(localStorage.getItem("cartItems")).filter(item=>item.id!==action.payload)
      localStorage.setItem("cartItems",JSON.stringify(array))
+    },
+    saveUserInfo(state,action){
+      state.userInfo=action.payload
     }
   },
 });
-export const { addToCart, getTotals,deleteCart } = cartSlice.actions;
+export const { addToCart, getTotals,deleteCart,saveUserInfo } = cartSlice.actions;
 export default cartSlice.reducer;

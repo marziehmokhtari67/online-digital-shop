@@ -14,21 +14,28 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { getTotals, deleteCart } from "./../../redux/reducer/cartSlice";
-import { useStyles } from "./../../styles/table/style";
+import { useStyles } from "./../../styles/cart/style";
+import Modal from "@mui/material/Modal";
 export function Cart() {
   const { cartItems, cartTotalAmount } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  
+   
+
   useEffect(() => {
     dispatch(getTotals());
   }, [dispatch]);
   return (
-    <div style={{ padding: "10px" }}>
+    <div className={classes.container} >
       <Typography variant="h5" align="right">
         سبد خرید
       </Typography>
-      <Table className={classes.table} sx={{ margin: "0 auto" }}>
+      <Table className={classes.table} >
         <TableHead>
           <TableRow>
             <TableCell align="right">کالا</TableCell>
@@ -54,25 +61,36 @@ export function Cart() {
                 {digitsEnToFa(item.cartQuantity)}
               </TableCell>
               <TableCell align="center">
-                <Button
-                  onClick={() => {
-                    dispatch(deleteCart(item.id));
-                    dispatch(getTotals());
-                  }}
+                <Button onClick={handleOpen}>حذف</Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
                 >
-                  حذف
-                </Button>
+                  <Box className={classes.modal}>
+                    <Typography>کالا از سبد خرید حذف شود؟</Typography>
+                    <Box className={classes.buttonsContainer} >
+                    <Button
+                      variant="outlined"
+                      onClick={() => {
+                        dispatch(deleteCart(item.id));
+                        dispatch(getTotals());
+                        handleClose();
+                      }}
+                    >بله</Button>
+                    <Button variant="outlined" onClick={handleClose} >خیر</Button>
+                    </Box>
+                   
+                  </Box>
+                </Modal>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-around",
-          marginTop: "30px",
-        }}
+       className={classes.lastRow}
       >
         <Typography>
           جمع:
@@ -83,7 +101,7 @@ export function Cart() {
         <Button
           variant="contained"
           onClick={() => navigate("/finalizePayment")}
-         sx={{backgroundColor:"#00c853"}}
+          sx={{ backgroundColor: "#00c853" }}
         >
           نهایی کردن سبد خرید
         </Button>

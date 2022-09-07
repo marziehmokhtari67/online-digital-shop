@@ -118,7 +118,7 @@ function Product() {
             <Typography className={classes.error} >{formik.errors.count}</Typography>
           )}
           {info.quantity === 0 ? (
-            <Button variant="outlined" disabled>
+            <Button variant="outlined" disabled  type="submit">
               افزودن به سبد خرید
             </Button>
           ) : (
