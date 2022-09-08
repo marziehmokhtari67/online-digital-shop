@@ -39,7 +39,7 @@ function Row({ product, categories,params }) {
           </Button>
           <EditModal handleCloseEdit={handleCloseedit} openedit={openedit} product={product} params={params}/>
           {/*  */}
-          <Button variant="outlined" sx={{ mx: 2 }} onClick={handleOpenDelete}>
+          <Button variant="outlined" sx={{ mx: 2 }} onClick={handleOpenDelete} color={'warning'}>
             حذف
           </Button>
           <DeletModal

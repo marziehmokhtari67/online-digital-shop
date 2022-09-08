@@ -99,7 +99,7 @@ export default function AddModal({ open, handleCloseAdd }) {
   const { categories } = useSelector((state) => state.category);
   const classes = useStyles();
 
-  const { values, handleChange, setFieldValue, handleSubmit, errors } =
+  const { values, handleChange, setFieldValue, handleSubmit, errors,isValid } =
     useFormik({
       initialValues: {
         name: "",
@@ -249,7 +249,7 @@ export default function AddModal({ open, handleCloseAdd }) {
           {errors.massage1 &&  <p style={{color:'red'}}>{errors.massage1}</p>}
             {errors.massage2&&<p style= {{color:'red'}}>{errors.massage2}</p>} 
           
-          <Button type="submit" className={classes.btn}  variant={"outlined"}>
+          <Button type="submit" className={classes.btn} disabled={isValid} variant={"outlined"}>
             ذخیره
           </Button>
         </form>

@@ -1,12 +1,12 @@
 import React from "react";
-import { Typography, Grid, Box, Button } from "@mui/material";
+import { Typography, Grid, Box, Button} from "@mui/material";
 import {DateInput} from "react-hichestan-datetimepicker";
 import { useFormik } from "formik";
 import{schema} from './../../yup/schema'
-import {useDispatch,useSelector} from 'react-redux'
-import {saveUserInfo} from './../../redux/reducer/cartSlice'
-import { useNavigate } from "react-router-dom";
-import Modal from '@mui/material/Modal';
+
+
+
+
 function FinalizePayment() {
   const inputStyle = {
     fontFamily: "Vazir-Medium",
@@ -15,17 +15,12 @@ function FinalizePayment() {
     width: "80%",
   };
   
-  const dispatch=useDispatch()
-  const {userInfo}=useSelector(state=>state.cart)
-  const navigate=useNavigate()
+  
   //handle payment function
-  const handlePayment=(data)=>{
+  const handlePayment=async(data)=>{
     
-    dispatch(saveUserInfo(data))
-    // const d= data.expextAt.replace( " " , "T" ).replace( "/" , "-" ) ;
-    
-    console.log(userInfo)
-    navigate('/paymentGatetWay')
+  localStorage.setItem("userInfo",JSON.stringify({...data,expectAt: Date.now(new Date(data.expectAt)).toString()})) 
+    window.open('http://localhost:3000/paymentGateWay','_blank')
     
   }
   // formik
@@ -93,6 +88,7 @@ function FinalizePayment() {
         </Grid>
         
         <Box sx={{ display: "flex" }}>
+          
           <Button 
           id='btn'
           type="submit"

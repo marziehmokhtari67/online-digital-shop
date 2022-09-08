@@ -2,10 +2,9 @@ import React,{useState,useEffect} from 'react'
 
 import {TableRow,TableCell} from '@mui/material'
 import { digitsEnToFa } from "@persian-tools/persian-tools";
-function Row({product,data,setData}) {
+function Row({product,data,setData,editpr,setEditpr,editqu,setEDitqu}) {
   
-  const[editpr,setEditpr]=useState(false)
-  const[editqu,setEDitqu]=useState(false)
+  
   const [price,setPrice]=useState(product.price)
   const[quantity,setQuantity]=useState(product.quantity)
   const handleChange=(e,id)=>{

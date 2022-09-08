@@ -15,7 +15,7 @@ function Rout() {
         <Route path="cart" element={<Cart />} />
         <Route path="finalizePayment" element={<FinalizePayment />} />
         <Route
-          path="result"
+          path="result/:result"
           element={<ResultOfPayment />}
         />
       </Route>

@@ -24,6 +24,8 @@ import { unwrapResult } from "@reduxjs/toolkit"
 function InventoryPrices() {
   const dispatch = useDispatch();
   const [data,setData]=useState([])
+  const[editpr,setEditpr]=useState(false)
+  const[editqu,setEDitqu]=useState(false)
   const [params, setParams] = useState(1);
   const handleSave = useCallback(async () => {
     const request= data.map(item=>dispatch(fetchPatch({id:item.id,rowData:item})))
@@ -38,6 +40,8 @@ function InventoryPrices() {
     });
  
   dispatch (fetchProduct(params))
+  setEditpr(false)
+  setEDitqu(false)
 })
     
   }, [data, dispatch, params]);
@@ -80,7 +84,9 @@ function InventoryPrices() {
           </TableHead>
           <TableBody>
             {products.map((product) => (
-              <Row key={product.id} product={product} data={data} setData={setData} />
+              <Row key={product.id} product={product} data={data} setData={setData} editpr={editpr} setEditpr={setEditpr}
+              editqu={editqu} setEDitqu={setEDitqu}
+              />
             ))}
           </TableBody>
         </Table>

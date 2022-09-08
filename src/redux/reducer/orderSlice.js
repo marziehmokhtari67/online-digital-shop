@@ -21,6 +21,17 @@ export const fetchOrders = createAsyncThunk(
       .catch((error) => error.message);
   }
 );
+export const addOrders = createAsyncThunk(
+  "orders/addOrders",
+  async (clientData) => {
+    return axios
+      .post(`${URL}/orders`,clientData)
+      .then((res) => res.data
+      )
+      .catch((error) => error.message);
+  }
+);
+
 export const changeDelivered = createAsyncThunk(
   "orders/changeDelivered",
   async (id) => {
@@ -55,6 +66,16 @@ export const ordersSlice = createSlice({
       return { ...state, loading: false };
     });
     builder.addCase(changeDelivered.rejected, (state, action) => {
+      return { orders: [], loading: false, error: action.payload };
+    });
+    // ///fetch add orders
+    builder.addCase(addOrders.pending, (state) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(addOrders.fulfilled, (state, action) => {
+      return { ...state, loading: false };
+    });
+    builder.addCase(addOrders.rejected, (state, action) => {
       return { orders: [], loading: false, error: action.payload };
     });
   },

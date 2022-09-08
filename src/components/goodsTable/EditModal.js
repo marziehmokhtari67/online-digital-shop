@@ -89,7 +89,7 @@ function EditModal({ openedit, handleCloseEdit, product,params }) {
   };
 
   //defining formik
-const {values,handleChange,errors,handleSubmit,setFieldValue} = useFormik({
+const {values,handleChange,errors,handleSubmit,setFieldValue,isValid} = useFormik({
   initialValues: {
     name: product.name,
     model:product.model,
@@ -240,7 +240,7 @@ const {values,handleChange,errors,handleSubmit,setFieldValue} = useFormik({
           </Grid>
           {errors.massage1 &&  <p style={{color:'red'}}>{errors.massage1}</p>}
             {errors.massage2&&<p style= {{color:'red'}}>{errors.massage2}</p>} 
-          <Button type="submit"  className={classes.btn} variant={"outlined"}>
+          <Button type="submit"  className={classes.btn} disabled={!isValid} variant={"outlined"}>
             ذخیره
           </Button>
         </form>

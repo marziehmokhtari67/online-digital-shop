@@ -12,12 +12,15 @@ function CategoryProducts({id}) {
   const [page,setPage]=useState(1)
   const handleChange = (event, value) => {
     setPage(value);
-    setSearch({page:value}) 
+    
   };
   
   function getProducts(page) {
     axios.get(`${URL}/products?category=${id}&_page=${page}&_limit=4&`)
-      .then((res) => setCatprdt(res.data))
+      .then((res) => {setCatprdt(res.data)
+        setSearch({page:page}) 
+      })
+
        
   }
 
