@@ -24,8 +24,8 @@ function FinalizePayment() {
   const handlePayment=async(data)=>{
     
   localStorage.setItem("userInfo",JSON.stringify({...data,expectAt: new Date(data.expectAt)})) 
-  // window.open('http://localhost:3001/paymentGateWay','_blank')
-     navigate('//localhost:3001/paymentGateWay')
+  window.open('http://localhost:3001/paymentGateWay','_blank')
+    //  navigate('//localhost:3001/paymentGateWay')
     
   }
  

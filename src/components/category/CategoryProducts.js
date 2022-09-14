@@ -8,6 +8,7 @@ import{useSearchParams} from 'react-router-dom'
 import {Pagination} from '@mui/material'
 function CategoryProducts({id}) {
   const[catprdt,setCatprdt]=useState([])
+  const[totalCount,setTotalCount]=useState(0)
   const[search,setSearch]=useSearchParams()
   const [page,setPage]=useState(1)
   const handleChange = (event, value) => {
@@ -19,6 +20,7 @@ function CategoryProducts({id}) {
     
     axios.get(`${URL}/products?category=${id}&_page=${page}&_limit=4`)
       .then((res) =>{setCatprdt(res.data)
+        setTotalCount(res.headers["x-total-count"])
         setSearch({page:page}) 
       })
 
@@ -34,7 +36,7 @@ function CategoryProducts({id}) {
         <Card  product={element}/></Grid>})}
       
     </Grid>
-     <Pagination count={2} page={page} onChange={handleChange}  shape="circular"
+     <Pagination  count={Number(Math.ceil(totalCount/4))} page={page} onChange={handleChange}  shape="circular"
      color='secondary' variant='outlined' />
      </Box>
   )
