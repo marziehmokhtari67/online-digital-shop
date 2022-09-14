@@ -1,4 +1,5 @@
 import { makeStyles } from "@mui/styles";
+import aks from './../../assets/images/digital.jpg'
 export const useStyles = makeStyles((theme) => ({
   container: {
     width: "100vw",
@@ -8,11 +9,15 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     gap: "10px",
-    background:'linear-gradient(to right, #fff7fa , #fef2ee , #eee1f3 100% )',
+    backgroundImage:`url(${aks})`,
+    backgroundRepeat:'no-repeat',
+    backgroundSize:'cover',
+    // background:'linear-gradient(to right, #fff7fa , #fef2ee , #eee1f3 100% )',
     borderRadius:'10px'
   },
   header: {
     textAlign: "center",
+    color:'blue'
   },
   formContainer: {
     position: "static",
@@ -24,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "35%",
     height: "50%",
-    backgroundColor: "rgba(0,0,0,0.6)",
+    backgroundColor: "white",
     borderRadius: "10px",
     color: "rgba(255,255,255,0.8)",
   },

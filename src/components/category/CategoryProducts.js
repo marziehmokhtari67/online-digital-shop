@@ -1,5 +1,5 @@
 
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useCallback} from 'react'
 import axios from 'axios'
 import {URL} from './../../API/constant'
 import Card from './Card'
@@ -15,26 +15,27 @@ function CategoryProducts({id}) {
     
   };
   
-  function getProducts(page) {
-    axios.get(`${URL}/products?category=${id}&_page=${page}&_limit=4&`)
-      .then((res) => {setCatprdt(res.data)
+  const getProducts=useCallback((page)=> {
+    
+    axios.get(`${URL}/products?category=${id}&_page=${page}&_limit=4`)
+      .then((res) =>{setCatprdt(res.data)
         setSearch({page:page}) 
       })
 
        
-  }
+  },[id, setSearch])
 
 
-  useEffect(()=>getProducts(page),[id, page, search])
+  useEffect(()=>getProducts(page),[getProducts, id, page, search])
   return (
-    <Box style={{display:'flex',flexDirection:'column'}}>
+    <Box style={{display:'flex',flexDirection:'column',}}>
     <Grid container>
       {catprdt.map(element=>{return<Grid item  md={6} xs={12} key={element.id} sx={{display:'flex'}}>
         <Card  product={element}/></Grid>})}
       
     </Grid>
-     <Pagination  count={2} page={page} onChange={handleChange}  shape="rounded"
-     color='primary' />
+     <Pagination count={2} page={page} onChange={handleChange}  shape="circular"
+     color='secondary' variant='outlined' />
      </Box>
   )
 }

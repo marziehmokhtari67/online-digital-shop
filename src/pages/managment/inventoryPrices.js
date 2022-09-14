@@ -97,8 +97,9 @@ function InventoryPrices() {
           count={Math.ceil(totalCount / 5)}
           page={params}
           onChange={handleChange}
-          shape="rounded"
-          color="primary"
+          variant='outlined'
+          shape="circular"
+          color="secondary"
         />
       </Stack>
     </Box>

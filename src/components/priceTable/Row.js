@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useCallback} from 'react'
 
 import {TableRow,TableCell} from '@mui/material'
 import { digitsEnToFa } from "@persian-tools/persian-tools";
@@ -12,8 +12,7 @@ function Row({product,data,setData,editpr,setEditpr,editqu,setEDitqu}) {
     if(e.target.name==='quantity'){
       setQuantity(e.target.value)
     }
-    
-   
+
    const d= data.find(item=>item.id===id)
    if (d){
     d[e.target.name]=Number(e.target.value)
@@ -27,19 +26,19 @@ function Row({product,data,setData,editpr,setEditpr,editqu,setEDitqu}) {
    
   
   } 
-  const toggle=(event)=>{
+  const toggle=useCallback((event)=>{
     if (event.key==='Escape'){
       setEditpr(false)
       setEDitqu(false)
     }
-  } 
+  },[setEDitqu, setEditpr] )
   useEffect(() => {
     document.addEventListener("keydown", toggle);
 
     return () => {
       document.removeEventListener("keydown",toggle );
     }
-  }, [price,quantity]);
+  }, [price, quantity, toggle]);
   return (
     <>
      <TableRow >

@@ -19,8 +19,14 @@ logoBox:{
     width: "25%", borderRadius: "10px",
 },
 name:{
-    fontFamily:"title",
+    fontFamily:"Vazir-Medium",
     color:'black' ,
+   
+    '&:hover':{
+    
+      color:'rgb(156,39,176)'
+    
+      },
 },
 leftBox:{
     display: "flex", gap: "20px", alignItems: "center" 

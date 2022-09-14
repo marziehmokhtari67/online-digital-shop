@@ -3,9 +3,9 @@ import Rout from "./routes";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import store from "./redux/store/store";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "./styles/config/style";
 import { injectStore } from "./API/http";
+import {theme} from './styles/config/style'
+import { ThemeProvider } from '@mui/material'
 import "react-toastify/dist/ReactToastify.min.css"
 injectStore(store);
 
@@ -15,7 +15,7 @@ function App() {
       <ToastContainer draggable={false} theme="colored"/>
       <ThemeProvider theme={theme}>
         <Rout />
-      </ThemeProvider>
+        </ThemeProvider>
     </Provider>
   );
 }

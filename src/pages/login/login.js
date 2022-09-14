@@ -1,6 +1,6 @@
 import React from "react";
 import * as yup from 'yup'
-import { Box, Typography, Button, Link, TextField } from "@mui/material";
+import { Box, Typography, Button, Link, TextField,InputAdornment } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import LockIcon from "@mui/icons-material/Lock";
 import { useNavigate } from "react-router-dom";
@@ -8,18 +8,18 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLogin } from "./../../redux/reducer/loginSlice";
 import { useStyles } from "./../../styles/login/style";
-
+import { unwrapResult } from "@reduxjs/toolkit";
 function Login() {
   
     
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [erors,setErors] = useState([])
+  
   // 
   const dispatch = useDispatch();
   const classes = useStyles();
-  const { isLogined ,error} = useSelector((state) => state.login);
+  const { error} = useSelector((state) => state.login);
   // 
   const schema = yup.object().shape({
     username: yup.string().required('نام کاربری الزامی است').min(2),
@@ -34,14 +34,16 @@ const validate = async()=>{
     
   } catch (err) {
     
-    console.log(erors)
+    
   }
 }
   const handleSubmit = async (e) => {
     e.preventDefault();
     await validate()
-    dispatch(fetchLogin({ username, password }));
+    dispatch(fetchLogin({ username, password })).then(unwrapResult).then(()=>
     navigate("/managment")
+    )
+     
   };
   return (
     <>
@@ -55,18 +57,27 @@ const validate = async()=>{
             component="form"
             sx={{ display: "flex", flexDirection: "column", gap: "25px" }}
           >
-            <Box className={classes.input}>
-              <AccountCircle sx={{ mr: 1, ml: 1, my: 0.5 }} />
+            <Box >
+            
               <TextField
+               id="input-with-icon-textfield"
                 label="نام کاربری"
                 name='username'
                 variant="standard"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AccountCircle />
+                    </InputAdornment>
+                  ),
+                }}
+                
               />
             </Box>
-            <Box className={classes.input}>
-              <LockIcon sx={{ mr: 1, ml: 1, my: 0.5 }} />
+            <Box >
+              
               <TextField
                 type="password"
                 name='password'
@@ -75,6 +86,13 @@ const validate = async()=>{
                 color="primary"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                     <LockIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Box>
             <Button className={classes.btn}

@@ -17,7 +17,7 @@ function Product() {
   const dispatch=useDispatch()
   // submit function
   const submit = (data) => {
-    dispatch(addToCart({name:info.name,id:info.id, price:info.price,cartQuantity:data.count,model:info.model}))
+    dispatch(addToCart({name:info.name,id:info.id, price:info.price,count:data.count,model:info.model}))
     dispatch(getTotals())
       toast.success("کالای مورد نظر به سبد خرید اضافه شد", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -108,6 +108,7 @@ function Product() {
           <input
             type="number"
             name="count"
+            
             value={formik.values.count}
             onChange={formik.handleChange}
             placeholder="لطفا تعداد محصول برای خرید را وارد کنید"

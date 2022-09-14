@@ -14,14 +14,14 @@ export const useStyles = makeStyles((theme)=>({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 700,
-    hight:500,
+    
     backgroundColor: 'rgb(255 ,255, 255)',
     border: '3px solid #eee1f3',
     boxShadow: 24,
-    padding:'10px',
+    padding:'5px 10px',
     [theme.breakpoints.down('sm')]:{
         width:'100vw',
-        height:'100vh',
+        
     }
 },
 header:{

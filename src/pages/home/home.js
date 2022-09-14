@@ -27,25 +27,26 @@ function Home() {
       p:4,
       display:'flex',
       flexDirection:'column',
-      alignItems:'center',
+     
+      
       }}
     >
       {categories.map((category) =>{return( 
         <div key={category.id} >
-          <div style={{display:'flex',gap:'5px',alignItems:'center'}}>
-          <Avatar src={`${URL}/files/${category.icon}` } alt='icon'/><Link
+          <Box sx={{display:'flex',gap:'5px',alignItems:'center',py:2,px:5, my:2,borderBottom:'3px solid rgb(249,225,229)'}}>
+          <Avatar src={`${URL}/files/${category.icon}` } variant='rounded' alt='icon'/><Link
             href={`category/${category.id}`}
-            sx={{ textDecoration: "none" }}
+            underline='none'
           >
             <Typography variant="h5">{category.name}</Typography>
           </Link>
-          </div>
+          </Box>
          
           
-           <Grid container>
-          {products.filter((product) => product.category === category.id).slice(0,7)
+           <Grid container  spacing={2}>
+          {products.filter((product) => product.category === category.id).slice(0,6)
             .map((product) => {
-              return  <Grid item  md={4} xs={6} key={product.id} sx={{display:'flex'}}><Card  product={product}/></Grid>
+              return  <Grid item  md={4} xs={6} key={product.id} sx={{display:'flex',justifyContent:'center'}}><Card  product={product}/></Grid>
             })}
             </Grid>
             

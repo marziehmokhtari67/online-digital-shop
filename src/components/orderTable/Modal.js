@@ -18,15 +18,14 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { useStyles } from "./../../styles/modals/style";
 import { changeDelivered, fetchOrders } from "./../../redux/reducer/orderSlice";
 import { useDispatch } from "react-redux";
-
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 function OrderModal({ handleClose, open, order, number }) {
+  // variables
   const classes = useStyles();
   const dispatch = useDispatch();
+  // functions
   const handleChange = (id) => {
-    console.log(order.delivered);
-
     dispatch(changeDelivered(id))
       .then(unwrapResult)
       .then(() => {
@@ -36,6 +35,7 @@ function OrderModal({ handleClose, open, order, number }) {
         dispatch(fetchOrders({ delivered: order.delivered, number }));
       });
   };
+
   return (
     <Modal
       open={open}
@@ -60,7 +60,8 @@ function OrderModal({ handleClose, open, order, number }) {
             تلفن: {digitsEnToFa(order.phone)}
           </Typography>
           <Typography sx={{ fontSize: "14px" }}>
-            زمان تحویل: {new Date(order.expectAt).toLocaleDateString("fa-IR")}
+            زمان تحویل خواسته شده توسط مشتری:{" "}
+            {new Date(order.expectAt).toLocaleDateString("fa-IR")}
           </Typography>
           <Typography sx={{ fontSize: "14px" }}>
             زمان سفارش: {new Date(order.createdAt).toLocaleDateString("fa-IR")}
@@ -99,7 +100,8 @@ function OrderModal({ handleClose, open, order, number }) {
         <Box component="div">
           {order.delivered ? (
             <Typography sx={{ fontSize: "14px" }}>
-              زمان تحویل:{new Date(order.createdAt).toLocaleDateString("fa-IR")}
+              زمان تحویل:{" "}
+              {new Date(order.createdAt).toLocaleDateString("fa-IR")}
             </Typography>
           ) : (
             <Button variant="outlined" onClick={() => handleChange(order.id)}>

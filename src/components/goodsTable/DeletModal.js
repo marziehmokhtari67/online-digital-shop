@@ -8,7 +8,7 @@ import { fetchDelete, fetchProduct} from "../../redux/reducer/productSlice";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-function DeletModal({ openDelete, handleCloseDelete, productId }) {
+function DeletModal({ openDelete, handleCloseDelete, productId,params }) {
   const classes = useStyles();
   const dispatch = useDispatch();
  
@@ -20,7 +20,7 @@ function DeletModal({ openDelete, handleCloseDelete, productId }) {
           position: toast.POSITION.BOTTOM_RIGHT,
           
         });
-        dispatch(fetchProduct());
+        dispatch(fetchProduct(params));
       });
 
   };
@@ -38,10 +38,10 @@ function DeletModal({ openDelete, handleCloseDelete, productId }) {
           </IconButton>
         </Box>
         <Typography>کالای مورد نظر از لیست کالا حذف شود؟</Typography>
-        <Box>
-          <Button onClick={() => handleDelete(productId)}>بله</Button>
+        <Box sx={{display:'flex',gap:'10px'}}>
+          <Button variant='outlined' onClick={() => handleDelete(productId)}>بله</Button>
 
-          <Button onClick={handleCloseDelete}>خیر</Button>
+          <Button variant='outlined' color='warning' onClick={handleCloseDelete}>خیر</Button>
         </Box>
       </Box>
     </Modal>

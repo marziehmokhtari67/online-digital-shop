@@ -21,6 +21,7 @@ function CustomerNavbar() {
   const classes = useStyles();
   const [selected, setSelected] = useState(false);
   const{cartItems}=useSelector(state=>state.cart)
+  const {isLogined}=useSelector(state=>state.login)
   return (
     <Box>
       <AppBar position="static" className={classes.appbar}>
@@ -32,17 +33,20 @@ function CustomerNavbar() {
               src={logo}
               alt="logo"
             />
-            <Link href='/' sx={{textDecoration:'none'}}><Typography variant="h4" className={classes.name}>
+            <Link href='/' underline='none'><Typography variant="h4" className={classes.name}>
             
               دیجیتال لند
             </Typography>
             </Link>
           </Box>
           <Box className={classes.leftBox}>
-            <Link href="/login" className={classes.leftBoxLink}>
+         {isLogined? <Link href="/managment"  className={classes.leftBoxLink} underline='none'>
               <PersonOutlineOutlinedIcon />
               <Typography>مدیریت</Typography>
-            </Link>
+            </Link> : <Link href="/login"  className={classes.leftBoxLink} underline='none'>
+              <PersonOutlineOutlinedIcon />
+              <Typography>مدیریت</Typography>
+            </Link>}   
             <Link href="/cart">
               <Badge
                 badgeContent={cartItems.length}

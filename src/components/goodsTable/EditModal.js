@@ -22,14 +22,14 @@ import { useFormik } from "formik"
 
 // //////////////////////////////////////////////////////////////////
 function EditModal({ openedit, handleCloseEdit, product,params }) {
-  // definding variables
+  //  variables
   const classes = useStyles();
   const dispatch = useDispatch();
   const [image, SetImage] = useState([product.image[0]]);
   const [thumbnail, setThumbnail] = useState(product.thumbnail);
   const [src, setSrc] = useState([]);
   const { categories } = useSelector((state) => state.category);
-  // defindinf functions
+  // handleUpload functions
   const handleUpload = async (e) => {
     const selectedFIles = [];
     const targetFiles = e.target.files;
@@ -53,6 +53,7 @@ function EditModal({ openedit, handleCloseEdit, product,params }) {
       res[3].data.filename,
     ]);
   };
+  // handleSave function
   const handleSave = (data) => {
     const formData = {
      name:data.name,model:data.model,color:data.color,quantity:data.quantity,price:data.price,
@@ -69,6 +70,7 @@ function EditModal({ openedit, handleCloseEdit, product,params }) {
       });
     handleCloseEdit();
   };
+  //  validate function
   const validate = (values) => {
     const errors = {};
     if (

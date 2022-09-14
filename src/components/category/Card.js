@@ -6,7 +6,7 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { makeStyles } from '@mui/styles'
 
 const useStyles=makeStyles({
-  card:{border:'1px solid rgba(0,0,0,0.3)',
+  card:{border:'3px solid rgb(249,225,229)',
   display:'flex',
   justifyContent:'center',
   alignItems:'center',
@@ -16,6 +16,7 @@ const useStyles=makeStyles({
   padding:'10px',
   borderRadius:'10px',
   transitionDuration:'ease-in',
+  
   '&:hover':{
     
     
@@ -27,7 +28,8 @@ const useStyles=makeStyles({
   margin:'10px 5px'},
   
 img:{
-  width:'80%',height:'60%'
+  width:'55%',height:'60%',
+  backgroundColor:'rgb(176, 228, 255)'
 }
   
 })
@@ -35,8 +37,8 @@ function Card({product}) {
   const navigate=useNavigate()
   const classes=useStyles()
   return (
-    <Box onClick={()=>navigate(`/product/${product.id}`)} className={classes.card}>
-    <img src={`${URL}/files/${product.image[0]}`} alt="productImage" className={classes.img} />
+    <Box onClick={()=>navigate(`/product/${product.id}`)} className={classes.card} >
+    <Box component='img'src={`${URL}/files/${product.image[0]}`} alt="productImage" className={classes.img}  />
     <Typography align='center'>{product.name} {product.model}</Typography>
     <Typography align='center' >قیمت:{  digitsEnToFa(product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) } تومان</Typography>
     </Box>

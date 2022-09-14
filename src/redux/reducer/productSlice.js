@@ -7,6 +7,7 @@ const initialState = {
   loading: false,
   error: "",
   totalCount: 0,
+  
 };
 //fetchProduct
 export const fetchProduct= createAsyncThunk(
@@ -101,6 +102,7 @@ export const productsSlice = createSlice({
     });
 
   },
+ 
   
 });
 

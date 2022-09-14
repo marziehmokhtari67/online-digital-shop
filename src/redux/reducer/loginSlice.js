@@ -16,7 +16,7 @@ async(user) => { try{
     localStorage.setItem('ACCESS_TOKEN', response.data.accessToken);
     localStorage.setItem('REFRESH_TOKEN', response.data.refreshToken);
     localStorage.setItem('IS_LOGGGED_IN', true);
-    return response;
+
   })}
   catch(error) {
     return Promise.reject(error.response.data)}
@@ -60,5 +60,12 @@ export const loginSlice = createSlice({
         state.error = action.error.message;
       },
   },
+  reducers:{
+    handleExit(state){
+      state.isLogined=false
+      localStorage.clear()
+    }
+  }
 });
+export const {handleExit}=loginSlice.actions
 export default loginSlice.reducer;

@@ -49,7 +49,7 @@ export function Cart() {
           {cartItems.map((item) => (
             <TableRow key={item.id}>
               <TableCell align="right">
-                <Link href={`/product/${item.id}`}>{item.name}</Link>
+                <Link href={`/product/${item.id}`} underline='none'>{item.name}</Link>
               </TableCell>
               <TableCell align="right">{item.model}</TableCell>
               <TableCell align="center">
@@ -58,10 +58,10 @@ export function Cart() {
                 )}
               </TableCell>
               <TableCell align="center">
-                {digitsEnToFa(item.cartQuantity)}
+                {digitsEnToFa(item.count)}
               </TableCell>
               <TableCell align="center">
-                <Button onClick={handleOpen}>حذف</Button>
+                <Button onClick={handleOpen}color={'warning'} variant='outlined' >حذف</Button>
                 <Modal
                   open={open}
                   onClose={handleClose}

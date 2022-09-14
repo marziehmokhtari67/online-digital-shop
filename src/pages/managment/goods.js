@@ -29,7 +29,8 @@ function Goods() {
   const [params, setParams] = useState(1);
   const classes = useStyles();
   const[open,setOpen]=useState(false)
-
+  const {isLogined}=useSelector(state=>state.login)
+  console.log(isLogined)
   // defining functions
   const handleCloseAdd=()=>setOpen(false)
   const handleOpenAdd=()=>setOpen(true)
@@ -54,7 +55,7 @@ function Goods() {
             >
           اضافه کردن
             </Button>
-            <AddModal open={open} handleCloseAdd={handleCloseAdd}/>
+            <AddModal open={open} handleCloseAdd={handleCloseAdd} params={params}/>
           </Toolbar>
         </AppBar>
       </Box>
@@ -87,8 +88,10 @@ function Goods() {
       </TableContainer>
       <Stack spacing={2}>
       
-      <Pagination className={classes.pagination} count={Number(Math.ceil(totalCount/5))} page={params} onChange={handleChange}  shape="rounded"
-        color='primary' />
+      <Pagination className={classes.pagination} count={Number(Math.ceil(totalCount/5))} page={params} onChange={handleChange}  shape="circular"
+        color='secondary'
+        variant='outlined'
+        />
         
     </Stack>
      

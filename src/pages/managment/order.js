@@ -96,11 +96,12 @@ function Order() {
       </TableContainer>
       <Stack spacing={2} className={classes.pagination}>
         <Pagination
-          count={Math.ceil(totalCount / 5)}
+          count={Math.ceil(totalCount / 4)}
           page={number}
           onChange={handleChange}
-          shape="rounded"
-          color="primary"
+          shape="circular"
+          variant='outlined'
+          color="secondary"
         />
       </Stack>
     </Box>

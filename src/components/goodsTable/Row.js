@@ -39,14 +39,14 @@ function Row({ product, categories,params }) {
           </Button>
           <EditModal handleCloseEdit={handleCloseedit} openedit={openedit} product={product} params={params}/>
           {/*  */}
-          <Button variant="outlined" sx={{ mx: 2 }} onClick={handleOpenDelete} color={'warning'}>
+          <Button variant="outlined" sx={{ mx: 2 }} onClick={handleOpenDelete} color={'warning'} >
             حذف
           </Button>
           <DeletModal
             openDelete={openDelete}
             handleCloseDelete={handleCloseDelete}
             productId={product.id}
-      
+            params={params}
           />
         </TableCell>
       </TableRow>

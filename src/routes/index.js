@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {SharedCustomerLayout,Home,Category,Product,FinalizePayment,Cart,ResultOfPayment,Cancelation,PaymentGateWay,Login,
+import {SharedCustomerLayout,Home,Category,Product,FinalizePayment,Cart,ResultOfPayment,Login,
 SharedManagmentLayout,InventoryPrices,Goods,Order,Error} from './../pages/index'
 import PrivateRoute from './../components/route/PrivateRoute'
 function Rout() {
@@ -19,21 +19,24 @@ function Rout() {
           element={<ResultOfPayment />}
         />
       </Route>
-      <Route path="paymentGatetWay" element={<PaymentGateWay />} />
+      
       <Route path="login" element={<Login />} />
       <Route path="managment" element={
-      <PrivateRoute>
+        <PrivateRoute>
         <SharedManagmentLayout />
-      </PrivateRoute>
+        </PrivateRoute>
         
     
       }>
+        
         <Route index element={<Order />} />
         <Route path="inventoryPrices" element={<InventoryPrices />} />
         <Route path="goods" element={<Goods />} />
+     
       </Route>
       <Route path="*" element={<Error />} />
     </Routes>
+    
   </BrowserRouter>
   
   )

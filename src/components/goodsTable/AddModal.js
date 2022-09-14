@@ -23,7 +23,7 @@ import { fetchAdd, fetchProduct } from "./../../redux/reducer/productSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-export default function AddModal({ open, handleCloseAdd }) {
+export default function AddModal({ open, handleCloseAdd,params }) {
   const handleUpload = async (e) => {
     const selectedFIles = [];
     const targetFiles = e.target.files;
@@ -81,7 +81,7 @@ export default function AddModal({ open, handleCloseAdd }) {
                toast.success("اضافه کردن کالا با موفقیت انجام شد", {
                  position: toast.POSITION.BOTTOM_RIGHT,
                });
-               dispatch(fetchProduct());
+               dispatch(fetchProduct(params));
              })
        
        data.name = "";
@@ -99,7 +99,7 @@ export default function AddModal({ open, handleCloseAdd }) {
   const { categories } = useSelector((state) => state.category);
   const classes = useStyles();
 
-  const { values, handleChange, setFieldValue, handleSubmit, errors,isValid } =
+  const { values, handleChange, setFieldValue, handleSubmit, errors } =
     useFormik({
       initialValues: {
         name: "",
@@ -249,7 +249,7 @@ export default function AddModal({ open, handleCloseAdd }) {
           {errors.massage1 &&  <p style={{color:'red'}}>{errors.massage1}</p>}
             {errors.massage2&&<p style= {{color:'red'}}>{errors.massage2}</p>} 
           
-          <Button type="submit" className={classes.btn} disabled={isValid} variant={"outlined"}>
+          <Button type="submit" className={classes.btn}  variant={"outlined"}>
             ذخیره
           </Button>
         </form>

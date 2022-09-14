@@ -1,6 +1,8 @@
 import { createTheme } from "@mui/material";
+import {faIR} from "@mui/material/locale"
 
- export const theme = createTheme(({
+
+export const theme = createTheme({
     typography: {
       fontFamily: 
         "Vazir-Medium",
@@ -9,10 +11,12 @@ import { createTheme } from "@mui/material";
         
         
     },
+    direction:'rtl',
     tableCell:{
         fontFamily: 
         "Vazir-Medium", 
     },
     
    
-  }));
+  },faIR);
+ 
