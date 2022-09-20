@@ -18,14 +18,14 @@ import instance from "./../../API/http";
 import { fetchEdit, fetchProduct } from "./../../redux/reducer/productSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { useFormik } from "formik"
+import { useFormik } from "formik";
 
 // //////////////////////////////////////////////////////////////////
-function EditModal({ openedit, handleCloseEdit, product,params }) {
+function EditModal({ openedit, handleCloseEdit, product, params }) {
   //  variables
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [image, SetImage] = useState([product.image[0]]);
+  const [image, SetImage] = useState(product.image);
   const [thumbnail, setThumbnail] = useState(product.thumbnail);
   const [src, setSrc] = useState([]);
   const { categories } = useSelector((state) => state.category);
@@ -56,11 +56,18 @@ function EditModal({ openedit, handleCloseEdit, product,params }) {
   // handleSave function
   const handleSave = (data) => {
     const formData = {
-     name:data.name,model:data.model,color:data.color,quantity:data.quantity,price:data.price,
-     category:Number(data.category),description:data.description,thumbnail,image
+      name: data.name,
+      model: data.model,
+      color: data.color,
+      quantity: data.quantity,
+      price: data.price,
+      category: Number(data.category),
+      description: data.description,
+      thumbnail,
+      image,
     };
     // e.preventDefault();
-    dispatch(fetchEdit({ id:product.id, formData }))
+    dispatch(fetchEdit({ id: product.id, formData }))
       .then(unwrapResult)
       .then(() => {
         toast.success("ویرایش کالا با موفقیت انجام شد", {
@@ -84,29 +91,29 @@ function EditModal({ openedit, handleCloseEdit, product,params }) {
     ) {
       errors.massage1 = "پر کردن تمامی فیلدها الزامی است.";
     }
-    if(!thumbnail){
-      errors.massage2='انتخاب عکس الزامی است'
+    if (!thumbnail) {
+      errors.massage2 = "انتخاب عکس الزامی است";
     }
     return errors;
   };
 
   //defining formik
-const {values,handleChange,errors,handleSubmit,setFieldValue,isValid} = useFormik({
-  initialValues: {
-    name: product.name,
-    model:product.model,
-    price:product.price,
-    quantity:product.quantity,
-    color:product.color,
-    description:product.description,
-    category:product.category,
-  },
-  validate,
- onSubmit:values => {
-  handleSave(values)
-},
- 
-});
+  const { values, handleChange, errors, handleSubmit, setFieldValue, isValid } =
+    useFormik({
+      initialValues: {
+        name: product.name,
+        model: product.model,
+        price: product.price,
+        quantity: product.quantity,
+        color: product.color,
+        description: product.description,
+        category: product.category,
+      },
+      validate,
+      onSubmit: (values) => {
+        handleSave(values);
+      },
+    });
 
   useEffect(() => {
     dispatch(fetchCategory());
@@ -125,10 +132,7 @@ const {values,handleChange,errors,handleSubmit,setFieldValue,isValid} = useFormi
           </IconButton>
         </Box>
 
-        <form
-          className={classes.form}
-          onSubmit={handleSubmit}
-        >
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item md={12} xs={12}>
               <Typography>تصویر کالا:</Typography>
@@ -142,10 +146,32 @@ const {values,handleChange,errors,handleSubmit,setFieldValue,isValid} = useFormi
               />
             </Grid>
             <Grid item md={6} xs={12} sx={{ display: "flex", gap: "5px" }}>
-              <Avatar name='thumbnail' alt="image" src={src[0]} variant="rounded" onChange={handleChange} />
-              <Avatar name='image1' alt="image"  src={src[1]} variant="rounded" onChange={handleChange}/>
-              <Avatar alt="image2" src={src[2]} variant="rounded" onChange={handleChange}/>
-              <Avatar alt="image3" src={src[3]} variant="rounded" onChange={handleChange}/>
+              <Avatar
+                name="thumbnail"
+                alt="image"
+                src={src[0]}
+                variant="rounded"
+                onChange={handleChange}
+              />
+              <Avatar
+                name="image1"
+                alt="image"
+                src={src[1]}
+                variant="rounded"
+                onChange={handleChange}
+              />
+              <Avatar
+                alt="image2"
+                src={src[2]}
+                variant="rounded"
+                onChange={handleChange}
+              />
+              <Avatar
+                alt="image3"
+                src={src[3]}
+                variant="rounded"
+                onChange={handleChange}
+              />
             </Grid>
 
             <Grid item md={6} xs={12}>
@@ -156,7 +182,7 @@ const {values,handleChange,errors,handleSubmit,setFieldValue,isValid} = useFormi
             </Grid>
             <Grid item md={6} xs={12}>
               <input
-              name='name'
+                name="name"
                 type="text"
                 className={classes.input}
                 value={values.name}
@@ -166,7 +192,7 @@ const {values,handleChange,errors,handleSubmit,setFieldValue,isValid} = useFormi
             <Grid item md={6} xs={12} className={classes.input}>
               <select
                 className={classes.input}
-                name='category'
+                name="category"
                 value={values.category}
                 onChange={handleChange}
               >
@@ -187,7 +213,7 @@ const {values,handleChange,errors,handleSubmit,setFieldValue,isValid} = useFormi
               <input
                 type="text"
                 className={classes.input}
-                name='model'
+                name="model"
                 value={values.model}
                 onChange={handleChange}
               />
@@ -197,7 +223,7 @@ const {values,handleChange,errors,handleSubmit,setFieldValue,isValid} = useFormi
                 type="number"
                 className={classes.input}
                 value={values.price}
-                name='price'
+                name="price"
                 onChange={handleChange}
               />
             </Grid>
@@ -210,7 +236,7 @@ const {values,handleChange,errors,handleSubmit,setFieldValue,isValid} = useFormi
             <Grid item md={6} xs={12}>
               <input
                 type="number"
-                name='quantity'
+                name="quantity"
                 className={classes.input}
                 value={values.quantity}
                 onChange={handleChange}
@@ -219,7 +245,7 @@ const {values,handleChange,errors,handleSubmit,setFieldValue,isValid} = useFormi
             <Grid item md={6} xs={12}>
               <input
                 type="text"
-                name='color'
+                name="color"
                 className={classes.input}
                 value={values.color}
                 onChange={handleChange}
@@ -230,7 +256,7 @@ const {values,handleChange,errors,handleSubmit,setFieldValue,isValid} = useFormi
             </Grid>
             <Grid item md={12} xs={12}>
               <CKEditor
-              id="description"
+                id="description"
                 data={values.description}
                 className={classes.ckEditor}
                 editor={ClassicEditor}
@@ -240,9 +266,14 @@ const {values,handleChange,errors,handleSubmit,setFieldValue,isValid} = useFormi
               />
             </Grid>
           </Grid>
-          {errors.massage1 &&  <p style={{color:'red'}}>{errors.massage1}</p>}
-            {errors.massage2&&<p style= {{color:'red'}}>{errors.massage2}</p>} 
-          <Button type="submit"  className={classes.btn} disabled={!isValid} variant={"outlined"}>
+          {errors.massage1 && <p style={{ color: "red" }}>{errors.massage1}</p>}
+          {errors.massage2 && <p style={{ color: "red" }}>{errors.massage2}</p>}
+          <Button
+            type="submit"
+            className={classes.btn}
+            disabled={!isValid}
+            variant={"outlined"}
+          >
             ذخیره
           </Button>
         </form>

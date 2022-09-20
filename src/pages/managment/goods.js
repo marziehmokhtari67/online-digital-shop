@@ -1,4 +1,4 @@
-import React,{ useEffect, useState }  from "react";
+import React, { useEffect, useState } from "react";
 import { fetchProduct } from "../../redux/reducer/productSlice";
 import { fetchCategory } from "../../redux/reducer/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,17 +25,17 @@ function Goods() {
   // defining constants
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
-  const { products,totalCount } = useSelector((state) => state.products);
+  const { products, totalCount } = useSelector((state) => state.products);
   const [params, setParams] = useState(1);
   const classes = useStyles();
-  const[open,setOpen]=useState(false)
-  const {isLogined}=useSelector(state=>state.login)
-  console.log(isLogined)
+  const [open, setOpen] = useState(false);
+  const { isLogined } = useSelector((state) => state.login);
+  console.log(isLogined);
   // defining functions
-  const handleCloseAdd=()=>setOpen(false)
-  const handleOpenAdd=()=>setOpen(true)
+  const handleCloseAdd = () => setOpen(false);
+  const handleOpenAdd = () => setOpen(true);
   useEffect(() => {
-  dispatch(fetchProduct(params), dispatch(fetchCategory()));
+    dispatch(fetchProduct(params), dispatch(fetchCategory()));
   }, [dispatch, params]);
   const handleChange = (event, value) => {
     setParams(value);
@@ -48,53 +48,52 @@ function Goods() {
             <Typography variant="h6" component="div">
               مدیریت کالا
             </Typography>
-            <Button
-              variant="outlined"
-              color='primary'
-              onClick={handleOpenAdd}
-            >
-          اضافه کردن
+            <Button variant="outlined" color="primary" onClick={handleOpenAdd}>
+              اضافه کردن
             </Button>
-            <AddModal open={open} handleCloseAdd={handleCloseAdd} params={params}/>
+            <AddModal
+              open={open}
+              handleCloseAdd={handleCloseAdd}
+              params={params}
+            />
           </Toolbar>
         </AppBar>
       </Box>
 
-      <TableContainer  className={classes.tableContainer} >
-        <Table className={classes.table} aria-label="simple table" size='small'>
+      <TableContainer className={classes.tableContainer}>
+        <Table className={classes.table} aria-label="simple table" size="small">
           <TableHead>
             <TableRow>
-              <TableCell align="center">
-                تصویر
-              </TableCell>
-              <TableCell align="center">
-                نام کالا
-              </TableCell>
-              <TableCell align="center" >
-                مدل
-              </TableCell>
-              <TableCell align="center" >
-                دسته بندی
-              </TableCell>
+              <TableCell align="center">تصویر</TableCell>
+              <TableCell align="center">نام کالا</TableCell>
+              <TableCell align="center">مدل</TableCell>
+              <TableCell align="center">دسته بندی</TableCell>
               <TableCell align="center"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {products.map((product) => (
-              <Row key={product.id} product={product} categories={categories} params={params}/>
+              <Row
+                key={product.id}
+                product={product}
+                categories={categories}
+                params={params}
+              />
             ))}
           </TableBody>
         </Table>
       </TableContainer>
       <Stack spacing={2}>
-      
-      <Pagination className={classes.pagination} count={Number(Math.ceil(totalCount/5))} page={params} onChange={handleChange}  shape="circular"
-        color='secondary'
-        variant='outlined'
+        <Pagination
+          className={classes.pagination}
+          count={Number(Math.ceil(totalCount / 5))}
+          page={params}
+          onChange={handleChange}
+          shape="circular"
+          color="secondary"
+          variant="outlined"
         />
-        
-    </Stack>
-     
+      </Stack>
     </Box>
   );
 }

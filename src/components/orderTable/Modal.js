@@ -101,7 +101,7 @@ function OrderModal({ handleClose, open, order, number }) {
           {order.delivered ? (
             <Typography sx={{ fontSize: "14px" }}>
               زمان تحویل:{" "}
-              {new Date(order.createdAt).toLocaleDateString("fa-IR")}
+              {new Date(order.expectAt).toLocaleDateString("fa-IR")}
             </Typography>
           ) : (
             <Button variant="outlined" onClick={() => handleChange(order.id)}>

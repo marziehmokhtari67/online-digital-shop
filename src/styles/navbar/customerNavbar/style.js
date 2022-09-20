@@ -16,11 +16,14 @@ rightBox:{
     display: "flex", gap: "20px", alignItems: "center" 
 },
 logoBox:{
-    width: "25%", borderRadius: "10px",
+ borderRadius: "50%",border:'6px solid lightgray',
+ width:'80px' ,height:'80px'
 },
 name:{
     fontFamily:"Vazir-Medium",
-    color:'black' ,
+    color:'blue' ,
+    fontStyle:'italic',
+    
    
     '&:hover':{
     

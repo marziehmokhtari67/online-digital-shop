@@ -1,28 +1,25 @@
-
 import React from "react";
 
 import { Modal, Box, IconButton, Typography, Button } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useStyles } from "./../../styles/modals/style";
-import { fetchDelete, fetchProduct} from "../../redux/reducer/productSlice";
+import { fetchDelete, fetchProduct } from "../../redux/reducer/productSlice";
 import { useDispatch } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-function DeletModal({ openDelete, handleCloseDelete, productId,params }) {
+function DeletModal({ openDelete, handleCloseDelete, productId, params }) {
   const classes = useStyles();
   const dispatch = useDispatch();
- 
+
   const handleDelete = (id) => {
     dispatch(fetchDelete(id))
       .then(unwrapResult)
       .then(() => {
         toast.success("حذف کالا با موفقیت انجام شد", {
           position: toast.POSITION.BOTTOM_RIGHT,
-          
         });
         dispatch(fetchProduct(params));
       });
-
   };
   return (
     <Modal
@@ -38,10 +35,18 @@ function DeletModal({ openDelete, handleCloseDelete, productId,params }) {
           </IconButton>
         </Box>
         <Typography>کالای مورد نظر از لیست کالا حذف شود؟</Typography>
-        <Box sx={{display:'flex',gap:'10px'}}>
-          <Button variant='outlined' onClick={() => handleDelete(productId)}>بله</Button>
+        <Box sx={{ display: "flex", gap: "10px" }}>
+          <Button variant="outlined" onClick={() => handleDelete(productId)}>
+            بله
+          </Button>
 
-          <Button variant='outlined' color='warning' onClick={handleCloseDelete}>خیر</Button>
+          <Button
+            variant="outlined"
+            color="warning"
+            onClick={handleCloseDelete}
+          >
+            خیر
+          </Button>
         </Box>
       </Box>
     </Modal>

@@ -1,33 +1,35 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect,useState,useCallback } from "react";
 import { Link, Box, Typography,Grid,Avatar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategory } from "./../../redux/reducer/categorySlice";
 import axios from 'axios'
 import {URL} from './../../API/constant'
 import Card from './../../components/category/Card'
+import Loading from './../../components/loading/Loading '
 
 function Home() {
   const dispatch = useDispatch();
-  const { categories } = useSelector((state) => state.category);
+  const { categories,loading } = useSelector((state) => state.category);
   const[products,setProducts]=useState([])
-  function getData() {
-    axios.get(`${URL}/products`)
-      .then((res) => setProducts(res.data))
+  const getData= useCallback((id)=> {
+    axios.get(`${URL}/products?category=${id}&_page=1&_limit=6`)
+      .then((res) => setProducts([...products,res.data]))
       
-  }
+  },[products])
   useEffect(() => {
     dispatch(fetchCategory())
-    getData()
+    categories.map(category=>getData(category.id))
     
-  }, [dispatch]);
+    
+  }, []);
   
-  return (
-    <Box 
+  return (loading? <Loading/>
+    :<Box 
       sx={{
       p:4,
       display:'flex',
       flexDirection:'column',
-     
+     background:'rgba(245,245,245,0.9)'
       
       }}
     >
@@ -44,9 +46,9 @@ function Home() {
          
           
            <Grid container  spacing={2}>
-          {products.filter((product) => product.category === category.id).slice(0,6)
+          {products.filter((product) => product.category === category.id)
             .map((product) => {
-              return  <Grid item  md={4} xs={6} key={product.id} sx={{display:'flex',justifyContent:'center'}}><Card  product={product}/></Grid>
+              return  <Grid item  md={4} xs={12} key={product.id} sx={{display:'flex',justifyContent:'center'}}><Card  product={product}/></Grid>
             })}
             </Grid>
             
@@ -57,5 +59,6 @@ function Home() {
     </Box>
   );
 }
+
 
 export { Home };

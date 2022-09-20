@@ -28,8 +28,8 @@ function Row({product,data,setData,editpr,setEditpr,editqu,setEDitqu}) {
   } 
   const toggle=useCallback((event)=>{
     if (event.key==='Escape'){
-      setEditpr(false)
-      setEDitqu(false)
+      setEditpr(null)
+      setEDitqu(null)
     }
   },[setEDitqu, setEditpr] )
   useEffect(() => {
@@ -45,11 +45,11 @@ function Row({product,data,setData,editpr,setEditpr,editqu,setEDitqu}) {
        
         <TableCell align='center' >{product.name}</TableCell>
         <TableCell align='center' >{product.model}</TableCell>
-        {editpr ? <TableCell align='center'><input type='number' name='price' onChange={(e)=>handleChange(e,product.id)} defaultValue={price}/></TableCell>
-        :<TableCell align='center'  onClick={()=>setEditpr(true) }  >{digitsEnToFa(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))}</TableCell>
+        {editpr===product.id ? <TableCell align='center'><input type='number' name='price' onChange={(e)=>handleChange(e,product.id)} defaultValue={price}/></TableCell>
+        :<TableCell align='center'  onClick={()=>setEditpr(product.id) }  >{digitsEnToFa(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))}</TableCell>
   }
-        {editqu? <TableCell align='center' ><input type='number' name='quantity' defaultValue={quantity} onChange={(e)=>handleChange(e,product.id)}/></TableCell>
-        :<TableCell align='center' onClick={()=>setEDitqu(true)}   >{digitsEnToFa(quantity)}</TableCell>
+        {editqu ===product.id ? <TableCell align='center' ><input type='number' name='quantity' defaultValue={quantity} onChange={(e)=>handleChange(e,product.id)}/></TableCell>
+        :<TableCell align='center' onClick={()=>setEDitqu(product.id)}   >{digitsEnToFa(quantity)}</TableCell>
         }
         
        

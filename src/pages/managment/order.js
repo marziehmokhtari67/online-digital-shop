@@ -41,7 +41,7 @@ function Order() {
   return (
     <Box className={classes.container}>
       <Box className={classes.header}>
-        <AppBar position="static" elevation={0} >
+        <AppBar position="static" elevation={0}>
           <Toolbar className={classes.toolBar} disableGutters={true}>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               مدیریت سفارش ها
@@ -84,12 +84,7 @@ function Order() {
           </TableHead>
           <TableBody>
             {orders.map((order) => (
-              <Row
-                key={order.id}
-                order={order}
-                
-                number={number}
-              />
+              <Row key={order.id} order={order} number={number} />
             ))}
           </TableBody>
         </Table>
@@ -100,7 +95,7 @@ function Order() {
           page={number}
           onChange={handleChange}
           shape="circular"
-          variant='outlined'
+          variant="outlined"
           color="secondary"
         />
       </Stack>

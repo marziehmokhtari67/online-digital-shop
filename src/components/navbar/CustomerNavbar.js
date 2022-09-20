@@ -35,7 +35,7 @@ function CustomerNavbar() {
             />
             <Link href='/' underline='none'><Typography variant="h4" className={classes.name}>
             
-              دیجیتال لند
+         دیجیتالند
             </Typography>
             </Link>
           </Box>

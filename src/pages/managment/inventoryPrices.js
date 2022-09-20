@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { fetchProduct,fetchPatch } from "../../redux/reducer/productSlice";
+import { fetchProduct, fetchPatch } from "../../redux/reducer/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -20,35 +20,37 @@ import {
 import Row from "../../components/priceTable/Row";
 import { useStyles } from "./../../styles/table/style";
 import { toast } from "react-toastify";
-import { unwrapResult } from "@reduxjs/toolkit"
+import { unwrapResult } from "@reduxjs/toolkit";
 function InventoryPrices() {
   const dispatch = useDispatch();
-  const [data,setData]=useState([])
-  const[editpr,setEditpr]=useState(false)
-  const[editqu,setEDitqu]=useState(false)
+  const [data, setData] = useState([]);
+  const [editpr, setEditpr] = useState(null);
+  const [editqu, setEDitqu] = useState(null);
   const [params, setParams] = useState(1);
   const handleSave = useCallback(async () => {
-    const request= data.map(item=>dispatch(fetchPatch({id:item.id,rowData:item})))
- Promise.all(request).then (unwrapResult).then(()=>{
-    toast.success("ویرایش با موفقیت ذخیره  شد", {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
- 
-  dispatch (fetchProduct(params))
-  setEditpr(false)
-  setEDitqu(false)
-})
-    
+    const request = data.map((item) =>
+      dispatch(fetchPatch({ id: item.id, rowData: item }))
+    );
+    Promise.all(request)
+      .then(unwrapResult)
+      .then(() => {
+        toast.success("ویرایش با موفقیت ذخیره  شد", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+
+        dispatch(fetchProduct(params));
+        setEditpr(null);
+        setEDitqu(null);
+      });
   }, [data, dispatch, params]);
 
   const { products, totalCount } = useSelector((state) => state.products);
-  
-  
+
   const classes = useStyles();
   const handleChange = (event, value) => {
     setParams(value);
@@ -84,8 +86,15 @@ function InventoryPrices() {
           </TableHead>
           <TableBody>
             {products.map((product) => (
-              <Row key={product.id} product={product} data={data} setData={setData} editpr={editpr} setEditpr={setEditpr}
-              editqu={editqu} setEDitqu={setEDitqu}
+              <Row
+                key={product.id}
+                product={product}
+                data={data}
+                setData={setData}
+                editpr={editpr}
+                setEditpr={setEditpr}
+                editqu={editqu}
+                setEDitqu={setEDitqu}
               />
             ))}
           </TableBody>
@@ -97,7 +106,7 @@ function InventoryPrices() {
           count={Math.ceil(totalCount / 5)}
           page={params}
           onChange={handleChange}
-          variant='outlined'
+          variant="outlined"
           shape="circular"
           color="secondary"
         />
