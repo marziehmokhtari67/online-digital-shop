@@ -7,11 +7,12 @@ const initialState = {
   loading: false,
   error: "",
   totalCount: 0,
+  searchResult:false
   
 };
 //fetchProduct
 export const fetchProduct= createAsyncThunk(
-  "product/fetchProduct",
+  "products/fetchProduct",
   async (number = 1) => {
     return axios
       .get(`${URL}/products?_page=${number}&_limit=5`)
@@ -22,21 +23,25 @@ export const fetchProduct= createAsyncThunk(
   }
 );
 // fetchDelete
-export const fetchDelete = createAsyncThunk("product/fetchDelete", async (id) => {
+export const fetchDelete = createAsyncThunk("products/fetchDelete", async (id) => {
   return instance.delete(`/products/${id}`).then((res) => res.data);
 });
 // fetchEdit
-export const fetchEdit = createAsyncThunk("posts/fetchEdit", async ({id,formData}) => {
-  return instance.put(`/products/${id}`,formData).then((res) => res);
+export const fetchEdit = createAsyncThunk("products/fetchEdit", async ({id,formData}) => {
+  return instance.put(`/products/${id}`,formData).then((res) => res.data);
 });
 // fetch add
-export const fetchAdd = createAsyncThunk("posts/fetchAdd", async (formData) => {
-  return instance.post('/products',formData).then((res) => res)})
+export const fetchAdd = createAsyncThunk("products/fetchAdd", async (formData) => {
+  return instance.post('/products',formData).then((res) => res.data)})
   //fetch patch 
-  export const fetchPatch = createAsyncThunk("posts/fetchPatch", async ({id,rowData}) => {
-    return instance.patch(`/products/${id}`,rowData).then((res) => res);
+  export const fetchPatch = createAsyncThunk("products/fetchPatch", async ({id,rowData}) => {
+    return instance.patch(`/products/${id}`,rowData).then((res) => res.data);
   });
-
+// fetch search
+export const fetchSearch = createAsyncThunk("products/fetchSearch", async ({keyword=''}) => {
+ console.log(keyword)
+return  axios.get(`${URL}/products?name=${keyword}`).then((res) => res);
+});
   // ////////
 export const productsSlice = createSlice({
   name: "products",
@@ -56,7 +61,7 @@ export const productsSlice = createSlice({
     });
    
     builder.addCase(fetchProduct.rejected, (action) => {
-      return { posts: [], loading: false, error: action.payload };
+      return { products: [], loading: false, error: action.payload };
     });
     // delete product
     builder.addCase(fetchDelete.pending, (state) => {
@@ -66,7 +71,7 @@ export const productsSlice = createSlice({
       return { ...state, loading: false };
     });
     builder.addCase(fetchDelete.rejected, (action) => {
-      return { posts: [], loading: false, error: action.payload };
+      return { products: [], loading: false, error: action.payload };
     });
    //edit product
     builder.addCase(fetchEdit.pending, (state) => {
@@ -76,7 +81,7 @@ export const productsSlice = createSlice({
       return { ...state, loading: false };
     });
     builder.addCase(fetchEdit.rejected, (action) => {
-      return { posts: [], loading: false, error: action.payload };
+      return { products: [], loading: false, error: action.payload };
     });
     //add product
 
@@ -87,7 +92,7 @@ export const productsSlice = createSlice({
       return { ...state, loading: false };
     });
     builder.addCase(fetchAdd.rejected, (action) => {
-      return { posts: [], loading: false, error: action.payload };
+      return { products: [], loading: false, error: action.payload };
     });
     // ////edit price and quantity of products
     
@@ -98,11 +103,23 @@ export const productsSlice = createSlice({
       return { ...state, loading: false };
     });
     builder.addCase(fetchPatch.rejected, (action) => {
-      return { posts: [], loading: false, error: action.payload };
+      return { products: [], loading: false, error: action.payload };
     });
+    // geting result search
+    builder.addCase(fetchSearch.pending, (state) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(fetchSearch.fulfilled, (state, action) => {
+      return { ...state, products:action.payload.data, loading: false,searchResult:true };
+    });
+    builder.addCase(fetchSearch.rejected, (action) => {
+      return { products: [], loading: false, error: action.payload ,searchResult:false};
+    });
+ 
 
   },
- 
+  // serch product
+  
   
 });
 

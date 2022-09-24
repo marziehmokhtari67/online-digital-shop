@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: "10px 0px",
     alignItems: "center",
     width: "35%",
-    height: "50%",
+    height: "55%",
     backgroundColor: "white",
     borderRadius: "10px",
     color: "rgba(255,255,255,0.8)",

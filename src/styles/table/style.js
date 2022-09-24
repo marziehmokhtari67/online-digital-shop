@@ -20,11 +20,14 @@ padding: "2% 11%",
 },
 tableContainer:{
   display:'flex',
-  justifyContent:'center'
+  justifyContent:'center',
+  height:'80%'
     
 },
 table:{
-    maxWidth:'80%'
+    maxWidth:'80%',
+
+    
 },
 pagination:{
    marginTop:'40px',

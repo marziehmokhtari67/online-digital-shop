@@ -13,7 +13,7 @@ const useStyles=makeStyles({
   flexDirection:'column',
   width:'300px',
   height:'300px',
-  padding:'10px',
+  paddingTop:'10px',
   borderRadius:'10px',
   background:'white',
   transitionDuration:'ease-in',
@@ -29,8 +29,17 @@ const useStyles=makeStyles({
   margin:'10px 5px'},
   
 img:{
-  width:'80%',height:'70%',
+  width:'55%',height:'60%',
   
+},
+textContainer:{
+  backgroundColor:'rgb(252,241,237)',
+  padding:'10px',
+  width:'100%',
+  height:'40%',
+  borderRadius:'5px',
+ 
+
 }
   
 })
@@ -39,14 +48,10 @@ function Card({product}) {
   const classes=useStyles()
   return (
     <Box onClick={()=>navigate(`/product/${product.id}`)} className={classes.card} >
-      <Box>
-      <Paper sx={{display:'flex',justifyContent:'center'}}>
     <Box component='img'src={`${URL}/files/${product.image[0]}`} alt="productImage" className={classes.img}  />
-    </Paper>
-      </Box>
-   
-    <Box sx={{background:'#ffcdd2'}}>
-    <Typography align='center'>{product.name} {product.model}</Typography>
+
+    <Box className={classes.textContainer}>
+    <Typography align='center' >{product.name} {product.model}</Typography>
     <Typography align='center' >قیمت:{  digitsEnToFa(product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")) } تومان</Typography>
     </Box>
    

@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {SharedCustomerLayout,Home,Category,Product,FinalizePayment,Cart,ResultOfPayment,Login,
-SharedManagmentLayout,InventoryPrices,Goods,Order,Error} from './../pages/index'
+SharedManagmentLayout,InventoryPrices,Goods,Order,Error, SearchResult} from './../pages/index'
 import PrivateRoute from './../components/route/PrivateRoute'
 function Rout() {
   return (
@@ -14,6 +14,7 @@ function Rout() {
         <Route path="product/:productId" element={<Product />} />
         <Route path="cart" element={<Cart />} />
         <Route path="finalizePayment" element={<FinalizePayment />} />
+        <Route path="search/:keyword" element={<SearchResult />} />
         <Route
           path="result/:result"
           element={<ResultOfPayment />}

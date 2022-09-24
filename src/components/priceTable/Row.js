@@ -7,6 +7,7 @@ function Row({product,data,setData,editpr,setEditpr,editqu,setEDitqu}) {
   
   const [price,setPrice]=useState(product.price)
   const[quantity,setQuantity]=useState(product.quantity)
+
   const handleChange=(e,id)=>{
     if (e.target.name==='price'){setPrice(e.target.value)};
     if(e.target.name==='quantity'){
@@ -39,17 +40,23 @@ function Row({product,data,setData,editpr,setEditpr,editqu,setEDitqu}) {
       document.removeEventListener("keydown",toggle );
     }
   }, [price, quantity, toggle]);
+ 
   return (
     <>
      <TableRow >
        
         <TableCell align='center' >{product.name}</TableCell>
         <TableCell align='center' >{product.model}</TableCell>
-        {editpr===product.id ? <TableCell align='center'><input type='number' name='price' onChange={(e)=>handleChange(e,product.id)} defaultValue={price}/></TableCell>
-        :<TableCell align='center'  onClick={()=>setEditpr(product.id) }  >{digitsEnToFa(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))}</TableCell>
+        {editpr===product.id  ? <TableCell align='center'><input type='number' name='price' onChange={(e)=>handleChange(e,product.id)} defaultValue={price}/></TableCell>
+        :<TableCell align='center'  onClick={()=>{setEditpr(product.id)
+        
+        
+        } }  >{digitsEnToFa(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))}</TableCell>
   }
-        {editqu ===product.id ? <TableCell align='center' ><input type='number' name='quantity' defaultValue={quantity} onChange={(e)=>handleChange(e,product.id)}/></TableCell>
-        :<TableCell align='center' onClick={()=>setEDitqu(product.id)}   >{digitsEnToFa(quantity)}</TableCell>
+        {editqu ===product.id  ? <TableCell align='center' ><input type='number' name='quantity' defaultValue={quantity} onChange={(e)=>handleChange(e,product.id)}/></TableCell>
+        :<TableCell align='center' onClick={()=>{setEDitqu(product.id)
+    
+        }}   >{digitsEnToFa(quantity)}</TableCell>
         }
         
        

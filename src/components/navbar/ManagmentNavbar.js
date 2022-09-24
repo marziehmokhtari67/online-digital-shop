@@ -49,7 +49,7 @@ function ManagmentNavbar() {
         <Container maxWidth="xl">
           <Toolbar className={classes.toolbar} disableGutters={true}>
             <Typography variant="h5" noWrap className={classes.name}>
-              پنل مدیریت دیجیتال لند
+              پنل مدیریت دیجیتالند
             </Typography>
             <Box className={classes.menuContainer}>
               <IconButton
@@ -97,7 +97,7 @@ function ManagmentNavbar() {
               noWrap
               flexGrow={1}
             >
-              پنل مدیریت دیجیتال لند
+              پنل مدیریت دیجیتالند
             </Typography>
             <ToggleButtonGroup
               color="primary"

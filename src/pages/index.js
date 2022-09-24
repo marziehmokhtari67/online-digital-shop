@@ -7,7 +7,7 @@ export {Cart} from "./home/cart";
 export {FinalizePayment} from "./paymant/finalizePayment";
 export {PaymentGateWay} from "./paymant/paymentGateWay";
 export {ResultOfPayment} from "./paymant/resultOfPayment";
-
+export {SearchResult} from './home/searchResultPage'
 export {Login} from "./login/login";
 export {Order} from "./managment/order";
 export {InventoryPrices} from "./managment/inventoryPrices";

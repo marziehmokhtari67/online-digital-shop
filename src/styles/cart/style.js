@@ -26,10 +26,11 @@ flexDirection:'column',
 },
 
 buttonsContainer:{
-display:'flex',gap:'5px',margin:'10px'},
+display:'flex',gap:'5px'},
 lastRow:{
     display: "flex",
     justifyContent: "space-around",
+    alignItems:'center',
     marginTop: "30px",
   }
 

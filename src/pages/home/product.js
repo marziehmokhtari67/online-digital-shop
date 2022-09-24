@@ -7,22 +7,39 @@ import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { useStyles } from "./../../styles/productPage/style";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import{useDispatch} from 'react-redux'
-import{addToCart,getTotals} from './../../redux/reducer/cartSlice'
+import { useDispatch } from "react-redux";
+import { addToCart } from "./../../redux/reducer/cartSlice";
 import { toast } from "react-toastify";
+import {
+  Magnifier,
+  GlassMagnifier,
+  SideBySideMagnifier,
+  PictureInPictureMagnifier,
+  MOUSE_ACTIVATION,
+  TOUCH_ACTIVATION,
+} from "react-image-magnifiers";
+
 function Product() {
   // variables
   const { productId } = useParams();
   const [info, setInfo] = useState([]);
-  const dispatch=useDispatch()
+  const [photo, setPhoto] = useState("");
+  const dispatch = useDispatch();
   // submit function
   const submit = (data) => {
-    dispatch(addToCart({name:info.name,id:info.id, price:info.price,count:data.count,model:info.model}))
-    // dispatch(getTotals())
-      toast.success("کالای مورد نظر به سبد خرید اضافه شد", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-      });
-      
+    dispatch(
+      addToCart({
+        name: info.name,
+        id: info.id,
+        price: info.price,
+        count: data.count,
+        model: info.model,
+      })
+    );
+
+    toast.success("کالای مورد نظر به سبد خرید اضافه شد", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
   };
   // schema
   const schema = yup.object().shape({
@@ -40,99 +57,118 @@ function Product() {
       count: 0,
     },
     validationSchema: schema,
-    onSubmit: values=>{
-      submit(values)
-    }
+    onSubmit: (values) => {
+      submit(values);
+    },
   });
   const getData = (id) => {
-    axios.get(`${URL}/products/${id}`).then((res) => setInfo(res.data));
+    axios.get(`${URL}/products/${id}`).then((res) => {
+      setInfo(res.data);
+      setPhoto(res.data.image[0]);
+    });
   };
   const classes = useStyles();
   useEffect(() => getData(productId), [productId]);
   return (
     <Box>
-    <Box className={classes.container}>
-      <Box className={classes.imagesContainer}>
-        <Box>
+      <Box className={classes.container}>
+        <Box className={classes.imagesContainer}>
+         
+          <Box className={classes.smallImagesContainer}>
           {info.image && (
             <img
               alt="aks"
               src={`${URL}/files/${info.image[0]}`}
-              className={classes.bigImage}
+              className={classes.smallImage}
+              onClick={() => setPhoto(info.image[0])}
             />
           )}
-        </Box>
-        {info.image && (
-          <img
-            alt="aks"
-            src={`${URL}/files/${info.image[0]}`}
-            className={classes.smallImage}
-          />
-        )}
-        {info.image && (
-          <img
-            alt="aks"
-            src={`${URL}/files/${info.image[1]}`}
-            className={classes.smallImage}
-          />
-        )}
-        {info.image && (
-          <img
-            alt="aks"
-            src={`${URL}/files/${info.image[2]}`}
-            className={classes.smallImage}
-          />
-        )}
-      </Box>
-      <Box  className={classes.detail}>
-        <Box>
-          <Typography>نام محصول: {info.name}</Typography>
-          <Typography> مدل:{info.model} </Typography>
-          {info.price && (
-            <Typography>
-              {" "}
-              قیمت:{" "}
-              {digitsEnToFa(
-                info.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              )}{" "}
-              تومان
-            </Typography>
+          {info.image && (
+            <img
+              alt="aks"
+              src={`${URL}/files/${info.image[1]}`}
+              className={classes.smallImage}
+              onClick={() => setPhoto(info.image[1])}
+            />
           )}
-          <Typography>رنگ: {info.color}</Typography>
+          {info.image && (
+            <img
+              alt="aks"
+              src={`${URL}/files/${info.image[2]}`}
+              className={classes.smallImage}
+              onClick={() => setPhoto(info.image[2])}
+            />
+          )}
+          </Box>
+          <Box>
+            {info.image && (
+              <img
+                alt="aks"
+                src={`${URL}/files/${photo}`}
+                className={classes.bigImage}
+              />
+            )}
+          </Box>
+        
+        </Box>
+        <Box className={classes.detail}>
+          <Box>
+            <Typography>نام محصول: {info.name}</Typography>
+            <Typography> مدل:{info.model} </Typography>
+            {info.price && (
+              <Typography>
+                {" "}
+                قیمت:{" "}
+                {digitsEnToFa(
+                  info.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                )}{" "}
+                تومان
+              </Typography>
+            )}
+            <Typography>رنگ: {info.color}</Typography>
 
-          {info.color && (
-            <Typography>موجودی: {digitsEnToFa(info.quantity)} تعداد</Typography>
-          )}
+            {info.color && (
+              <Typography>
+                موجودی: {digitsEnToFa(info.quantity)} تعداد
+              </Typography>
+            )}
+          </Box>
+          <form
+            autoComplete="off"
+            onSubmit={formik.handleSubmit}
+            className={classes.form}
+          >
+            <input
+              type="number"
+              name="count"
+              min="0"
+              value={formik.values.count}
+              onChange={formik.handleChange}
+              placeholder="لطفا تعداد محصول برای خرید را وارد کنید"
+              className={classes.input}
+            />
+            {formik.errors.count && (
+              <Typography className={classes.error}>
+                {formik.errors.count}
+              </Typography>
+            )}
+            {info.quantity === 0 ? (
+              <Button variant="outlined" disabled type="submit">
+                افزودن به سبد خرید
+              </Button>
+            ) : (
+              <Button variant="outlined" type="submit">
+                افزودن به سبد خرید
+              </Button>
+            )}
+          </form>
         </Box>
-        <form autoComplete="off" onSubmit={formik.handleSubmit} className={classes.form}>
-          <input
-            type="number"
-            name="count"
-            min='0'
-            value={formik.values.count}
-            onChange={formik.handleChange}
-            placeholder="لطفا تعداد محصول برای خرید را وارد کنید"
-            // onBlur={formik.handleBlur}
-            className={classes.input}
-          />
-          {formik.errors.count && (
-            <Typography className={classes.error} >{formik.errors.count}</Typography>
-          )}
-          {info.quantity === 0 ? (
-            <Button variant="outlined" disabled  type="submit">
-              افزودن به سبد خرید
-            </Button>
-          ) : (
-            <Button variant="outlined" type="submit">
-              افزودن به سبد خرید
-            </Button>
-          )}
-        </form>
       </Box>
-      
-    </Box>
-    <Typography  sx={{pt:1,pr:2}}>توضیحات:</Typography>
-    <Typography sx={{pt:1,pr:2}} dangerouslySetInnerHTML={{__html:info.description}}/>
+      <Typography sx={{ pt: 1, pr: 2 }}>توضیحات:</Typography>
+      <Typography
+        sx={{ pt: 1, pr: 2 }}
+        dangerouslySetInnerHTML={{ __html: info.description }}
+      />
     </Box>
   );
 }

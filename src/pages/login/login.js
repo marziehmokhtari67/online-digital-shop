@@ -48,11 +48,12 @@ const validate = async()=>{
   return (
     <>
       <Box className={classes.container}>
+       
+        <Box component="div" className={classes.formContainer}>
         <Typography variant="h6" className={classes.header}>
           ورود به پنل مدیریت دیجیتال لند
         </Typography>
-        <Box component="div" className={classes.formContainer}>
-          {error && <Typography sx={{color:'rgb(231, 135, 189)'}}>نام کاربری یا رمز اشتباه است</Typography>}
+          {error && <Typography sx={{color:'rgb(231, 135, 189)'}}>نام کاربری یا رمز عبور اشتباه است</Typography>}
           <Box
             component="form"
             sx={{ display: "flex", flexDirection: "column", gap: "25px" }}

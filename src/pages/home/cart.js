@@ -13,11 +13,11 @@ import {
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
-import { getTotals, deleteCart } from "./../../redux/reducer/cartSlice";
+import { getTotals, deleteCart,cleareCartItem } from "./../../redux/reducer/cartSlice";
 import { useStyles } from "./../../styles/cart/style";
 import Modal from "@mui/material/Modal";
 export function Cart() {
-  const { cartItems, cartTotalAmount } = useSelector((state) => state.cart);
+  const { cartItems, cartTotalAmount} = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
@@ -98,6 +98,7 @@ export function Cart() {
             cartTotalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
           )}
         </Typography>
+        <Box className={classes.buttonsContainer}>
         <Button
           variant="contained"
           onClick={() => navigate("/finalizePayment")}
@@ -105,6 +106,14 @@ export function Cart() {
         >
           نهایی کردن سبد خرید
         </Button>
+        <Button
+          variant="contained"
+          onClick={()=>dispatch(cleareCartItem())}
+          sx={{ backgroundColor: "#ffa726" }}
+        >
+           پاک کردن سبد خرید
+        </Button>
+        </Box>
       </Box>
     </div>
   );
