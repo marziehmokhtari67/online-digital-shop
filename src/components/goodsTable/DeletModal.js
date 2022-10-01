@@ -27,7 +27,7 @@ function DeletModal({ openDelete, handleCloseDelete, productId, params }) {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box className={classes.container}>
+      <Box className={classes.container} >
         <Box className={classes.header}>
           <Typography>حذف کالا</Typography>
           <IconButton onClick={handleCloseDelete} color={"primary"}>

@@ -9,7 +9,7 @@ const Search = styled('div')(({ theme }) => ({
     backgroundColor: 'rgb(240,240,241)',
     padding: "5px",
     marginLeft: 0,
-    width: '100%',
+    // width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(1),
       width: 'auto',

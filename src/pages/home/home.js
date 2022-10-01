@@ -1,12 +1,12 @@
 import React, { useEffect,useState,useCallback } from "react";
-import { Link, Box, Typography,Grid,Avatar } from "@mui/material";
+import {  Box, Typography,Grid,Avatar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategory } from "./../../redux/reducer/categorySlice";
 import axios from 'axios'
 import {URL} from './../../API/constant'
 import Card from './../../components/category/Card'
 import Loading from './../../components/loading/Loading '
-
+import {NavLink} from 'react-router-dom'
 function Home() {
   const dispatch = useDispatch();
   const { categories,loading } = useSelector((state) => state.category);
@@ -18,11 +18,10 @@ function Home() {
       
   },[products])
 
-  console.log(products);
+  
   useEffect(() => {
     dispatch(fetchCategory()).unwrap().then(res=>res.map(r=> getData(r.id)))
     // categories.map(category=>console.log(category))
-    
     
   }, []);
   
@@ -38,20 +37,23 @@ function Home() {
     >
       {categories.map((category,index) =>{return( 
         <div key={category.id} >
-          <Box sx={{display:'flex',gap:'5px',alignItems:'center',py:2,px:5, my:2,borderBottom:'3px solid rgb(249,225,229)'}}>
-          <Avatar src={`${URL}/files/${category.icon}` } variant='rounded' alt='icon'/><Link
-            href={`category/${category.id}`}
-            underline='none'
+          <Box sx={{display:'flex',gap:'5px',alignItems:'center',py:2,px:5, my:2,borderBottom:'3px solid #ba68c8'}}>
+          <Avatar src={`${URL}/files/${category.icon}` } variant='rounded' alt='icon'/><NavLink
+            to={`category/${category.id}`}
+           style={{textDecoration:'none',color:'blue'}} 
           >
             <Typography variant="h5">{category.name}</Typography>
-          </Link>
+          </NavLink>
           </Box>
          
           
            <Grid container  spacing={2}>
           {products?.filter((product) => product.category === category.id)
             .map((product) => {
-              return  <Grid item  md={4} xs={12} key={product.id} sx={{display:'flex',justifyContent:'center'}}><Card  product={product}/></Grid>
+              
+              return (
+                <Grid item  md={4} xs={12} key={product.id} sx={{display:'flex',justifyContent:'center'}}><Card  product={product}/></Grid>
+              )
             })}
             </Grid>
             

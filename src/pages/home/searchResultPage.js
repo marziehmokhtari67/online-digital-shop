@@ -14,7 +14,7 @@ React.useEffect(()=> {dispatch(fetchSearch({keyword}))},[dispatch, keyword])
   return (
     
     <Box p={4}>
-      <Typography variant='h4' sx={{borderBottom:'3px solid rgb(249,225,229)'}}>کالاها</Typography>
+      <Typography variant='h4' sx={{borderBottom:'3px solid #ba68c8'}}>کالاها</Typography>
    {products.length> 0 ?
    <Grid container mt={4} spacing={2}>
    {products.map(product=>(<Grid item  md={4} xs={12} key={product.id} >

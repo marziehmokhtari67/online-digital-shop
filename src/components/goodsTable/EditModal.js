@@ -19,13 +19,14 @@ import { fetchEdit, fetchProduct } from "./../../redux/reducer/productSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
+import {URL} from './../../API/constant'
 
 // //////////////////////////////////////////////////////////////////
 function EditModal({ openedit, handleCloseEdit, product, params }) {
   //  variables
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [image, SetImage] = useState(product.image);
+  const [image, setImage] = useState(product.image);
   const [thumbnail, setThumbnail] = useState(product.thumbnail);
   const [src, setSrc] = useState([]);
   const { categories } = useSelector((state) => state.category);
@@ -34,11 +35,11 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
     const selectedFIles = [];
     const targetFiles = e.target.files;
 
-    const targetFilesObject = [...targetFiles];
-    targetFilesObject.map((file) => {
-      return selectedFIles.push(URL.createObjectURL(file));
-    });
-    setSrc(selectedFIles);
+    // const targetFilesObject = [...targetFiles];
+    // targetFilesObject.map((file) => {
+    //   return selectedFIles.push(URL.createObjectURL(file));
+    // });
+    // setSrc(selectedFIles);
 
     const requests = Array.from(targetFiles).map((item) => {
       const form = new FormData();
@@ -46,12 +47,16 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
       return instance.post("/upload", form);
     });
     const res = await Promise.all(requests);
-    setThumbnail(res[0].data.filename);
-    SetImage([
-      res[1].data.filename,
-      res[2].data.filename,
-      res[3].data.filename,
-    ]);
+    setThumbnail(res[0].data.filename); 
+    const array=[...image]
+    
+    res.slice(1,4).map((r,index)=>array[index]=r.data.filename)
+    setImage(array)
+    // SetImage([
+    //   res[1].data.filename,
+    //   res[2].data.filename,
+    //   res[3].data.filename,
+    // ]);
   };
   // handleSave function
   const handleSave = (data) => {
@@ -123,8 +128,10 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
       open={openedit}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      
     >
-      <Box className={classes.container}>
+      <Box className={classes.container} 
+   >
         <Box className={classes.header}>
           <Typography>افزودن/ویرایش</Typography>
           <IconButton onClick={handleCloseEdit} color={"primary"}>
@@ -133,11 +140,11 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
         </Box>
 
         <form className={classes.form} onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             <Grid item md={12} xs={12}>
               <Typography>تصویر کالا:</Typography>
             </Grid>
-            <Grid item>
+            <Grid item md={6} xs={6}>
               <input
                 type="file"
                 multiple
@@ -149,26 +156,26 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
               <Avatar
                 name="thumbnail"
                 alt="image"
-                src={src[0]}
+                src={`${URL}/files/${thumbnail}`}
                 variant="rounded"
                 onChange={handleChange}
               />
               <Avatar
                 name="image1"
                 alt="image"
-                src={src[1]}
+                src={`${URL}/files/${image[0]}`}
                 variant="rounded"
                 onChange={handleChange}
               />
               <Avatar
                 alt="image2"
-                src={src[2]}
+                src={`${URL}/files/${image[1]}`}
                 variant="rounded"
                 onChange={handleChange}
               />
               <Avatar
                 alt="image3"
-                src={src[3]}
+                src={`${URL}/files/${image[2]}`}
                 variant="rounded"
                 onChange={handleChange}
               />
@@ -176,11 +183,6 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
 
             <Grid item md={6} xs={12}>
               <Typography>نام کالا:</Typography>
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <Typography>دسته بندی:</Typography>
-            </Grid>
-            <Grid item md={6} xs={12}>
               <input
                 name="name"
                 type="text"
@@ -189,7 +191,8 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
                 onChange={handleChange}
               ></input>
             </Grid>
-            <Grid item md={6} xs={12} className={classes.input}>
+            <Grid item md={6} xs={12}>
+              <Typography>دسته بندی:</Typography>
               <select
                 className={classes.input}
                 name="category"
@@ -203,13 +206,9 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
                 ))}
               </select>
             </Grid>
+            
             <Grid item md={6} xs={12}>
               <Typography>مدل:</Typography>
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <Typography>قیمت:</Typography>
-            </Grid>
-            <Grid item md={6} xs={12}>
               <input
                 type="text"
                 className={classes.input}
@@ -218,7 +217,8 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item md={6} xs={6}>
+              <Typography>قیمت:</Typography>
               <input
                 type="number"
                 className={classes.input}
@@ -229,11 +229,6 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
             </Grid>
             <Grid item md={6} xs={12}>
               <Typography>تعداد:</Typography>
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <Typography>رنگ:</Typography>
-            </Grid>
-            <Grid item md={6} xs={12}>
               <input
                 type="number"
                 name="quantity"
@@ -243,6 +238,7 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
               />
             </Grid>
             <Grid item md={6} xs={12}>
+              <Typography>رنگ:</Typography>
               <input
                 type="text"
                 name="color"
@@ -251,10 +247,10 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
                 onChange={handleChange}
               />
             </Grid>
+          
+          
             <Grid item md={12} xs={12}>
               <Typography>توضیحات:</Typography>
-            </Grid>
-            <Grid item md={12} xs={12}>
               <CKEditor
                 id="description"
                 data={values.description}
@@ -265,6 +261,7 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
                 }}
               />
             </Grid>
+           
           </Grid>
           {errors.massage1 && <p style={{ color: "red" }}>{errors.massage1}</p>}
           {errors.massage2 && <p style={{ color: "red" }}>{errors.massage2}</p>}

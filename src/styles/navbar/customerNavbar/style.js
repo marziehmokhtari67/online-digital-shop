@@ -6,17 +6,39 @@ appbar:{
     backgroundAttachment: "fixed",
     padding: "5px 40px" ,
     
-    
+    [theme.breakpoints.down("md")]: {
+        padding: "8px 10px" ,
+      },
 },
 toolbar:{
     justifyContent: "space-between",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
         display:"flex",
-        flexDirection:'column'
+        flexDirection:'column',
+        gap:'5px'
       },
+     
 },
 rightBox:{
-    display: "flex", gap: "20px", alignItems: "center" 
+    display: "flex", gap: "20px", alignItems: "center", 
+    [theme.breakpoints.down("sm")]: {
+        width:'100%',
+        justifyContent: "space-between",
+      },
+},
+nameBox:{
+    display:'flex',
+    gap:'10px',
+    alignItems:'center'
+},
+menu:{
+
+[theme.breakpoints.up("sm")]: {
+    display:"none",
+   
+  },
+ 
+
 },
 logoBox:{
  borderRadius: "50%",border:'6px solid rgb(240,240,241)',
@@ -35,14 +57,21 @@ name:{
       },
 },
 leftBox:{
-    display: "flex", gap: "20px", alignItems: "center" 
+    display: "flex", gap: "20px", alignItems: "center",
+  
+    [theme.breakpoints.down("sm")]: {
+        display:"none",
+        
+      },
+        
+       
 },
 leftBoxLink:{
     display: "flex",
     alignItems: "center",
     gap: "5px",
     textDecoration: "none",
-    color:"#4527a0",
+    color:'blue',
     fontFamily:"iran",
 },
 

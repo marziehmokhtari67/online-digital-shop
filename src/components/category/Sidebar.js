@@ -19,7 +19,7 @@ function Sidebar() {
   getsubCategory()}
   ,[dispatch])
   return (
-    <Box sx={{width:'25%',padding:'40px 20px 0px',borderLeft:'5px solid rgb(249,225,229)'}}>
+    <Box sx={{width:'25%',padding:'40px 20px 0px',borderLeft:'5px solid #ba68c8'}}>
      {categories.map((category)=>{return (<Box key={category.id}>
     <NavLink to={`/category/${category.id}`}
     style={({ isActive }) => ({ 

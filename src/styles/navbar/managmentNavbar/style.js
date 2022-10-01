@@ -5,9 +5,13 @@ export const useStyles = makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     backgroundAttachment: "fixed",
     padding: "5px 40px",
+    [theme.breakpoints.down("md")]: {
+      padding: "5px 5px",
+    },
   },
   toolbar: {
     justifyContent: "space-between",
+    
   },
   name: {
     display: "flex",
@@ -37,5 +41,13 @@ export const useStyles = makeStyles((theme) => ({
       display: "flex",
     },
   },
+  link:{
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
+      flexDirection:'column',
+      alignItems:'center',
+    
+    },
+  }
 
 }));

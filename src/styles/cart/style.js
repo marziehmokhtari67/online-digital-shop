@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme)=>({
   container :{padding: "20px 40px",
 display:'flex',
 flexDirection:'column',
@@ -26,7 +26,13 @@ flexDirection:'column',
 },
 
 buttonsContainer:{
-display:'flex',gap:'5px'},
+display:'flex',gap:'5px',
+
+  [theme.breakpoints.down('sm')]:{
+      display:'flex',
+      flexDirection:'column'
+  }
+},
 lastRow:{
     display: "flex",
     justifyContent: "space-around",
@@ -34,4 +40,4 @@ lastRow:{
     marginTop: "30px",
   }
 
-})
+}))

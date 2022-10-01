@@ -10,14 +10,7 @@ import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import { addToCart } from "./../../redux/reducer/cartSlice";
 import { toast } from "react-toastify";
-import {
-  Magnifier,
-  GlassMagnifier,
-  SideBySideMagnifier,
-  PictureInPictureMagnifier,
-  MOUSE_ACTIVATION,
-  TOUCH_ACTIVATION,
-} from "react-image-magnifiers";
+import ReactImageMagnify from 'react-image-magnify';
 
 function Product() {
   // variables
@@ -54,7 +47,7 @@ function Product() {
   // formik
   const formik = useFormik({
     initialValues: {
-      count: 0,
+      count: null,
     },
     validationSchema: schema,
     onSubmit: (values) => {
@@ -73,43 +66,67 @@ function Product() {
     <Box>
       <Box className={classes.container}>
         <Box className={classes.imagesContainer}>
-         
           <Box className={classes.smallImagesContainer}>
-          {info.image && (
-            <img
-              alt="aks"
-              src={`${URL}/files/${info.image[0]}`}
-              className={classes.smallImage}
-              onClick={() => setPhoto(info.image[0])}
-            />
-          )}
-          {info.image && (
-            <img
-              alt="aks"
-              src={`${URL}/files/${info.image[1]}`}
-              className={classes.smallImage}
-              onClick={() => setPhoto(info.image[1])}
-            />
-          )}
-          {info.image && (
-            <img
-              alt="aks"
-              src={`${URL}/files/${info.image[2]}`}
-              className={classes.smallImage}
-              onClick={() => setPhoto(info.image[2])}
-            />
-          )}
-          </Box>
-          <Box>
             {info.image && (
               <img
                 alt="aks"
-                src={`${URL}/files/${photo}`}
-                className={classes.bigImage}
+                src={`${URL}/files/${info.image[0]}`}
+                className={classes.smallImage}
+                onClick={() => setPhoto(info.image[0])}
+              />
+            )}
+            {info.image && (
+              <img
+                alt="aks"
+                src={`${URL}/files/${info.image[1]}`}
+                className={classes.smallImage}
+                onClick={() => setPhoto(info.image[1])}
+              />
+            )}
+            {info.image && (
+              <img
+                alt="aks"
+                src={`${URL}/files/${info.image[2]}`}
+                className={classes.smallImage}
+                onClick={() => setPhoto(info.image[2])}
               />
             )}
           </Box>
-        
+          <Box>
+            {info.image && (
+              <>
+             <ReactImageMagnify {...{
+              smallImage: {
+                  alt: 'Wristwatch by Ted Baker London',
+                  src:`${URL}/files/${photo}`,
+                  width: 300,
+                  height:300,
+                  
+                 
+              },
+              largeImage: {
+                  src: `${URL}/files/${photo}`,
+                  width:450,
+                  height:1000,
+
+                  
+              },
+              enlargedImageContainerDimensions: {
+                width: '150%',
+                height: '70%',
+            }
+          }}
+          enlargedImagePosition='beside'
+          enlargedImagePortalId= "myPortal"
+          className={classes.bigImage}
+          />
+          
+          </>
+             
+              
+            )}
+            <Box id="myPortal" className={classes.portal}/>
+          </Box>
         </Box>
         <Box className={classes.detail}>
           <Box>
@@ -153,11 +170,16 @@ function Product() {
               </Typography>
             )}
             {info.quantity === 0 ? (
-              <Button variant="outlined" disabled type="submit">
+              <Button
+                variant="outlined"
+                disabled
+                type="submit"
+                className={classes.btn}
+              >
                 افزودن به سبد خرید
               </Button>
             ) : (
-              <Button variant="outlined" type="submit">
+              <Button variant="outlined" type="submit" className={classes.btn}>
                 افزودن به سبد خرید
               </Button>
             )}

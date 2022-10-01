@@ -29,8 +29,8 @@ function Goods() {
   const [params, setParams] = useState(1);
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const { isLogined } = useSelector((state) => state.login);
-  console.log(isLogined);
+  
+
   // defining functions
   const handleCloseAdd = () => setOpen(false);
   const handleOpenAdd = () => setOpen(true);
@@ -83,9 +83,9 @@ function Goods() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Stack spacing={2}>
+      <Stack spacing={2}  className={classes.pagination}>
         <Pagination
-          className={classes.pagination}
+         
           count={Number(Math.ceil(totalCount / 5))}
           page={params}
           onChange={handleChange}

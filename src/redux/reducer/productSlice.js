@@ -40,7 +40,7 @@ export const fetchAdd = createAsyncThunk("products/fetchAdd", async (formData) =
 // fetch search
 export const fetchSearch = createAsyncThunk("products/fetchSearch", async ({keyword=''}) => {
  console.log(keyword)
-return  axios.get(`${URL}/products?name=${keyword}`).then((res) => res);
+return  axios.get(`${URL}/products?q=${keyword}`).then((res) => res);
 });
   // ////////
 export const productsSlice = createSlice({

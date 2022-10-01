@@ -135,7 +135,7 @@ export default function AddModal({ open, handleCloseAdd,params }) {
         </Box>
 
         <form className={classes.form} onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             <Grid item md={12} xs={12}>
               <Typography>تصویر کالا:</Typography>
             </Grid>
@@ -156,11 +156,6 @@ export default function AddModal({ open, handleCloseAdd,params }) {
 
             <Grid item md={6} xs={12}>
               <Typography>نام کالا:</Typography>
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <Typography>دسته بندی:</Typography>
-            </Grid>
-            <Grid item md={6} xs={12}>
               <input
                 type="text"
                 className={classes.input}
@@ -169,27 +164,22 @@ export default function AddModal({ open, handleCloseAdd,params }) {
                 name="name"
               />
             </Grid>
-            <Grid item md={6} xs={12} className={classes.input}>
+            <Grid item md={6} xs={12}>
+              <Typography>دسته بندی:</Typography>
               <select
                 className={classes.input}
                 value={values.category}
                 name="category"
                 onChange={handleChange}
-              >
-                {categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
+              >{categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select> 
             </Grid>
             <Grid item md={6} xs={12}>
               <Typography>مدل:</Typography>
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <Typography>قیمت:</Typography>
-            </Grid>
-            <Grid item md={6} xs={12}>
               <input
                 type="text"
                 className={classes.input}
@@ -199,6 +189,7 @@ export default function AddModal({ open, handleCloseAdd,params }) {
               />
             </Grid>
             <Grid item md={6} xs={12}>
+              <Typography>قیمت:</Typography>
               <input
                 type="number"
                 name="price"
@@ -209,11 +200,6 @@ export default function AddModal({ open, handleCloseAdd,params }) {
             </Grid>
             <Grid item md={6} xs={12}>
               <Typography>تعداد:</Typography>
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <Typography>رنگ:</Typography>
-            </Grid>
-            <Grid item md={6} xs={12}>
               <input
                 type="number"
                 name="quantity"
@@ -223,6 +209,7 @@ export default function AddModal({ open, handleCloseAdd,params }) {
               />
             </Grid>
             <Grid item md={6} xs={12}>
+              <Typography>رنگ:</Typography>
               <input
                 type="text"
                 name="color"
@@ -231,10 +218,10 @@ export default function AddModal({ open, handleCloseAdd,params }) {
                 onChange={handleChange}
               />
             </Grid>
+         
+            
             <Grid item md={12} xs={12}>
               <Typography>توضیحات:</Typography>
-            </Grid>
-            <Grid item md={12} xs={12}>
               <CKEditor
                 id="description"
                 data={values.description}
@@ -245,6 +232,7 @@ export default function AddModal({ open, handleCloseAdd,params }) {
                 }}
               />
             </Grid>
+            
           </Grid>
           {errors.massage1 &&  <p style={{color:'red'}}>{errors.massage1}</p>}
             {errors.massage2&&<p style= {{color:'red'}}>{errors.massage2}</p>} 

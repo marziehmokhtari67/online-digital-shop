@@ -1,24 +1,43 @@
 import { makeStyles } from "@mui/styles";
-export const useStyles=makeStyles({
+export const useStyles=makeStyles((theme)=>({
 container:{
     padding:'30px',
     display:'flex',
-   gap:'40px'
+    width:'300px',
+   gap:'40px',
+   
+   [theme.breakpoints.down('sm')]:{
+    display:'flex',
+    flexDirection: 'column',
+    gap:'1px',
     
+}
 },
 imagesContainer:{
- display:'flex',gap:'40px'
+ display:'flex',gap:'40px',
+ 
+ [theme.breakpoints.down('sm')]:{
+    display:'flex',
+    flexDirection: 'column-reverse'
+ }
 
 },
 smallImagesContainer:{
     display:'flex',
     flexDirection:'column',
-    gap:'5px'
+    
+    gap:'5px',
+    [theme.breakpoints.down('sm')]:{
+        width:'100vw',
+        display:'flex',
+        flexDirection:'row',
+     }
+    
 },
 smallImage:{
     width: "100px",
     height: "100px",
-    border: "2px solid rgb(238,225,242)",
+    border: "2px solid #ba68c8",
     '&:hover':{
         cursor:'pointer',
         transform: 'scale(1.02)',
@@ -29,15 +48,17 @@ smallImage:{
 bigImage:{
     width: "300px",
     height: "300px",
-    border: "5px solid rgb(238,225,242)",
-    borderRadius:'5px'
+    borderRadius:'5px',
+    
 },
 info:{
    padding:'30px 5px',
 },
 detail:{
+    position:'fixed',
     paddingTop:'40px',
-    paddingRight:'10px'
+    paddingRight:'10px',
+    right:'550px'
 },
 form:{
     display:'flex',
@@ -46,10 +67,35 @@ form:{
     marginTop:'30px'
 },
 input:{
-    padding:'5px'
+    padding:'5px',
+    [theme.breakpoints.down('sm')]:{
+        width:'60%'
+     }
+},
+btn:{
+    padding:'5px',
+    [theme.breakpoints.down('sm')]:{
+        width:'60%'
+     }
 },
 error:{
     color:'red',
     
+},
+portal:{
+    position:'fixed',
+    
+    bottom:'30%',
+    right:'60%',
+    zIndex:'50',
+    border:'2px solid #ba68c8',
+    [theme.breakpoints.down('sm')]:{
+        display:'none',
+       
+        
+    }
+    
 }
-})
+
+
+}))

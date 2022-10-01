@@ -29,7 +29,7 @@ export function Cart() {
 
   useEffect(() => {
     dispatch(getTotals());
-  }, [dispatch]);
+  }, [dispatch,cartItems]);
   return (
     <div className={classes.container} >
       <Typography variant="h5" align="right">

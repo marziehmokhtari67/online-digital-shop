@@ -48,7 +48,7 @@ function ManagmentNavbar() {
       <AppBar className={classes.appbar} position="static">
         <Container maxWidth="xl">
           <Toolbar className={classes.toolbar} disableGutters={true}>
-            <Typography variant="h5" noWrap className={classes.name}>
+            <Typography variant="h6" noWrap className={classes.name}>
               پنل مدیریت دیجیتالند
             </Typography>
             <Box className={classes.menuContainer}>
@@ -60,7 +60,7 @@ function ManagmentNavbar() {
                 onClick={handleOpenNavMenu}
                 color="inherit"
               >
-                <MenuIcon />
+                <MenuIcon  color={'primary'}/>
               </IconButton>
               <Menu
                 className={classes.menu}
@@ -119,7 +119,7 @@ function ManagmentNavbar() {
                 سفارش ها
               </ToggleButton>
             </ToggleButtonGroup>
-            <Box sx={{ flexGrow: 0 }}>
+            <Box className={classes.link}>
               <Link
                 sx={{ fontFamily: "Vazir-Medium", fontSize: "14px" }}
                 underline="hover"

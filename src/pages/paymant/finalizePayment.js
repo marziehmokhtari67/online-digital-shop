@@ -18,13 +18,13 @@ function FinalizePayment() {
     width: "80%",
   };
   //variable
-  const navigate=useNavigate()
+  
   const{cartItems}=useSelector(state=>state.cart)
   //handle payment function
   const handlePayment=async(data)=>{
     
   localStorage.setItem("userInfo",JSON.stringify({...data,expectAt: new Date(data.expectAt)})) 
-  window.open('http://localhost:3001/paymentGateWay','_blank')
+  window.open('http://localhost:3000/paymentGateWay','_blank')
     
     
   }
@@ -56,7 +56,7 @@ function FinalizePayment() {
       <form onSubmit={handleSubmit}  id='form'>
         <Grid container>
           <Grid item md={6} xs={12} >
-            <Box sx={{height:'0.2vh',marginBottom:'5px'}}>
+            <Box sx={{height:'15vh',marginBottom:'5px'}}>
             <Typography>نام:</Typography>
             <input style={inputStyle} type="text" name="username" value={values.username} onChange={handleChange}/>
             {errors.username&& <Typography sx={{color:'red'}}>{errors.username}</Typography>}

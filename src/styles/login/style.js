@@ -28,6 +28,10 @@ export const useStyles = makeStyles((theme) => ({
     padding: "10px 0px",
     alignItems: "center",
     width: "35%",
+    [theme.breakpoints.down("sm")]: {
+      width:"55%",
+      
+    },
     height: "55%",
     backgroundColor: "white",
     borderRadius: "10px",

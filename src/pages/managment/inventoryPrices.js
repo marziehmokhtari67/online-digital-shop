@@ -100,9 +100,9 @@ function InventoryPrices() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Stack spacing={2}>
+      <Stack spacing={2} className={classes.pagination}>
         <Pagination
-          className={classes.pagination}
+          
           count={Math.ceil(totalCount / 5)}
           page={params}
           onChange={handleChange}

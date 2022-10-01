@@ -3,7 +3,7 @@ export const useStyles=makeStyles((theme)=>({
     container:{
         display:'flex',
         flexDirection:'column',
-        
+       
         alignItems:'center'
     },
 header:{
@@ -30,11 +30,12 @@ table:{
     
 },
 pagination:{
-   marginTop:'40px',
-   [theme.breakpoints.down('md')]: {
-    marginTop:'5px',
+position:'fixed',
+bottom:'20px',
+[theme.breakpoints.down('md')]: {
+    position:'static',
+    margin:'5px 0'
   },
-    // backgroundColor:'#c7fdda'
     
 },
 buttonsContainer:{
