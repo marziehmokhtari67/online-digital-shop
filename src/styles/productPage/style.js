@@ -55,7 +55,7 @@ info:{
    padding:'30px 5px',
 },
 detail:{
-    position:'fixed',
+    position:'static',
     paddingTop:'40px',
     paddingRight:'10px',
     right:'550px'
@@ -69,17 +69,20 @@ form:{
 input:{
     padding:'5px',
     [theme.breakpoints.down('sm')]:{
-        width:'60%'
+        width:'70%'
      }
 },
 btn:{
     padding:'5px',
     [theme.breakpoints.down('sm')]:{
-        width:'60%'
+        width:'70%'
      }
 },
 error:{
     color:'red',
+    height:'5vh',
+    width:'220px',
+    fontSize:'5',
     
 },
 portal:{

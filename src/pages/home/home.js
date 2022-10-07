@@ -7,6 +7,7 @@ import {URL} from './../../API/constant'
 import Card from './../../components/category/Card'
 import Loading from './../../components/loading/Loading '
 import {NavLink} from 'react-router-dom'
+import ImageSlider from "../../components/imageSlider/ImageSlider";
 function Home() {
   const dispatch = useDispatch();
   const { categories,loading } = useSelector((state) => state.category);
@@ -35,6 +36,7 @@ function Home() {
       
       }}
     >
+       <ImageSlider/> 
       {categories.map((category,index) =>{return( 
         <div key={category.id} >
           <Box sx={{display:'flex',gap:'5px',alignItems:'center',py:2,px:5, my:2,borderBottom:'3px solid #ba68c8'}}>

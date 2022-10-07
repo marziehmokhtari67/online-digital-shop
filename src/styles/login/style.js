@@ -12,7 +12,6 @@ export const useStyles = makeStyles((theme) => ({
     backgroundImage:`url(${aks})`,
     backgroundRepeat:'no-repeat',
     backgroundSize:'cover',
-    // background:'linear-gradient(to right, #fff7fa , #fef2ee , #eee1f3 100% )',
     borderRadius:'10px'
   },
   header: {
@@ -37,12 +36,19 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: "10px",
     color: "rgba(255,255,255,0.8)",
   },
+  error:{
+    height:'2.5vh',
+    color:'rgb(231, 135, 189)'
+  },
+  form:{
+    display: "flex", flexDirection: "column", gap: "25px" 
+  },
   input: {
     display: "flex",
     alignItems: "flex-end",
   },
   btn: {
-    fontFamily: "iran",
+    
     color: "rgba(255,255,255,0.8)",
     backgroundColor: "#42a5f5",
   },

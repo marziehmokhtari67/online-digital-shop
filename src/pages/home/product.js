@@ -164,11 +164,11 @@ function Product() {
               placeholder="لطفا تعداد محصول برای خرید را وارد کنید"
               className={classes.input}
             />
-            {formik.errors.count && (
-              <Typography className={classes.error}>
-                {formik.errors.count}
+            
+              <Typography fontSize={14} className={classes.error}>
+                {formik.errors.count? formik.errors.count :null}
               </Typography>
-            )}
+           
             {info.quantity === 0 ? (
               <Button
                 variant="outlined"

@@ -1,11 +1,12 @@
-import React from 'react'
-
-function Loading () {
+import React from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+function Loading() {
   return (
-    <div>
-      ....در حال بار گزاری
-    </div>
-  )
+    <Box sx={{ display: "flex",justifyContent:'center',alignItems:'center' }}>
+      <CircularProgress />
+    </Box>
+  );
 }
 
-export default Loading 
+export default Loading;

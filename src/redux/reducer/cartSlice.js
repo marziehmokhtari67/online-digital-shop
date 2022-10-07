@@ -6,7 +6,7 @@ const initialState = {
     : [],
   
   cartTotalAmount: 0,
-  success:false,
+  
   
 };
 
