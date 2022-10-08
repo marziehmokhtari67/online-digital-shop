@@ -1,1 +1,1 @@
- export const URL='http://localhost:3002'
+ export const URL='https://server-api-edkf.onrender.com'
