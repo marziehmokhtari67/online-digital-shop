@@ -42,7 +42,7 @@ function ResultOfPayment() {
 
 
   
-  useEffect(() => handleResult(), [result]);
+  useEffect(() => handleResult(), [handleResult, result]);
   return result === "success" ? (
     <Box
       sx={{
