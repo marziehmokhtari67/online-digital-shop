@@ -30,14 +30,14 @@ function CategoryProducts({id}) {
 
   useEffect(()=>getProducts(page),[getProducts, id, page, search])
   return (
-    <Box style={{display:'flex',flexDirection:'column'}}>
+    <Box style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
     <Grid container>
       {catprdt.map(element=>{return<Grid item  md={6} xs={12} key={element.id} >
         <Card  product={element}/></Grid>})}
       
     </Grid>
      <Pagination  count={Number(Math.ceil(totalCount/4))} page={page} onChange={handleChange}  shape="circular"
-     color='secondary' variant='outlined' />
+     color='secondary' variant='outlined'  />
      </Box>
   )
 }

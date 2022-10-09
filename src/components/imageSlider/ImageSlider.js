@@ -4,12 +4,14 @@ import lenovo from './../../assets/images/lenovo.jpg'
 import watch from './../../assets/images/watch.jpg'
 import mobile from './../../assets/images/mobile.jpg'
 import Carousel from 'react-bootstrap/Carousel';
+import {useStyles} from './../../styles/imageSlider/style'
 function ImageSlider() {
+  const classes=useStyles()
   return (
-    <Carousel>
+    <Carousel >
     <Carousel.Item>
       <img
-        className="d-block w-100 "
+        className={classes.image}
         src={asus}
       
         alt="First slide"
@@ -18,7 +20,7 @@ function ImageSlider() {
     </Carousel.Item>
     <Carousel.Item>
     <img
-        className="d-block w-100 "
+        className={classes.image}
       
         src={watch}
         alt="Third slide"
@@ -29,7 +31,7 @@ function ImageSlider() {
     </Carousel.Item>
     <Carousel.Item>
     <img
-        className="d-block w-100 "
+        className={classes.image}
     
         src={lenovo}
         alt="Second slide"
@@ -38,7 +40,7 @@ function ImageSlider() {
     </Carousel.Item>
     <Carousel.Item>
       <img
-        className="d-block w-100 "
+        className={classes.image}
       
         src={mobile}
         alt="Third slide"

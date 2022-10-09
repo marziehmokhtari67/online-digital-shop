@@ -17,14 +17,10 @@ function Home() {
     axios.get(`${URL}/products?category=${id}&_page=1&_limit=6`)
       .then((res) => setProducts(prevState=>[...prevState,...res.data]))
       
-  },[products])
-
-  
+  },[]) 
   useEffect(() => {
-    dispatch(fetchCategory()).unwrap().then(res=>res.map(r=> getData(r.id)))
-    // categories.map(category=>console.log(category))
-    
-  }, []);
+    dispatch(fetchCategory()).unwrap().then(res=>res.map(r=> getData(r.id)))  
+  },[]);
   
   return (loading? <Loading/>
     :<Box 

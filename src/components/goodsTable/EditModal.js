@@ -28,11 +28,11 @@ function EditModal({ openedit, handleCloseEdit, product, params }) {
   const dispatch = useDispatch();
   const [image, setImage] = useState(product.image);
   const [thumbnail, setThumbnail] = useState(product.thumbnail);
-  const [src, setSrc] = useState([]);
+  // const [src, setSrc] = useState([]);
   const { categories } = useSelector((state) => state.category);
   // handleUpload functions
   const handleUpload = async (e) => {
-    const selectedFIles = [];
+    // const selectedFIles = [];
     const targetFiles = e.target.files;
 
     // const targetFilesObject = [...targetFiles];

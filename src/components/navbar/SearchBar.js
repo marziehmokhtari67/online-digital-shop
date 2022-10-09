@@ -5,14 +5,17 @@ import { styled} from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
-    borderRadius:'10px',
-    backgroundColor: 'rgb(240,240,241)',
+    display:'flex',
+      justifyContent:'space-between',
+    borderRadius:'20px',
+    backgroundColor: 'rgb(240,239,255)',
     padding: "5px",
     marginLeft: 0,
-    // width: '100%',
-    [theme.breakpoints.up('sm')]: {
+     width: '50%',
+    [theme.breakpoints.down('sm')]: {
       marginLeft: theme.spacing(1),
-      width: 'auto',
+      
+      width: '90%',
       padding:'5px'
     },
   }));
