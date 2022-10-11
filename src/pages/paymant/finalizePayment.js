@@ -4,28 +4,23 @@ import {DateInput} from "react-hichestan-datetimepicker";
 import { useFormik } from "formik";
 import{schema} from './../../yup/schema'
 import '../../index.css'
-
+import {useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
-
+import {useStyles} from './../../styles/finalizePayment/style'
 
 
 function FinalizePayment() {
-  //style
-  const inputStyle = {
-    fontFamily: "Vazir-Medium",
-    padding: "5px",
-    margin: "5px 0px",
-    width: "80%",
-  };
-  //variable
+  
+  const navigate=useNavigate()
+ const classes=useStyles()
   
   const{cartItems}=useSelector(state=>state.cart)
-  //handle payment function
+
   const handlePayment=async(data)=>{
     
   localStorage.setItem("userInfo",JSON.stringify({...data,expectAt: new Date(data.expectAt)})) 
-  window.open('http://localhost:3000/paymentGateWay','_blank')
-    
+
+   navigate('/paymentGateWay') 
     
   }
  
@@ -49,44 +44,44 @@ function FinalizePayment() {
 
   return cartItems.length===0 ? (<Box sx={{display:'flex',justifyContent:'center'}}><Typography sx={{margin:'40px 0'}}>سبد خرید خالی است لطفا محصولی رو جهت خرید انتخاب کنید</Typography></Box>
   ):(
-    <Box sx={{ padding: "30px" }}>
+    <Box className={classes.container}>
       <Typography variant="h5" align="right" sx={{ marginBottom: "20px" }}>
         نهایی کردن خرید
       </Typography>
       <form onSubmit={handleSubmit}  id='form'>
         <Grid container>
           <Grid item md={6} xs={12} >
-            <Box sx={{height:'15vh',marginBottom:'5px'}}>
+            <Box className={classes.inputContainer}>
             <Typography>نام:</Typography>
-            <input style={inputStyle} type="text" name="username" value={values.username} onChange={handleChange}/>
+            <input className={classes.input} type="text" name="username" value={values.username} onChange={handleChange}/>
             {errors.username&& <Typography sx={{color:'red'}}>{errors.username}</Typography>}
             </Box>
           </Grid>
           
           <Grid item md={6} xs={12} >
-            <Box sx={{height:'15vh',marginBottom:'5px'}}>
+            <Box className={classes.inputContainer}>
             <Typography>نام خانوادگی:</Typography>
-            <input style={inputStyle} name="lastname" type="text" value={values.lastname} onChange={handleChange} />
+            <input className={classes.input} name="lastname" type="text" value={values.lastname} onChange={handleChange} />
             {errors.lastname&& <Typography sx={{color:'red'}}>{errors.lastname}</Typography>}
             </Box>
           </Grid>
           <Grid item md={6} xs={12} >
-          <Box sx={{height:'15vh',marginBottom:'5px'}}>
+          <Box className={classes.inputContainer}>
             <Typography>آدرس:</Typography>
-            <input  style={inputStyle} type="text" name="address" value={values.address} onChange={handleChange} />
+            <input  className={classes.input} type="text" name="address" value={values.address} onChange={handleChange} />
               {errors.address&& <Typography sx={{color:'red'}}>{errors.address}</Typography>}
             </Box>
           </Grid>
           <Grid item md={6} xs={12} >
-          <Box sx={{height:'15vh',marginBottom:'5px'}}>
+          <Box className={classes.inputContainer}>
             <Typography>تلفن همراه:</Typography>
-              <input  style={inputStyle} type="text" name="phone" value={values.phone} onChange={handleChange} />
+              <input className={classes.input} type="text" name="phone" value={values.phone} onChange={handleChange} />
             {errors.phone&&<Typography sx={{color:'red'}}>{errors.phone}</Typography>}
           </Box>
           </Grid>
           
           <Grid item md={4.5} xs={12} >
-          <Box sx={{height:'15vh',marginBottom:'5px'}}>
+          <Box className={classes.inputContainer}>
             <Typography>تاریخ تحویل:</Typography>
             <DateInput name={'expectAt'} value={values.expectAt}  className='class'   onChange={handleChange} />
             {errors.expectAt && <Typography sx={{color:'red'}}>{errors.expectAt}</Typography>}

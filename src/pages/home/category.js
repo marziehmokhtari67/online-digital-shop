@@ -2,15 +2,15 @@ import React from 'react'
 import Sidebar from './../../components/category/Sidebar'
 import CategoryProducts from '../../components/category/CategoryProducts'
 import { useParams } from 'react-router-dom'
-
+import {useStyles} from './../../styles/categoryPage/style'
 
 
 function Category() {
   const{categoryId}=useParams()
-  
+  const classes=useStyles()
   return (
     
-    <div style={{display:'flex',padding:'20px 40px',gap:'100px'}}>
+    <div className={classes.container}>
       <Sidebar/>
      
 
