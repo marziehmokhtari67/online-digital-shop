@@ -10,6 +10,7 @@ container:{
     display:'flex',
     flexDirection: 'column',
     gap:'1px',
+    padding:'10px'
     
 }
 },
@@ -28,7 +29,7 @@ smallImagesContainer:{
     
     gap:'5px',
     [theme.breakpoints.down('sm')]:{
-        width:'100vw',
+        width:'80vw',
         display:'flex',
         flexDirection:'row',
      }
@@ -49,7 +50,7 @@ bigImage:{
     width: "300px",
     height: "300px",
     borderRadius:'5px',
-    
+   
 },
 info:{
    padding:'30px 5px',

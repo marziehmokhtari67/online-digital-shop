@@ -1,15 +1,25 @@
 import { makeStyles } from "@mui/styles";
 
 export const useStyles = makeStyles((theme)=>({
-  container :{padding: "20px 40px",
+  container :{
+padding: "20px 40px",
 display:'flex',
 flexDirection:'column',
+[theme.breakpoints.down('sm')]:{
+  padding:'10px'
+}
 },
   table:{
     
         maxWidth:'80%',
-        margin:'10px auto'
+        margin:'10px auto',
+       
 
+  },
+  row:{
+    [theme.breakpoints.down('sm')]:{
+      padding:'0'
+    }
   },
   modal:{
   position: 'absolute',
@@ -21,7 +31,12 @@ flexDirection:'column',
   border: '3px solid  #eee1f3',
   backgroundColor: 'rgb(255 ,255, 255)',
   boxShadow: 24,
-  p: 4,
+  padding:'10px',
+  [theme.breakpoints.down('sm')]:{
+    width:'250px',
+    height:'100px',
+    left: '55%'
+  }
   
 },
 
@@ -30,7 +45,9 @@ display:'flex',gap:'5px',
 
   [theme.breakpoints.down('sm')]:{
       display:'flex',
-      flexDirection:'column'
+      flexDirection:'column',
+      marginTop:'10px',
+    
   }
 },
 lastRow:{

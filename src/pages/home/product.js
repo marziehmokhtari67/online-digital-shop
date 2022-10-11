@@ -161,7 +161,7 @@ function Product() {
               min="0"
               value={formik.values.count}
               onChange={formik.handleChange}
-              placeholder="لطفا تعداد محصول برای خرید را وارد کنید"
+              placeholder=" تعداد محصول را وارد کنید"
               className={classes.input}
             />
             
