@@ -29,12 +29,7 @@ const Search = styled('div')(({ theme }) => ({
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create('width'),
       width: '100%',
-      // [theme.breakpoints.up('sm')]: {
-      //   width: '12ch',
-      //   '&:focus': {
-      //     width: '20ch',
-      //   },
-      // },
+      
     },
   }));
 export default function SearchBar(){
@@ -45,11 +40,16 @@ export default function SearchBar(){
 localStorage.setItem('queryString',queryString)
 navigate(`/search/${queryString}`)
   }
- return(   <Search>
+ return(   <Search onKeyDown={(e)=>{
+  if (e.keyCode === 13) {
+    handleSearch()
+  }
+ }}>
           <StyledInputBase
               placeholder="جستجو…"
               inputProps={{ 'aria-label': 'search' }}
               onChange={(e)=>setQueryString(e.target.value)}
+              
             />
             <IconButton onClick={handleSearch}>
             <SearchIcon />

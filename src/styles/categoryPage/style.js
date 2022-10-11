@@ -5,8 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         padding:'20px 40px',
         gap:'100px',
         [theme.breakpoints.down("sm")]: {
-        gap:'30px',
-        padding:'20px 20px'
+       display:'flex'
         
       },
     },
