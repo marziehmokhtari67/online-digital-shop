@@ -91,14 +91,14 @@ function ManagmentNavbar() {
                 ))}
               </Menu>
             </Box>
-            <Typography
+            {/* <Typography
               className={classes.name1}
               variant="h6"
               noWrap
               flexGrow={1}
             >
               پنل مدیریت دیجیتالند
-            </Typography>
+            </Typography> */}
             <ToggleButtonGroup
               color="primary"
               value={alignment}

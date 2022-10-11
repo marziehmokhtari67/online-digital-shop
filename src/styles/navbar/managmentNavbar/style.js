@@ -34,18 +34,16 @@ export const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  name1: {
-    color: "black",
-    display: "none",
-    [theme.breakpoints.down("md")]: {
-      display: "flex",
-    },
-  },
+  // name1: {
+  //   color: "black",
+  //   display: "none",
+  //   [theme.breakpoints.down("md")]: {
+  //     display: "flex",
+  //  ,
   link:{
     [theme.breakpoints.down("sm")]: {
       display: "flex",
-      flexDirection:'column',
-      alignItems:'center',
+      alignItems:'center'
     
     },
   }
