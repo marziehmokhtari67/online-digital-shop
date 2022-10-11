@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "35%",
     [theme.breakpoints.down("sm")]: {
-      width:"55%",
+      width:"70%",
       
     },
     height: "55%",
