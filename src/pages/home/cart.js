@@ -38,8 +38,7 @@ export function Cart() {
       <Table className={classes.table} >
         <TableHead>
           <TableRow className={classes.row}>
-            <TableCell align="right">کالا</TableCell>
-            {/* <TableCell align="right">مدل</TableCell> */}
+            <TableCell align="center">کالا</TableCell>
             <TableCell align="center">قیمت</TableCell>
             <TableCell align="center">تعداد</TableCell>
             <TableCell align="center"></TableCell>
@@ -47,11 +46,11 @@ export function Cart() {
         </TableHead>
         <TableBody>
           {cartItems.map((item) => (
-            <TableRow key={item.id}  className={classes.row}>
-              <TableCell align="right">
+            <TableRow key={item.id}  >
+              <TableCell align="center">
                 <Link href={`/product/${item.id}`} underline='none'>{item.name}</Link>
               </TableCell>
-              {/* <TableCell align="right">{item.model}</TableCell> */}
+            
               <TableCell align="center">
                 {digitsEnToFa(
                   item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")

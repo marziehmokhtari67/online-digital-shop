@@ -90,9 +90,9 @@ portal:{
     position:'fixed',
     
     bottom:'30%',
-    right:'60%',
+    right:'500px',
     zIndex:'50',
-    border:'2px solid #ba68c8',
+    border:'2px solid white',
     [theme.breakpoints.down('sm')]:{
         display:'none',
        

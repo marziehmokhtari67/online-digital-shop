@@ -12,11 +12,12 @@ export const useStyles = makeStyles((theme) => ({
     backgroundImage:`url(${aks})`,
     backgroundRepeat:'no-repeat',
     backgroundSize:'cover',
-    borderRadius:'10px'
+    
   },
   header: {
     textAlign: "center",
-    color:'blue'
+    color:'blue',
+    fontSize:'10px'
   },
   formContainer: {
     position: "static",
@@ -28,7 +29,9 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "35%",
     [theme.breakpoints.down("sm")]: {
+      padding:'0 5px',
       width:"70%",
+     height:'70%'
       
     },
     height: "55%",

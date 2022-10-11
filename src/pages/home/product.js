@@ -179,7 +179,7 @@ function Product() {
                 افزودن به سبد خرید
               </Button>
             ) : (
-              <Button variant="outlined" type="submit" className={classes.btn}>
+              <Button variant="outlined" type="submit" className={classes.btn} disabled={!formik.isValid}>
                 افزودن به سبد خرید
               </Button>
             )}

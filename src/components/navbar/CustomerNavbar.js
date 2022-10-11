@@ -46,10 +46,12 @@ function CustomerNavbar() {
               src={logo}
               alt="logo"
             />
+            <Tooltip title='بازگشت به صفحه اصلی'>
             <NavLink to='/' style={{textDecoration:'none'}} ><Typography variant="h5" className={classes.name}>
          دیجیتالند
             </Typography>
             </NavLink>
+            </Tooltip>
             </Box>
             <Box className={classes.menu}>
             <IconButton

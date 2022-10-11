@@ -53,7 +53,7 @@ const validate = async()=>{
         <Typography variant="h6" className={classes.header}>
           ورود به پنل مدیریت دیجیتال لند
         </Typography>
-          <Typography fontSize={14} className={classes.error}>{error?'نام کاربری یا رمز عبور اشتباه است':' admin:نام کاربری و رمز عبور'}</Typography>
+          <Typography fontSize={14} className={classes.error}>{error?'نام کاربری یا رمز عبور اشتباه است':'نام کاربری و رمز عبور:admin'}</Typography>
           <Box
             component="form"
            className={classes.form}
