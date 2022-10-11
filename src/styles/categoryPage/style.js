@@ -15,7 +15,7 @@ sideBar:{
     padding:'10px 5px 0px',
     borderLeft:'5px solid #ba68c8',
     [theme.breakpoints.down("sm")]: {
-        width:"400px",
+        display:'none'
         
       }
     },

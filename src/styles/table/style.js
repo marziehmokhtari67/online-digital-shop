@@ -34,7 +34,7 @@ position:'fixed',
 bottom:'20px',
 [theme.breakpoints.down('md')]: {
     position:'static',
-    margin:'5px 0'
+    margin:'10px 0'
   },
     
 },

@@ -35,8 +35,8 @@ function CustomerNavbar() {
     setAnchorElNav(null);
   };
   return (
-    <Box>
-      <AppBar position="static" className={classes.appbar}>
+    <Box >
+      <AppBar position="relative" className={classes.appbar}>
         <Toolbar className={classes.toolbar}>
           <Box className={classes.rightBox}>
             <Box className={classes.nameBox}>

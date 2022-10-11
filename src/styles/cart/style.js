@@ -38,6 +38,10 @@ lastRow:{
     justifyContent: "space-around",
     alignItems:'center',
     marginTop: "30px",
+    [theme.breakpoints.down('sm')]:{
+      display:'flex',
+      flexDirection:'column'
+  }
   }
 
 }))

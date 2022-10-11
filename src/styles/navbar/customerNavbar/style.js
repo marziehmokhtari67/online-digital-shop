@@ -5,10 +5,13 @@ appbar:{
     backgroundRepeat: "no-repeat",
     backgroundAttachment: "fixed",
     padding: "5px 40px" ,
-    
-    [theme.breakpoints.down("md")]: {
-        padding: "8px 10px" ,
-        
+   
+   
+    [theme.breakpoints.down("sm")]: {
+        padding: "8px 5px" ,
+       maxWidth:'100vw',
+        margin:'0',
+       
       },
 },
 toolbar:{
