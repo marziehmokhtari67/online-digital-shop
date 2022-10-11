@@ -15,10 +15,21 @@ sideBar:{
     padding:'10px 5px 0px',
     borderLeft:'5px solid #ba68c8',
     [theme.breakpoints.down("sm")]: {
-        width:"40%",
+        width:"400px",
         
-      },
+      }
+    },
+      pagination:{
+        position:'relative',
+        left:'90px',
+        top:'10px',
+        [theme.breakpoints.down('sm')]:{
+          position:'static',
+          marginTop:'10px'
+        
+        }
+      }
 
-}
+
 
 }))

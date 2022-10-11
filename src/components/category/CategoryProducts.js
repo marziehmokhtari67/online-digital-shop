@@ -6,11 +6,13 @@ import Card from './Card'
 import {Grid,Box} from '@mui/material'
 import{useSearchParams} from 'react-router-dom'
 import {Pagination} from '@mui/material'
+import {useStyles} from './../../styles/categoryPage/style'
 function CategoryProducts({id}) {
   const[catprdt,setCatprdt]=useState([])
   const[totalCount,setTotalCount]=useState(0)
   const[search,setSearch]=useSearchParams()
   const [page,setPage]=useState(1)
+  const classes=useStyles()
   const handleChange = (event, value) => {
     setPage(value);
     
@@ -38,7 +40,7 @@ function CategoryProducts({id}) {
     </Grid>
     
      <Pagination  count={Number(Math.ceil(totalCount/4))} page={page} onChange={handleChange}  shape="circular"
-     color='secondary' variant='outlined' sx={{position:'relative',left:'90px',top:'10px'}} />
+     color='secondary' variant='outlined' className={classes.pagination} />
     
      </Box>
   )
