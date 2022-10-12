@@ -32,7 +32,7 @@ function CategoryProducts({id}) {
 
   useEffect(()=>getProducts(page),[getProducts, id, page, search])
   return (
-    <Box style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
+    <Box className={classes.cardsContainer}>
     <Grid container>
       {catprdt.map(element=>{return<Grid item  md={6} xs={12} key={element.id} >
         <Card  product={element}/></Grid>})}

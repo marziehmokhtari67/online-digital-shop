@@ -3,6 +3,7 @@ import Sidebar from './../../components/category/Sidebar'
 import CategoryProducts from '../../components/category/CategoryProducts'
 import { useParams } from 'react-router-dom'
 import {useStyles} from './../../styles/categoryPage/style'
+import DrawerSideBar from '../../components/category/DrawerSideBar'
 
 
 function Category() {
@@ -12,7 +13,7 @@ function Category() {
     
     <div className={classes.container}>
       <Sidebar/>
-     
+     <DrawerSideBar/>
 
       <CategoryProducts  id={categoryId}/>
         
