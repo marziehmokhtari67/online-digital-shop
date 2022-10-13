@@ -33,7 +33,7 @@ flexDirection:'column',
   boxShadow: 24,
   padding:'10px',
   [theme.breakpoints.down('sm')]:{
-    width:'250px',
+    width:'300px',
     height:'100px',
     left: '55%'
   }
@@ -45,7 +45,7 @@ display:'flex',gap:'5px',
 
   [theme.breakpoints.down('sm')]:{
       display:'flex',
-      flexDirection:'column',
+  
       marginTop:'10px',
     
   }
