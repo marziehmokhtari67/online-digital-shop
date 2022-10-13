@@ -77,14 +77,14 @@ function DrawerSideBar() {
       }, [dispatch]);
   return (
    <div className={classes.container}>
-   <Button onClick={toggleDrawer('فهرست عناوین', true)}>فهرست عناوین</Button>
+   <Button onClick={toggleDrawer('right', true)} variant='contained'>مجموعه محصولات</Button>
           <SwipeableDrawer
-            anchor={'فهرست عناوین'}
-            open={state['فهرست عناوین']}
-            onClose={toggleDrawer('فهرست عناوین', false)}
-            onOpen={toggleDrawer('فهرست عناوین', true)}
+            anchor={'right'}
+            open={state['right']}
+            onClose={toggleDrawer('right', false)}
+            onOpen={toggleDrawer('right', true)}
           >
-            {list('فهرست عناوین')}
+            {list('right')}
           </SwipeableDrawer>
    </div>
   )
